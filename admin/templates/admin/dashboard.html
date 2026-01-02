@@ -1,0 +1,63 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 card-stats">
+            <div class="card-body">
+                <h5 class="text-muted">Total Products</h5>
+                <h2>{{ product_count }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 card-stats" style="border-left-color: #28a745;">
+            <div class="card-body">
+                <h5 class="text-muted">Total Inquiries</h5>
+                <h2>{{ inquiry_count }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 card-stats" style="border-left-color: #dc3545;">
+            <div class="card-body">
+                <h5 class="text-muted">Unread Messages</h5>
+                <h2>{{ unread_inquiries }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white">
+        <h5 class="mb-0">Recent Inquiries</h5>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>From</th>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inquiry in recent_inquiries %}
+                <tr {% if not inquiry.is_read %}class="table-active" {% endif %}>
+                    <td>{{ inquiry.name }}</td>
+                    <td>{{ inquiry.subject }}</td>
+                    <td>{{ inquiry.received_at.strftime('%Y-%m-%d') }}</td>
+                    <td><a href="{{ url_for('admin.view_inquiry', id=inquiry.id) }}"
+                            class="btn btn-sm btn-outline-primary">View</a></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-center py-4">No recent inquiries found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'official/base.html' %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<!-- Hero Parallax -->
+<div class="parallax-group">
+    <div class="parallax-layer parallax-layer--back"
+        style="background-image: url('{{ url_for('official.static', filename='img/ChatGPT Image Jan 2, 2026, 03_35_15 PM.png') }}');">
+    </div>
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container text-center" style="padding-top: 150px; padding-bottom: 80px;">
+            <div class="hero-card">
+                <h1 class="display-1">About Us</h1>
+                <p class="lead" style="margin: 0 auto 20px auto;">
+                    Integrity. Quality. Global Collaboration.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 16px;">
+                    <a href="{{ url_for('official.services') }}" class="btn btn-primary">Our Services</a>
+                    <a href="{{ url_for('official.contact') }}" class="btn btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- Content Group -->
+<div class="parallax-group content-group" style="min-height: auto; padding-bottom: 5rem;">
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container" style="padding-top: 5rem;">
+            <div class="bento-grid">
+                <!-- Overview -->
+                <div class="bento-card col-span-12">
+                    <h3 class="card-title">Company Overview</h3>
+                    <p class="card-desc" style="font-size: 1.1rem; line-height: 1.8;">
+                        Teleportz Enterprises Private Limited is an internationally focused import–export firm committed
+                        to facilitating seamless global trade. Our operations are guided by integrity, quality, and
+                        customer satisfaction.
+                    </p>
+                </div>
+
+                <!-- Mission -->
+                <div class="bento-card col-span-6" style="background: var(--accent-color); color: white; border: none;">
+                    <div class="card-icon" style="background: rgba(255,255,255,0.2); color: white;"><i
+                            class="fa-solid fa-bullseye"></i></div>
+                    <h3 class="card-title" style="color: white; margin-top: 15px;">Our Mission</h3>
+                    <p class="card-desc" style="color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.6;">
+                        To deliver reliable and efficient international trade solutions while building long-term global
+                        partnerships.
+                    </p>
+                </div>
+
+                <!-- Vision -->
+                <div class="bento-card col-span-6 glass" style="border: 1px solid rgba(255,255,255,0.1);">
+                    <div class="card-icon" style="background: rgba(255,255,255,0.05); color: white;"><i
+                            class="fa-solid fa-eye"></i></div>
+                    <h3 class="card-title" style="color: white; margin-top: 15px;">Our Vision</h3>
+                    <p class="card-desc" style="color: rgba(255,255,255,0.7); font-size: 1rem; line-height: 1.6;">
+                        To become a trusted global trade partner recognized for quality, transparency, and operational
+                        excellence.
+                    </p>
+                </div>
+
+                <!-- Core Values -->
+                <div class="bento-card col-span-12">
+                    <h3 class="card-title mb-5 text-center">Core Values</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;">
+                        <div class="text-center p-4"
+                            style="background: rgba(85, 107, 47, 0.03); border-radius: 20px; border: 1px solid rgba(85, 107, 47, 0.05); transition: all 0.3s ease;">
+                            <i class="fa-solid fa-scale-balanced"
+                                style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1.25rem;"></i>
+                            <h4 style="font-size: 1.1rem; font-weight: 700;">Integrity & Compliance</h4>
+                        </div>
+                        <div class="text-center p-4"
+                            style="background: rgba(85, 107, 47, 0.03); border-radius: 20px; border: 1px solid rgba(85, 107, 47, 0.05); transition: all 0.3s ease;">
+                            <i class="fa-solid fa-medal"
+                                style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1.25rem;"></i>
+                            <h4 style="font-size: 1.1rem; font-weight: 700;">Quality First</h4>
+                        </div>
+                        <div class="text-center p-4"
+                            style="background: rgba(85, 107, 47, 0.03); border-radius: 20px; border: 1px solid rgba(85, 107, 47, 0.05); transition: all 0.3s ease;">
+                            <i class="fa-solid fa-hand-holding-heart"
+                                style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1.25rem;"></i>
+                            <h4 style="font-size: 1.1rem; font-weight: 700;">Customer Commitment</h4>
+                        </div>
+                        <div class="text-center p-4"
+                            style="background: rgba(85, 107, 47, 0.03); border-radius: 20px; border: 1px solid rgba(85, 107, 47, 0.05); transition: all 0.3s ease;">
+                            <i class="fa-solid fa-earth-americas"
+                                style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1.25rem;"></i>
+                            <h4 style="font-size: 1.1rem; font-weight: 700;">Global Collaboration</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

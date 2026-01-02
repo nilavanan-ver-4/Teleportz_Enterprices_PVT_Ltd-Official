@@ -1,0 +1,58 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>{{ action }} Product</h2>
+    <a href="{{ url_for('admin.products') }}" class="btn btn-outline-secondary">Cancel</a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="mb-3">
+                        <label class="form-label">Product Name</label>
+                        <input type="text" name="name" class="form-control"
+                            value="{{ product.name if product else '' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <input type="text" name="category" class="form-control" list="categories"
+                            value="{{ product.category if product else '' }}">
+                        <datalist id="categories">
+                            <option value="Electronics">
+                            <option value="Textiles">
+                            <option value="Agriculture">
+                            <option value="Machinery">
+                        </datalist>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-control"
+                            rows="5">{{ product.description if product else '' }}</textarea>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label class="form-label">Product Image</label>
+                        <input type="file" name="image" class="form-control" accept="image/*">
+                        <div class="form-text">Supported formats: JPG, PNG.</div>
+                    </div>
+                    {% if product and product.image_filename %}
+                    <div class="mb-3">
+                        <label class="form-label d-block">Current Image:</label>
+                        <img src="{{ url_for('static', filename='uploads/' + product.image_filename) }}" alt="Current"
+                            class="img-thumbnail" style="max-height: 200px;">
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success"><i class="fa-solid fa-save me-2"></i> Save
+                    Product</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

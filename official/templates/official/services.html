@@ -1,0 +1,77 @@
+{% extends 'official/base.html' %}
+
+{% block title %}Services{% endblock %}
+
+{% block content %}
+<div class="parallax-group">
+    <div class="parallax-layer parallax-layer--back"
+       style="background-image: url('{{ url_for('official.static', filename='img/ChatGPT Image Jan 2, 2026, 03_57_03 PM.png') }}');">
+    </div>
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container text-center" style="padding-top: 150px; padding-bottom: 80px;">
+            <div class="hero-card">
+                <h1 class="display-1">Our Services</h1>
+                <p class="lead" style="margin: 0 auto 20px auto;">
+                    Comprehensive trade solutions for a connected world.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 16px;">
+                    <a href="{{ url_for('official.products') }}" class="btn btn-primary">Check Products</a>
+                    <a href="{{ url_for('official.contact') }}" class="btn btn-secondary">Request Quote</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="parallax-group content-group" style="min-height: auto; padding-bottom: 5rem;">
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container" style="padding-top: 5rem;">
+            <div class="bento-grid">
+                <!-- Import Services -->
+                <div class="bento-card col-span-6">
+                    <div class="card-icon"><i class="fa-solid fa-ship"></i></div>
+                    <h3 class="card-title">Import Services</h3>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Global sourcing of quality products</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Vendor verification and compliance</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Customs coordination support</li>
+                    </ul>
+                </div>
+
+                <!-- Export Services -->
+                <div class="bento-card col-span-6">
+                    <div class="card-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                    <h3 class="card-title">Export Services</h3>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-circle-check"></i> International product distribution</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Documentation assistance</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Logistics coordination</li>
+                    </ul>
+                </div>
+
+                <!-- Trade Consulting -->
+                <div class="bento-card col-span-6">
+                    <div class="card-icon"><i class="fa-solid fa-briefcase"></i></div>
+                    <h3 class="card-title">Trade Consulting</h3>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Market entry guidance</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Supplier & buyer connections</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Risk mitigation strategies</li>
+                    </ul>
+                </div>
+
+                <!-- Quality & Compliance -->
+                <div class="bento-card col-span-6">
+                    <div class="card-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                    <h3 class="card-title">Quality & Compliance</h3>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Product quality checks</li>
+                        <li><i class="fa-solid fa-circle-check"></i> International trade standards adherence</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

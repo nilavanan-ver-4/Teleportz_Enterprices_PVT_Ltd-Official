@@ -1,0 +1,132 @@
+{% extends 'official/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Group with Parallax -->
+<div class="parallax-group">
+    <div class="parallax-layer parallax-layer--back"
+        style="background-image: url('{{ url_for('official.static', filename='img/ChatGPT Image Jan 2, 2026, 03_30_48 PM.png') }}');">
+    </div>
+
+    <!-- Base Content Layer -->
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container text-center" style="padding-top: 150px; padding-bottom: 80px;">
+            <div class="hero-card">
+                <h2 class="display-1">Teleportz Enterprices<br>PVT Ltd.</h2>
+                <p class="lead" style="margin: 0 auto 20px auto;">
+                    Reliable Global Import–Export Solutions
+                </p>
+                <div style="display: flex; justify-content: center; gap: 16px;">
+                    <a href="{{ url_for('official.contact') }}" class="btn btn-primary">Contact Us</a>
+                    <a href="{{ url_for('official.products') }}" class="btn btn-secondary">View Products</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- Bento Grid Section (Standard Flow) -->
+<div class="parallax-group content-group" style="min-height: auto; padding-bottom: 5rem;">
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container">
+            <!-- Intro Paragraph - Premium Styled -->
+            <div class="intro-section">
+                <div class="intro-badge">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>Global Trade Excellence</span>
+                </div>
+                <p class="intro-text">
+                    Teleportz Enterprises Private Limited is a <strong>global import–export company</strong>
+                    specializing in sourcing and
+                    distributing quality products across international markets. We focus on <em>reliability</em>,
+                    <em>transparency</em>,
+                    and <em>long-term partnerships</em> to support businesses worldwide.
+                </p>
+                <div class="intro-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Countries Served</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Products Traded</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support Available</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Why Choose Us - Main Feature -->
+                <div class="bento-card col-span-8 row-span-2">
+                    <div style="max-width: 60%;">
+                        <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
+                        <h3 class="card-title">Global Trade Expertise</h3>
+                        <p class="card-desc">
+                            Navigating complex international markets with proven strategies and regulatory compliance.
+                        </p>
+                    </div>
+                    <!-- Abstract Graphic -->
+                    <div class="card-media"
+                        style="height: 300px; background: linear-gradient(135deg, #f0f9ff, #e0f2fe); margin-top: 40px; border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-handshake" style="font-size: 5rem; color: var(--accent-color);"></i>
+                    </div>
+                </div>
+
+                <!-- Benefits -->
+                <div class="bento-card col-span-4">
+                    <div class="card-icon"><i class="fa-solid fa-check-double"></i></div>
+                    <h3 class="card-title">Quality Assurance</h3>
+                    <p class="card-desc">Rigorous checks ensuring only the best products reach you.</p>
+                </div>
+
+                <div class="bento-card col-span-4">
+                    <div class="card-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h3 class="card-title">Reliable Logistics</h3>
+                    <p class="card-desc">Optimized supply chains for timely delivery.</p>
+                </div>
+
+                <div class="bento-card col-span-4">
+                    <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+                    <h3 class="card-title">Trusted Partners</h3>
+                    <p class="card-desc">Verified network of international suppliers.</p>
+                </div>
+
+                <!-- Categories Preview -->
+                <div class="bento-card col-span-12" style="background: #ffffff;">
+                    <h3 class="card-title text-center mb-4">Our Key Industries</h3>
+                    <div class="row" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                        <div class="category-chip"
+                            style="background: #f1f5e8; padding: 10px 20px; border-radius: 99px; font-weight: 600; color: var(--accent-color);">
+                            <i class="fa-solid fa-wheat-awn"></i> Agricultural Products
+                        </div>
+                        <div class="category-chip"
+                            style="background: #e0f2fe; padding: 10px 20px; border-radius: 99px; font-weight: 600; color: #0ea5e9;">
+                            <i class="fa-solid fa-industry"></i> Industrial Materials
+                        </div>
+                        <div class="category-chip"
+                            style="background: #fae8ff; padding: 10px 20px; border-radius: 99px; font-weight: 600; color: #d946ef;">
+                            <i class="fa-solid fa-bag-shopping"></i> Consumer Goods
+                        </div>
+                        <div class="category-chip"
+                            style="background: #fff7ed; padding: 10px 20px; border-radius: 99px; font-weight: 600; color: #f97316;">
+                            <i class="fa-solid fa-box-open"></i> Custom Solutions
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="text-center mt-5">
+                        <h4 style="margin-bottom: 1rem;">Looking for a trusted trade partner?</h4>
+                        <a href="{{ url_for('official.contact') }}" class="btn btn-primary">Get in Touch Today</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

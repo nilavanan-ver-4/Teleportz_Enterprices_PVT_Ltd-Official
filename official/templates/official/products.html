@@ -1,0 +1,106 @@
+{% extends 'official/base.html' %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<div class="parallax-group">
+    <div class="parallax-layer parallax-layer--back"
+        style="background-image: url('{{ url_for('official.static', filename='img/containers-8676518_1920.jpg') }}');">
+    </div>
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container text-center" style="padding-top: 150px; padding-bottom: 80px;">
+            <div class="hero-card">
+                <h1 class="display-1">Our Products</h1>
+                <p class="lead" style="margin: 0 auto 20px auto;">
+                    Quality sourcing across key industries.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 16px;">
+                    <a href="{{ url_for('official.home') }}" class="btn btn-primary">Back Home</a>
+                    <a href="{{ url_for('official.contact') }}" class="btn btn-secondary">Inquire Now</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="parallax-group content-group" style="min-height: auto; padding-bottom: 5rem;">
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container" style="padding-top: 2rem;">
+
+            <!-- Category Chips -->
+            <div class="mb-5 text-center">
+                <h3 style="margin-bottom: 1.5rem;">Product Categories</h3>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                    <span
+                        style="padding: 8px 16px; background: white; border: 1px solid #cbd5e1; border-radius: 99px;">Agricultural
+                        & Food Products</span>
+                    <span
+                        style="padding: 8px 16px; background: white; border: 1px solid #cbd5e1; border-radius: 99px;">Industrial
+                        Raw Materials</span>
+                    <span
+                        style="padding: 8px 16px; background: white; border: 1px solid #cbd5e1; border-radius: 99px;">Consumer
+                        & Retail Goods</span>
+                    <span
+                        style="padding: 8px 16px; background: white; border: 1px solid #cbd5e1; border-radius: 99px;">Customized
+                        Trade Orders</span>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div style="max-width: 500px; margin: 0 auto 60px auto;">
+                <form action="{{ url_for('official.products') }}" method="GET" style="position: relative;">
+                    <input type="text" name="search" placeholder="Search products..." value="{{ search }}"
+                        style="width: 100%; background: white; border: 1px solid #cbd5e1; padding: 16px 24px; border-radius: 99px; color: var(--text-primary); font-size: 1rem; outline: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+                    <button type="submit"
+                        style="position: absolute; right: 8px; top: 8px; background: var(--accent-color); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="bento-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+                {% for product in products %}
+                <div class="bento-card product-item" style="padding: 0; min-height: 420px; border-radius: 24px;">
+                    <!-- Background Image Layer -->
+                    {% if product.image_filename %}
+                    <img src="{{ url_for('static', filename='uploads/' + product.image_filename) }}"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                    {% else %}
+                    <div
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); z-index: 1;">
+                    </div>
+                    {% endif %}
+
+                    <!-- Content Overlay -->
+                    <div
+                        style="position: absolute; bottom: 0; left: 0; width: 100%; z-index: 2; padding: 24px; background: linear-gradient(to top, white 0%, rgba(255,255,255,0.95) 60%, transparent 100%);">
+                        <span
+                            style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent-color); font-weight: 700;">{{
+                            product.category }}</span>
+                        <h3 style="font-size: 1.4rem; margin: 8px 0; color: var(--text-primary);">{{ product.name }}
+                        </h3>
+                        <p
+                            style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">
+                            {{ product.description[:70] }}...</p>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                            <div style="font-size: 0.8rem; color: #64748b;">
+                                <i class="fa-solid fa-earth-asia"></i> Global Origin
+                            </div>
+                            <a href="{{ url_for('official.contact', subject='Inquiry: ' + product.name) }}"
+                                class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="text-center mt-5">
+                <p style="color: var(--text-secondary);">Detailed specifications available upon request.</p>
+            </div>
+
+        </section>
+    </div>
+</div>
+{% endblock %}

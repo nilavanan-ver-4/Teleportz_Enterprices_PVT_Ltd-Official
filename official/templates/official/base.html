@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Teleportz Enterprises{% endblock %} - Global Trade Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('official.static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Floating Navigation -->
+    <div class="navbar-wrapper">
+        <nav class="navbar">
+            <a href="{{ url_for('official.home') }}" class="brand">
+                <img src="{{ url_for('official.static', filename='img/logo.png') }}" alt="Teleportz Logo"
+                    style="height: 64px; border-radius: 6px;">
+                <span>Teleportz Enterprices PVT Ltd.</span>
+            </a>
+            <div class="nav-links-desktop" style="display: flex; gap: 24px;">
+                <a href="{{ url_for('official.home') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('official.about') }}" class="nav-link">About</a>
+                <a href="{{ url_for('official.services') }}" class="nav-link">Services</a>
+                <a href="{{ url_for('official.products') }}" class="nav-link">Products</a>
+            </div>
+            <a href="{{ url_for('official.contact') }}" class="btn-nav">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages container">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <!-- Parallax Container -->
+    <div class="parallax">
+        <!-- Parallax Background Layer -->
+        <div class="parallax-layer parallax-layer--back bg-hitech"
+            style="background-image: url('{{ url_for('official.static', filename='img/hitech_bg.png') }}'); opacity: 0.8;">
+        </div>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Downward Indicator -->
+        <div class="downward-indicator">
+            <i class="fa-solid fa-arrow-down"></i>
+        </div>
+
+        <!-- Spacer for Footer Reveal -->
+        <div class="footer-spacer"></div>
+    </div>
+
+    <!-- Fixed Footer Outside Wrapper -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div style="width: 100%;">
+                <div class="footer-grid">
+                    <div>
+                        <h3>Teleportz Enterprices PVT Ltd.</h3>
+                        <p style="font-size: 0.9rem;">Bridging worlds through seamless global trade solutions.</p>
+                    </div>
+                    <div>
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="{{ url_for('official.about') }}"><i class="fa-solid fa-building"></i> About</a>
+                            </li>
+                            <li><a href="{{ url_for('official.services') }}"><i class="fa-solid fa-handshake"></i>
+                                    Services</a></li>
+                            <li><a href="{{ url_for('official.products') }}"><i class="fa-solid fa-box"></i>
+                                    Products</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="#"><i class="fa-solid fa-shield-halved"></i> Privacy</a></li>
+                            <li><a href="#"><i class="fa-solid fa-file-contract"></i> Terms</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Connect</h3>
+                        <ul>
+                            <li><a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                            <li><a href="#"><i class="fa-brands fa-twitter"></i> Twitter</a></li>
+                            <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center mt-5" style="border-top: 1px solid #e2e8f0; padding-top: 2rem;">
+                    <p>&copy; 2026 Teleportz Enterprices PVT Ltd. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upward Scroll Button -->
+        <div class="upward-indicator">
+            <!-- Upward arrow -->
+            <i class="fa-solid fa-arrow-up"></i>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('official.static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
