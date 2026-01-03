@@ -5,7 +5,7 @@
 {% block content %}
 <div class="parallax-group">
     <div class="parallax-layer parallax-layer--back"
-       style="background-image: url('{{ url_for('official.static', filename='img/ChatGPT Image Jan 2, 2026, 03_57_03 PM.png') }}');">
+        style="background-image: url('{{ url_for('official.static', filename='img/World.png') }}');">
     </div>
     <div class="parallax-layer parallax-layer--base">
         <section class="container text-center" style="padding-top: 150px; padding-bottom: 80px;">
@@ -23,55 +23,130 @@
     </div>
 </div>
 
-<div class="parallax-group content-group" style="min-height: auto; padding-bottom: 5rem;">
-    <div class="parallax-layer parallax-layer--base">
-        <section class="container" style="padding-top: 5rem;">
-            <div class="bento-grid">
-                <!-- Import Services -->
-                <div class="bento-card col-span-6">
-                    <div class="card-icon"><i class="fa-solid fa-ship"></i></div>
-                    <h3 class="card-title">Import Services</h3>
-                    <ul class="service-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Global sourcing of quality products</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Vendor verification and compliance</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Customs coordination support</li>
-                    </ul>
+<div class="content-group" style="padding: 5rem 0; background: var(--bg-color);">
+    <section class="container">
+        <div class="bento-grid">
+            <!-- End-to-End Trade Management (Centerpiece) -->
+            <div class="bento-card col-span-12"
+                style="background: linear-gradient(135deg, #ffffff 0%, #f1f5e8 100%); overflow: visible;">
+                <div class="row" style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <div class="card-icon" style="background: var(--accent-color); color: white;">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <h3 class="card-title" style="font-size: 2rem;">End-to-End Trade Management</h3>
+                        <p class="card-desc" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 24px;">
+                            We manage the complete trade lifecycle—from sourcing and compliance to logistics and
+                            delivery—ensuring smooth, transparent, and efficient international transactions tailored
+                            to each client’s requirements.
+                        </p>
+                        <a href="{{ url_for('official.contact') }}" class="btn btn-primary">Get Started</a>
+                    </div>
+                    <div style="flex: 1; min-width: 300px; display: flex; justify-content: center;">
+                        <div
+                            style="position: relative; width: 100%; max-width: 400px; aspect-ratio: 1; background: url('{{ url_for('official.static', filename='img/handshake.png') }}') center / cover; border-radius: 32px; border: 8px solid white; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                            <div
+                                style="position: absolute; top: -20px; right: -20px; background: white; padding: 15px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); z-index: 10;">
+                                <i class="fa-solid fa-shield-halved"
+                                    style="color: var(--accent-color); font-size: 1.5rem;"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Export Services -->
-                <div class="bento-card col-span-6">
-                    <div class="card-icon"><i class="fa-solid fa-plane-departure"></i></div>
-                    <h3 class="card-title">Export Services</h3>
-                    <ul class="service-list">
-                        <li><i class="fa-solid fa-circle-check"></i> International product distribution</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Documentation assistance</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Logistics coordination</li>
-                    </ul>
-                </div>
-
-                <!-- Trade Consulting -->
-                <div class="bento-card col-span-6">
-                    <div class="card-icon"><i class="fa-solid fa-briefcase"></i></div>
-                    <h3 class="card-title">Trade Consulting</h3>
-                    <ul class="service-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Market entry guidance</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Supplier & buyer connections</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Risk mitigation strategies</li>
-                    </ul>
-                </div>
-
-                <!-- Quality & Compliance -->
-                <div class="bento-card col-span-6">
-                    <div class="card-icon"><i class="fa-solid fa-clipboard-check"></i></div>
-                    <h3 class="card-title">Quality & Compliance</h3>
-                    <ul class="service-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Product quality checks</li>
-                        <li><i class="fa-solid fa-circle-check"></i> International trade standards adherence</li>
-                    </ul>
-                </div>
-
             </div>
-        </section>
-    </div>
+
+            <!-- Import Services -->
+            <div class="bento-card col-span-6 row-span-2">
+                <div class="card-icon"><i class="fa-solid fa-ship"></i></div>
+                <h3 class="card-title">Import Services</h3>
+                <p class="card-desc">Seamlessly bring quality global products to your doorstep with our specialized
+                    import solutions.</p>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Global sourcing of quality products</li>
+                    <li><i class="fa-solid fa-check"></i> Vendor verification and compliance</li>
+                    <li><i class="fa-solid fa-check"></i> Customs coordination support</li>
+                    <li><i class="fa-solid fa-check"></i> Import duty optimization</li>
+                </ul>
+            </div>
+
+            <!-- Export Services -->
+            <div class="bento-card col-span-6">
+                <div class="card-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                <h3 class="card-title">Export Services</h3>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> International product distribution</li>
+                    <li><i class="fa-solid fa-check"></i> Documentation assistance</li>
+                    <li><i class="fa-solid fa-check"></i> Logistics coordination</li>
+                </ul>
+            </div>
+
+            <!-- Logistics & Supply Chain -->
+            <div class="bento-card col-span-6">
+                <div class="card-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                <h3 class="card-title">Logistics & Supply Chain</h3>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Freight coordination (air, sea, land)</li>
+                    <li><i class="fa-solid fa-check"></i> Shipment tracking and scheduling</li>
+                    <li><i class="fa-solid fa-check"></i> Cost-effective logistics planning</li>
+                </ul>
+            </div>
+
+            <!-- Documentation & Regulatory -->
+            <div class="bento-card col-span-4">
+                <div class="card-icon"><i class="fa-solid fa-file-signature"></i></div>
+                <h3 class="card-title">Documentation & Regulations</h3>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Export–import documentation</li>
+                    <li><i class="fa-solid fa-check"></i> Customs coordination</li>
+                    <li><i class="fa-solid fa-check"></i> HS code & compliance guidance</li>
+                </ul>
+            </div>
+
+
+            <!-- Trade Consulting -->
+            <div class="bento-card col-span-4">
+                <div class="card-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <h3 class="card-title">Trade Consulting</h3>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Market entry guidance</li>
+                    <li><i class="fa-solid fa-check"></i> Supplier & buyer connections</li>
+                    <li><i class="fa-solid fa-check"></i> Risk mitigation strategies</li>
+                </ul>
+            </div>
+
+            <!-- Quality & Compliance -->
+            <div class="bento-card col-span-4">
+                <div class="card-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                <h3 class="card-title">Quality & Compliance</h3>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Product quality checks</li>
+                    <li><i class="fa-solid fa-check"></i> International trade standards</li>
+                    <li><i class="fa-solid fa-check"></i> Factory audits & inspections</li>
+                </ul>
+            </div>
+
+            <!-- Post Shipment Support -->
+            <div class="bento-card col-span-6">
+                <div class="card-icon"><i class="fa-solid fa-headset"></i></div>
+                <h3 class="card-title">Post-Shipment Support</h3>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Shipment follow-ups</li>
+                    <li><i class="fa-solid fa-check"></i> Issue resolution & coordination</li>
+                    <li><i class="fa-solid fa-check"></i> Long-term client assistance</li>
+                </ul>
+            </div>
+
+            <!-- Custom Trade Solutions -->
+            <div class="bento-card col-span-6">
+                <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
+                <h3 class="card-title">Custom Trade Solutions</h3>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Industry-specific sourcing</li>
+                    <li><i class="fa-solid fa-check"></i> Custom order handling</li>
+                    <li><i class="fa-solid fa-check"></i> Flexible trade models</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 </div>
 {% endblock %}

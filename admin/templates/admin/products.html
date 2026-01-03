@@ -13,6 +13,7 @@
             <thead class="bg-light">
                 <tr>
                     <th style="width: 80px;">Image</th>
+                    <th style="width: 240px;">Image URL</th>
                     <th>Name</th>
                     <th>Category</th>
                     <th>Created At</th>
@@ -24,11 +25,22 @@
                 <tr>
                     <td>
                         {% if product.image_filename %}
-                        <img src="{{ url_for('static', filename='uploads/' + product.image_filename) }}" alt="img"
+                        <img src="{{ url_for('official.uploaded_file', filename=product.image_filename) }}" alt="img"
                             style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
                         {% else %}
                         <div class="bg-light d-flex align-items-center justify-content-center text-muted"
                             style="width: 50px; height: 50px; border-radius: 4px;"><i class="fa-solid fa-box"></i></div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if product.image_filename %}
+                        <a href="{{ url_for('official.uploaded_file', filename=product.image_filename) }}"
+                            target="_blank" rel="noopener noreferrer"
+                            style="display: inline-block; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.85rem;">
+                            {{ url_for('official.uploaded_file', filename=product.image_filename) }}
+                        </a>
+                        {% else %}
+                        <span class="text-muted">—</span>
                         {% endif %}
                     </td>
                     <td>{{ product.name }}</td>

@@ -30,41 +30,45 @@
             <!-- Category Chips -->
             <div class="mb-5 text-center">
                 <h3 style="margin-bottom: 1.5rem;">Product Categories</h3>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-                    <span
-                        style="padding: 8px 16px; background: white; border: 1px solid #cbd5e1; border-radius: 99px;">Agricultural
-                        & Food Products</span>
-                    <span
-                        style="padding: 8px 16px; background: white; border: 1px solid #cbd5e1; border-radius: 99px;">Industrial
-                        Raw Materials</span>
-                    <span
-                        style="padding: 8px 16px; background: white; border: 1px solid #cbd5e1; border-radius: 99px;">Consumer
-                        & Retail Goods</span>
-                    <span
-                        style="padding: 8px 16px; background: white; border: 1px solid #cbd5e1; border-radius: 99px;">Customized
-                        Trade Orders</span>
+                <div class="category-chips-container">
+                    <span class="category-chip chip-agri"><i class="fa-solid fa-wheat-awn"></i> Agricultural &
+                        Food</span>
+                    <span class="category-chip chip-industrial"><i class="fa-solid fa-industry"></i> Industrial
+                        Materials</span>
+                    <span class="category-chip chip-consumer"><i class="fa-solid fa-couch"></i> Consumer Goods</span>
+                    <span class="category-chip chip-custom"><i class="fa-solid fa-sliders"></i> Custom Orders</span>
                 </div>
             </div>
 
             <!-- Search Bar -->
-            <div style="max-width: 500px; margin: 0 auto 60px auto;">
-                <form action="{{ url_for('official.products') }}" method="GET" style="position: relative;">
-                    <input type="text" name="search" placeholder="Search products..." value="{{ search }}"
+            <div style="max-width: 500px; margin: 0 auto 60px auto;margin-top: 20px;">
+                <form id="product-search-form" action="{{ url_for('official.products') }}" method="GET"
+                    style="position: relative;">
+                    <input id="product-search" type="text" name="search" placeholder="Search products..."
+                        value="{{ search }}"
                         style="width: 100%; background: white; border: 1px solid #cbd5e1; padding: 16px 24px; border-radius: 99px; color: var(--text-primary); font-size: 1rem; outline: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
-                    <button type="submit"
+                    <button id="product-search-submit" type="submit"
                         style="position: absolute; right: 8px; top: 8px; background: var(--accent-color); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
+                    <div id="product-search-status" aria-live="polite"
+                        style="position: absolute; left: 12px; top: 10px; font-size: 0.85rem; color: rgba(0,0,0,0.6); display: none;">
+                    </div>
                 </form>
             </div>
 
             <!-- Product Grid -->
-            <div class="bento-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+            <div id="products-grid" class="bento-grid"
+                style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
                 {% for product in products %}
-                <div class="bento-card product-item" style="padding: 0; min-height: 420px; border-radius: 24px;">
+                <div class="bento-card product-item" data-name="{{ product.name }}"
+                    data-category="{{ product.category }}" data-description="{{ product.description }}"
+                    data-image="{{ url_for('official.uploaded_file', filename=product.image_filename) if product.image_filename else '' }}"
+                    data-contact-url="{{ url_for('official.contact', subject='Inquiry: ' + product.name) }}"
+                    style="padding: 0; min-height: 420px; border-radius: 24px; cursor: pointer;">
                     <!-- Background Image Layer -->
                     {% if product.image_filename %}
-                    <img src="{{ url_for('static', filename='uploads/' + product.image_filename) }}"
+                    <img src="{{ url_for('official.uploaded_file', filename=product.image_filename) }}"
                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
                     {% else %}
                     <div
@@ -73,23 +77,17 @@
                     {% endif %}
 
                     <!-- Content Overlay -->
-                    <div
-                        style="position: absolute; bottom: 0; left: 0; width: 100%; z-index: 2; padding: 24px; background: linear-gradient(to top, white 0%, rgba(255,255,255,0.95) 60%, transparent 100%);">
-                        <span
-                            style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent-color); font-weight: 700;">{{
-                            product.category }}</span>
-                        <h3 style="font-size: 1.4rem; margin: 8px 0; color: var(--text-primary);">{{ product.name }}
-                        </h3>
-                        <p
-                            style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">
-                            {{ product.description[:70] }}...</p>
+                    <div class="product-overlay">
+                        <span class="product-category">{{ product.category }}</span>
 
-                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-                            <div style="font-size: 0.8rem; color: #64748b;">
-                                <i class="fa-solid fa-earth-asia"></i> Global Origin
-                            </div>
-                            <a href="{{ url_for('official.contact', subject='Inquiry: ' + product.name) }}"
-                                class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">Inquire</a>
+                        <div class="product-meta">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            <!-- Description removed from card for cleaner look -->
+                        </div>
+
+                        <div class="product-footer">
+                            <button class="btn-product-view">View Details</button>
+                            <button class="btn btn-primary product-inquire">Inquire</button>
                         </div>
                     </div>
                 </div>
@@ -101,6 +99,43 @@
             </div>
 
         </section>
+    </div>
+</div>
+
+<!-- Product Details Modal -->
+<div id="productModal" class="product-modal-overlay">
+    <div class="product-modal-content">
+        <button class="product-modal-close" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="product-modal-body">
+            <div class="product-modal-image">
+                <img id="modalProductImage" src="" alt="Product Image">
+                <div class="modal-image-overlay"></div>
+            </div>
+            <div class="product-modal-info">
+                <span id="modalProductCategory" class="product-category">Category</span>
+                <h2 id="modalProductName" class="product-name"
+                    style="color: var(--text-primary); text-shadow: none; margin-top: 10px;">Product Name</h2>
+                <div class="modal-divider"></div>
+                <div class="modal-scroll-area">
+                    <p id="modalProductDescription" class="modal-desc">Full description goes here...</p>
+                    <div class="modal-features">
+                        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Quality Guaranteed</div>
+                        <div class="feature-item"><i class="fa-solid fa-truck-fast"></i> Global Shipping</div>
+                        <div class="feature-item"><i class="fa-solid fa-shield"></i> Secure Transaction</div>
+                    </div>
+                </div>
+                <div class="product-modal-actions">
+                    <a id="modalContactLink" href="#" class="btn btn-primary"
+                        style="width: 100%; background-color: #556B2F; border: none; padding: 14px; border-radius: 12px; font-weight: 700; margin-bottom: 10px; display: block; text-align: center;">
+                        <i class="fa-solid fa-envelope me-2"></i> Submit Inquiry Form
+                    </a>
+                    <a id="modalMailLink" href="#" class="btn btn-secondary"
+                        style="width: 100%; border: 1px solid #556B2F; color: #556B2F; background: transparent; padding: 14px; border-radius: 12px; font-weight: 700; display: block; text-align: center;">
+                        <i class="fa-solid fa-at me-2"></i> Direct Email Inquiry
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

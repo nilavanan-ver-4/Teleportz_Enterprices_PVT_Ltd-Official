@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash
 from app import User, Product, Inquiry, db
@@ -73,7 +73,7 @@ def new_product():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             # Ensure upload folder exists
-            upload_path = os.path.join('static', 'uploads')
+            upload_path = os.path.join(current_app.instance_path, 'uploads')
             os.makedirs(upload_path, exist_ok=True)
             file.save(os.path.join(upload_path, filename))
         
@@ -98,7 +98,7 @@ def edit_product(id):
         
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            upload_path = os.path.join('static', 'uploads')
+            upload_path = os.path.join(current_app.instance_path, 'uploads')
             os.makedirs(upload_path, exist_ok=True)
             file.save(os.path.join(upload_path, filename))
             product.image_filename = filename

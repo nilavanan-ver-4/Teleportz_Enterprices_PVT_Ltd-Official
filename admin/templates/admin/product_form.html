@@ -42,8 +42,8 @@
                     {% if product and product.image_filename %}
                     <div class="mb-3">
                         <label class="form-label d-block">Current Image:</label>
-                        <img src="{{ url_for('static', filename='uploads/' + product.image_filename) }}" alt="Current"
-                            class="img-thumbnail" style="max-height: 200px;">
+                        <img src="{{ url_for('official.uploaded_file', filename=product.image_filename) }}"
+                            alt="Current" class="img-thumbnail" style="max-height: 200px;">
                     </div>
                     {% endif %}
                 </div>

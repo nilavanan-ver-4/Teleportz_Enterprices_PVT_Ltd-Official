@@ -5,15 +5,24 @@
 {% block content %}
 <!-- Hero Group with Parallax -->
 <div class="parallax-group">
+    <!-- Parallax Background Layer -->
     <div class="parallax-layer parallax-layer--back"
-        style="background-image: url('{{ url_for('official.static', filename='img/ChatGPT Image Jan 2, 2026, 03_30_48 PM.png') }}');">
+        style="background-image: url('{{ url_for('official.static', filename='img/World.png') }}');">
+    </div>
+
+    <!-- Middle Parallax Layer for Floating Elements -->
+    <div class="parallax-layer parallax-layer--middle">
+        <div class="hero-visuals">
+            <!-- <i class="fa-solid fa-plane visual-airplane"></i> -->
+            <!-- <i class="fa-solid fa-ship visual-ship"></i> -->
+        </div>
     </div>
 
     <!-- Base Content Layer -->
     <div class="parallax-layer parallax-layer--base">
         <section class="container text-center" style="padding-top: 150px; padding-bottom: 80px;">
             <div class="hero-card">
-                <h2 class="display-1">Teleportz Enterprices<br>PVT Ltd.</h2>
+                <h2 class="display-1" style="font-size: 3rem;">Teleportz Enterprices PVT Ltd.</h2>
                 <p class="lead" style="margin: 0 auto 20px auto;">
                     Reliable Global Import–Export Solutions
                 </p>
@@ -27,106 +36,161 @@
 </div>
 
 <!-- Bento Grid Section (Standard Flow) -->
-<div class="parallax-group content-group" style="min-height: auto; padding-bottom: 5rem;">
-    <div class="parallax-layer parallax-layer--base">
-        <section class="container">
-            <!-- Intro Paragraph - Premium Styled -->
-            <div class="intro-section">
-                <div class="intro-badge">
-                    <i class="fa-solid fa-globe"></i>
-                    <span>Global Trade Excellence</span>
+<section class="parallax-group content-group" style="padding-bottom: 5rem;">
+    <div class="container" style="padding-top: 5rem;">
+        <!-- Intro Paragraph - Premium Styled -->
+        <div class="intro-section" style="margin-top: 50px;">
+            <div class="intro-badge">
+                <i class="fa-solid fa-globe"></i>
+                <span>Global Trade Excellence</span>
+            </div>
+            <p class="intro-text">
+                Teleportz Enterprises Private Limited is a <strong>global import–export company</strong>
+                specializing in sourcing and
+                distributing quality products across international markets. We focus on <em>reliability</em>,
+                <em>transparency</em>,
+                and <em>long-term partnerships</em> to support businesses worldwide.
+            </p>
+            <div class="intro-stats">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Countries Served</div>
                 </div>
-                <p class="intro-text">
-                    Teleportz Enterprises Private Limited is a <strong>global import–export company</strong>
-                    specializing in sourcing and
-                    distributing quality products across international markets. We focus on <em>reliability</em>,
-                    <em>transparency</em>,
-                    and <em>long-term partnerships</em> to support businesses worldwide.
-                </p>
-                <div class="intro-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Countries Served</div>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-number">1000+</div>
-                        <div class="stat-label">Products Traded</div>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Support Available</div>
-                    </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Products Traded</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
                 </div>
             </div>
+        </div>
 
-            <div class="bento-grid">
-                <!-- Why Choose Us - Main Feature -->
-                <div class="bento-card col-span-8 row-span-2">
-                    <div style="max-width: 60%;">
-                        <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
-                        <h3 class="card-title">Global Trade Expertise</h3>
-                        <p class="card-desc">
-                            Navigating complex international markets with proven strategies and regulatory compliance.
-                        </p>
-                    </div>
-                    <!-- Abstract Graphic -->
+        <!-- Featured Products Spotlight (Essential Content) -->
+        <div style="margin: 40px 0 60px 0;">
+            <h3 class="card-title text-center mb-5" style="font-size: 2rem;">Featured Trading Commodities</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+                {% if products %}
+                {% for product in products %}
+                <div class="bento-card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px;">
                     <div class="card-media"
-                        style="height: 300px; background: linear-gradient(135deg, #f0f9ff, #e0f2fe); margin-top: 40px; border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center;">
-                        <i class="fa-solid fa-handshake" style="font-size: 5rem; color: var(--accent-color);"></i>
+                        style="height: 200px; border-radius: 12px; background: #f8fafc; overflow: hidden;">
+                        <img src="{{ url_for('official.uploaded_file', filename=product.image_filename) if product.image_filename else url_for('official.static', filename='img/placeholder.jpg') }}"
+                            alt="{{ product.name }}"
+                            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <div>
+                        <span class="badge"
+                            style="background: rgba(85, 107, 47, 0.1); color: var(--accent-color); padding: 4px 12px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">{{
+                            product.category }}</span>
+                        <h4 style="margin: 12px 0 8px 0; font-size: 1.25rem;">{{ product.name }}</h4>
+                        <p class="card-desc" style="font-size: 0.9rem; line-height: 1.6;">{{
+                            product.description|truncate(100) }}</p>
+                    </div>
+                    <div style="margin-top: auto; padding-top: 16px;">
+                        <a href="{{ url_for('official.products') }}" class="btn btn-secondary"
+                            style="padding: 10px 20px; font-size: 0.9rem; width: 100%;">View Specifications</a>
                     </div>
                 </div>
+                {% endfor %}
 
-                <!-- Benefits -->
-                <div class="bento-card col-span-4">
-                    <div class="card-icon"><i class="fa-solid fa-check-double"></i></div>
-                    <h3 class="card-title">Quality Assurance</h3>
-                    <p class="card-desc">Rigorous checks ensuring only the best products reach you.</p>
-                </div>
-
-                <div class="bento-card col-span-4">
-                    <div class="card-icon"><i class="fa-solid fa-truck-fast"></i></div>
-                    <h3 class="card-title">Reliable Logistics</h3>
-                    <p class="card-desc">Optimized supply chains for timely delivery.</p>
-                </div>
-
-                <div class="bento-card col-span-4">
-                    <div class="card-icon"><i class="fa-solid fa-users"></i></div>
-                    <h3 class="card-title">Trusted Partners</h3>
-                    <p class="card-desc">Verified network of international suppliers.</p>
-                </div>
-
-                <!-- Categories Preview -->
-                <div class="bento-card col-span-12" style="background: #ffffff;">
-                    <h3 class="card-title text-center mb-4">Our Key Industries</h3>
-                    <div class="row" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-                        <div class="category-chip"
-                            style="background: #f1f5e8; padding: 10px 20px; border-radius: 99px; font-weight: 600; color: var(--accent-color);">
-                            <i class="fa-solid fa-wheat-awn"></i> Agricultural Products
-                        </div>
-                        <div class="category-chip"
-                            style="background: #e0f2fe; padding: 10px 20px; border-radius: 99px; font-weight: 600; color: #0ea5e9;">
-                            <i class="fa-solid fa-industry"></i> Industrial Materials
-                        </div>
-                        <div class="category-chip"
-                            style="background: #fae8ff; padding: 10px 20px; border-radius: 99px; font-weight: 600; color: #d946ef;">
-                            <i class="fa-solid fa-bag-shopping"></i> Consumer Goods
-                        </div>
-                        <div class="category-chip"
-                            style="background: #fff7ed; padding: 10px 20px; border-radius: 99px; font-weight: 600; color: #f97316;">
-                            <i class="fa-solid fa-box-open"></i> Custom Solutions
-                        </div>
+                <!-- More Products Card (3rd Item) -->
+                <div class="bento-card"
+                    style="padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: rgba(85, 107, 47, 0.05); cursor: pointer; transition: all 0.3s ease;"
+                    onclick="window.location.href='{{ url_for('official.products') }}'">
+                    <div class="card-icon" style="width: 80px; height: 80px; font-size: 2rem; margin-bottom: 24px;">
+                        <i class="fa-solid fa-plus"></i>
                     </div>
+                    <h3 class="card-title">Explore All</h3>
+                    <p class="card-desc" style="margin-bottom: 24px;">Discover our full range of premium massage
+                        chairs and wellness solutions.</p>
+                    <a href="{{ url_for('official.products') }}" class="btn btn-primary" style="padding: 12px 24px;">
+                        View All Products <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
+                    </a>
+                </div>
+                {% else %}
+                <div class="text-center col-span-12" style="padding: 40px; background: #f8fafc; border-radius: 16px;">
+                    <p class="card-desc">No featured products currently available. Check back soon!</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
 
-                    <!-- CTA -->
-                    <div class="text-center mt-5">
-                        <h4 style="margin-bottom: 1rem;">Looking for a trusted trade partner?</h4>
-                        <a href="{{ url_for('official.contact') }}" class="btn btn-primary">Get in Touch Today</a>
+        <div class="bento-grid">
+            <!-- Why Choose Us - Main Feature -->
+            <div class="bento-card col-span-8 row-span-2">
+                <div style="max-width: 60%;">
+                    <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
+                    <h3 class="card-title">Global Trade Expertise</h3>
+                    <p class="card-desc">
+                        Navigating complex international markets with proven strategies and regulatory compliance.
+                    </p>
+                </div>
+                <!-- Abstract Graphic -->
+                <div class="card-media"
+                    style="background: linear-gradient(135deg, rgba(240,249,255,0.85), rgba(224,242,254,0.85)), url('{{ url_for('official.static', filename='img/handshake.png') }}') center/cover no-repeat; height: 300px; margin-top: 40px; border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-handshake" style="font-size: 3.5rem; color: var(--accent-color);"></i>
+                </div>
+            </div>
+
+            <!-- Benefits -->
+            <div class="bento-card col-span-4">
+                <div class="card-icon"><i class="fa-solid fa-check-double"></i></div>
+                <h3 class="card-title">Quality Assurance</h3>
+                <p class="card-desc">Rigorous checks ensuring only the best products reach you.</p>
+            </div>
+
+            <div class="bento-card col-span-4">
+                <div class="card-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                <h3 class="card-title">Reliable Logistics</h3>
+                <p class="card-desc">Optimized supply chains for timely delivery.</p>
+            </div>
+
+            <div class="bento-card col-span-4">
+                <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+                <h3 class="card-title">Trusted Partners</h3>
+                <p class="card-desc">Verified network of international suppliers.</p>
+            </div>
+
+            <!-- Ethics & Compliance (Fills the bento gap) -->
+            <div class="bento-card col-span-8" style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);">
+                <div style="display: flex; gap: 24px; align-items: center;">
+                    <div class="card-icon" style="margin-bottom: 0; background: white; flex-shrink: 0;"><i
+                            class="fa-solid fa-shield-halved"></i></div>
+                    <div>
+                        <h3 class="card-title" style="margin-bottom: 4px;">Ethical & Compliant Trade</h3>
+                        <p class="card-desc">Strict adherence to global trade regulations and fair practices.</p>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
-</div>
+
+            <!-- Categories Preview -->
+            <div class="bento-group-card col-span-12" style="background: #ffffff;">
+                <h3 class="card-title text-center mb-4">Our Key Industries</h3>
+                <div class="category-chips-container">
+                    <div class="category-chip chip-agri">
+                        <i class="fa-solid fa-wheat-awn"></i> Agricultural Products
+                    </div>
+                    <div class="category-chip chip-industrial">
+                        <i class="fa-solid fa-industry"></i> Industrial Materials
+                    </div>
+                    <div class="category-chip chip-consumer">
+                        <i class="fa-solid fa-bag-shopping"></i> Consumer Goods
+                    </div>
+                    <div class="category-chip chip-custom">
+                        <i class="fa-solid fa-box-open"></i> Custom Solutions
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="text-center mt-5">
+                    <h4 style="margin-bottom: 1rem; margin-top: 20px;">Looking for a trusted trade partner?</h4>
+                    <a href="{{ url_for('official.contact') }}" class="btn btn-primary">Get in Touch Today</a>
+                </div>
+            </div>
+        </div>
+</section>
 {% endblock %}

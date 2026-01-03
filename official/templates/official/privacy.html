@@ -1,0 +1,199 @@
+{% extends 'official/base.html' %}
+
+{% block title %}Privacy Policy | Teleportz Enterprises{% endblock %}
+
+{% block content %}
+<style>
+    /* Print Styles */
+    @media print {
+
+        .navbar-wrapper,
+        .footer,
+        .upward-indicator,
+        .downward-indicator,
+        .download-btn-container,
+        .btn {
+            display: none !important;
+        }
+
+        body {
+            background: white !important;
+            color: black !important;
+        }
+
+        .content-group {
+            background: white !important;
+            box-shadow: none !important;
+            padding-top: 0 !important;
+        }
+
+        .hero-card {
+            background: white !important;
+            color: black !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            text-align: left !important;
+            align-items: flex-start !important;
+        }
+
+        .display-1 {
+            color: black !important;
+            background: none !important;
+            -webkit-text-fill-color: black !important;
+            font-size: 2.5rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        .lead {
+            color: #333 !important;
+            font-size: 1.1rem !important;
+            margin-bottom: 2rem !important;
+        }
+
+        .bento-grid {
+            display: block !important;
+            gap: 0 !important;
+        }
+
+        .bento-card {
+            break-inside: avoid;
+            border: 1px solid #eee !important;
+            margin-bottom: 20px !important;
+            box-shadow: none !important;
+            background: white !important;
+            padding: 20px !important;
+        }
+
+        .card-icon {
+            display: none !important;
+        }
+
+        .container {
+            padding: 0 !important;
+            max-width: 100% !important;
+        }
+    }
+
+    .download-btn {
+        background: var(--accent-color);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 99px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(85, 107, 47, 0.2);
+    }
+
+    .download-btn:hover {
+        transform: translateY(-2px);
+        background: #3f5022;
+        box-shadow: 0 6px 20px rgba(85, 107, 47, 0.3);
+    }
+</style>
+
+<div class="content-group">
+    <!-- Professional Hero Section -->
+    <section class="container text-center" style="padding: 160px 20px 60px 20px;">
+        <div class="hero-card" style="margin-bottom: 0;">
+            <div class="intro-badge"><i class="fa-solid fa-shield-halved"></i> Data Protection</div>
+            <h1 class="display-1">Privacy Policy</h1>
+            <p class="lead" style="margin: 0 auto 30px auto;">How we secure your international trade data and ensure
+                global compliance.</p>
+
+            <div class="download-btn-container">
+                <button onclick="window.print()" class="download-btn">
+                    <i class="fa-solid fa-file-pdf"></i> Download as PDF
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="container" style="padding-bottom: 5rem;">
+        <div class="bento-grid">
+            <!-- 1. Overview -->
+            <div class="bento-card col-span-12">
+                <div class="card-icon"><i class="fa-solid fa-circle-info"></i></div>
+                <h3 class="card-title">Overview</h3>
+                <p class="card-desc">At Teleportz Enterprises PVT Ltd., we take your privacy seriously. This policy
+                    outlines how we handle data within our global import-export network, ensuring compliance with
+                    international regulations while facilitating seamless trade solutions.</p>
+            </div>
+
+            <!-- 2. Cookies & Tracking -->
+            <div class="bento-card col-span-6">
+                <div class="card-icon" style="background: rgba(14, 165, 233, 0.1); color: #0ea5e9;"><i
+                        class="fa-solid fa-cookie-bite"></i></div>
+                <h4 class="card-title">Cookies & Tracking</h4>
+                <p class="card-desc">We use essential cookies to manage your sessions and analytical tracking to
+                    understand how our trade platform is used. This helps us optimize our supply chain tools for your
+                    business needs.</p>
+            </div>
+
+            <!-- 3. International Data Transfers -->
+            <div class="bento-card col-span-6">
+                <div class="card-icon" style="background: rgba(249, 115, 22, 0.1); color: #f97316;"><i
+                        class="fa-solid fa-earth-americas"></i></div>
+                <h4 class="card-title">International Transfers</h4>
+                <p class="card-desc">As a global entity, your data may be transferred across borders to facilitate
+                    logistics, customs clearance, and international payments. We ensure all transfers meet high security
+                    standards.</p>
+            </div>
+
+            <!-- 4. Third-Party Services -->
+            <div class="bento-card col-span-8">
+                <div class="card-icon" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;"><i
+                        class="fa-solid fa-handshake"></i></div>
+                <h4 class="card-title">Third-Party Partners</h4>
+                <p class="card-desc">We share minimal necessary data with verified third-party logistics (3PL)
+                    providers, customs brokers, and financial institutions to fulfill your orders and maintain
+                    international trade compliance.</p>
+            </div>
+
+            <!-- 5. Data Retention -->
+            <div class="bento-card col-span-4">
+                <div class="card-icon" style="background: rgba(236, 72, 153, 0.1); color: #ec4899;"><i
+                        class="fa-solid fa-clock-rotate-left"></i></div>
+                <h4 class="card-title">Data Retention</h4>
+                <p class="card-desc">Trade documents and personal data are retained in accordance with international
+                    commercial laws and statutory audit requirements.</p>
+            </div>
+
+            <!-- 6. Your Rights -->
+            <div class="bento-card col-span-6">
+                <div class="card-icon" style="background: rgba(34, 197, 94, 0.1); color: #22c55e;"><i
+                        class="fa-solid fa-user-gear"></i></div>
+                <h4 class="card-title">Your Rights</h4>
+                <p class="card-desc">You have the right to access, correct, or request the deletion of your personal
+                    information. You can also opt-out of non-essential communications at any time through our contact
+                    channels.</p>
+            </div>
+
+            <!-- 7. Policy Updates -->
+            <div class="bento-card col-span-6">
+                <div class="card-icon" style="background: rgba(100, 116, 139, 0.1); color: #64748b;"><i
+                        class="fa-solid fa-arrows-rotate"></i></div>
+                <h4 class="card-title">Policy Updates</h4>
+                <p class="card-desc">We may update this policy periodically to reflect changes in global trade laws.
+                    Major updates will be highlighted on our homepage or sent via email to our active partners.</p>
+            </div>
+
+            <!-- 8. Final Contact -->
+            <div class="bento-card col-span-12"
+                style="background: linear-gradient(135deg, rgba(85, 107, 47, 0.05) 0%, transparent 100%);">
+                <div class="card-icon"><i class="fa-solid fa-envelope"></i></div>
+                <h4 class="card-title">Legal Inquiries</h4>
+                <p class="card-desc">For any clarifications regarding our data practices, please <a
+                        href="{{ url_for('official.contact') }}" class="text-accent" style="font-weight: 600;">contact
+                        our data compliance officer</a>.</p>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

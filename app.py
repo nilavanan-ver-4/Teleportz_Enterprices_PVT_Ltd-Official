@@ -82,9 +82,7 @@ def create_app(config_class=Config, register_blueprints=True):
 
     # Ensure upload folder exists
     with app.app_context():
-        # Adjust upload path to be relative to the root/static since we are in root app.py
-        # Actually admin routes use app/static/uploads logic, we should probably standardize it.
-        # But let's keep it safe.
-        pass
+        upload_path = os.path.join(app.instance_path, 'uploads')
+        os.makedirs(upload_path, exist_ok=True)
 
     return app

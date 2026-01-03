@@ -11,6 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('official.static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('official.static', filename='css/chatbot.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
@@ -18,20 +19,97 @@
 
     <!-- Floating Navigation -->
     <div class="navbar-wrapper">
+        <i class="fa-solid fa-plane" id="navbar-airplane"></i>
+        <i class="fa-solid fa-plane" id="parallax-airplane"></i>
         <nav class="navbar">
             <a href="{{ url_for('official.home') }}" class="brand">
                 <img src="{{ url_for('official.static', filename='img/logo.png') }}" alt="Teleportz Logo"
                     style="height: 64px; border-radius: 6px;">
                 <span>Teleportz Enterprices PVT Ltd.</span>
             </a>
-            <div class="nav-links-desktop" style="display: flex; gap: 24px;">
+            <div class="nav-links-desktop">
                 <a href="{{ url_for('official.home') }}" class="nav-link">Home</a>
                 <a href="{{ url_for('official.about') }}" class="nav-link">About</a>
-                <a href="{{ url_for('official.services') }}" class="nav-link">Services</a>
+
+                <div class="nav-item-dropdown">
+                    <a href="{{ url_for('official.services') }}" class="nav-link">Services <i
+                            class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-ship"></i> Import
+                            Services</a>
+                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-plane-departure"></i> Export
+                            Services</a>
+                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-truck-fast"></i> Logistics &
+                            Supply Chain</a>
+                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-file-signature"></i>
+                            Documentation & Regulatory</a>
+                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-briefcase"></i> Trade
+                            Consulting</a>
+                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-clipboard-check"></i> Quality
+                            & Compliance</a>
+                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-headset"></i> Post-Shipment
+                            Support</a>
+                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-sliders"></i> Custom Trade
+                            Solutions</a>
+                    </div>
+                </div>
+
+                <div class="nav-item-dropdown">
+                    <a href="#" class="nav-link">Features <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="#"><i class="fa-solid fa-brain"></i> Global Trade Intelligence</a>
+                        <a href="#"><i class="fa-solid fa-user-tag"></i> Buyers Intelligence</a>
+                        <a href="#"><i class="fa-solid fa-industry"></i> Suppliers Intelligence</a>
+                        <a href="#"><i class="fa-solid fa-chart-line"></i> Market Intelligence</a>
+                        <a href="#"><i class="fa-solid fa-laptop-code"></i> Trade Platform</a>
+                        <a href="#"><i class="fa-solid fa-bolt"></i> Competitive Intel</a>
+                        <a href="#"><i class="fa-solid fa-box"></i> Product Intel</a>
+                        <a href="#"><i class="fa-solid fa-link"></i> Supply Chain Intel</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="view-all">View All Features <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
                 <a href="{{ url_for('official.products') }}" class="nav-link">Products</a>
             </div>
-            <a href="{{ url_for('official.contact') }}" class="btn-nav">Contact</a>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <a href="{{ url_for('official.contact') }}" class="btn-nav">Contact</a>
+                <button class="mobile-nav-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </nav>
+    </div>
+
+    <!-- High-End Mobile Sidebar -->
+    <div class="sidebar-overlay"></div>
+    <div class="mobile-sidebar">
+        <div class="sidebar-header">
+            <a href="{{ url_for('official.home') }}" class="brand">
+                <img src="{{ url_for('official.static', filename='img/logo.png') }}" alt="Logo" style="height: 48px;">
+                <span>Teleportz</span>
+            </a>
+            <button class="sidebar-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="{{ url_for('official.home') }}"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="{{ url_for('official.about') }}"><i class="fa-solid fa-building"></i> About Us</a></li>
+                <li><a href="{{ url_for('official.services') }}"><i class="fa-solid fa-handshake"></i> Services</a></li>
+                <li><a href="{{ url_for('official.products') }}"><i class="fa-solid fa-box"></i> Products</a></li>
+                <li><a href="{{ url_for('official.contact') }}"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2026 Teleportz</p>
+        </div>
     </div>
 
     <!-- Flash Messages -->
@@ -50,10 +128,6 @@
     <!-- Main Content -->
     <!-- Parallax Container -->
     <div class="parallax">
-        <!-- Parallax Background Layer -->
-        <div class="parallax-layer parallax-layer--back bg-hitech"
-            style="background-image: url('{{ url_for('official.static', filename='img/hitech_bg.png') }}'); opacity: 0.8;">
-        </div>
         <main>
             {% block content %}{% endblock %}
         </main>
@@ -69,6 +143,15 @@
 
     <!-- Fixed Footer Outside Wrapper -->
     <footer class="footer">
+        <div class="footer-visuals">
+            <!-- Parallax Airplane moved to header for 'fly above' effect -->
+
+            <!-- Maritime Corridor with Parallax Sailboat (Backward) -->
+            <div class="footer-maritime-corridor">
+                <i class="fa-solid fa-sailboat" id="parallax-sailboat"></i>
+                <div class="footer-water-flow"></div>
+            </div>
+        </div>
         <div class="container footer-content">
             <div style="width: 100%;">
                 <div class="footer-grid">
@@ -79,7 +162,8 @@
                     <div>
                         <h3>Company</h3>
                         <ul>
-                            <li><a href="{{ url_for('official.about') }}"><i class="fa-solid fa-building"></i> About</a>
+                            <li><a href="{{ url_for('official.about') }}"><i class="fa-solid fa-building"></i>
+                                    About</a>
                             </li>
                             <li><a href="{{ url_for('official.services') }}"><i class="fa-solid fa-handshake"></i>
                                     Services</a></li>
@@ -90,31 +174,81 @@
                     <div>
                         <h3>Legal</h3>
                         <ul>
-                            <li><a href="#"><i class="fa-solid fa-shield-halved"></i> Privacy</a></li>
-                            <li><a href="#"><i class="fa-solid fa-file-contract"></i> Terms</a></li>
+                            <li><a href="{{ url_for('official.privacy') }}"><i class="fa-solid fa-user"></i>
+                                    Privacy Policy</a></li>
+                            <li><a href="{{ url_for('official.terms') }}"><i class="fa-solid fa-file-contract"></i>
+                                    Terms of Service</a></li>
+                            <li><a href="{{ url_for('official.contact') }}"><i class="fa-solid fa-envelope"></i>
+                                    Contact Us</a></li>
                         </ul>
                     </div>
                     <div>
                         <h3>Connect</h3>
-                        <ul>
-                            <li><a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
-                            <li><a href="#"><i class="fa-brands fa-twitter"></i> Twitter</a></li>
-                            <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
-                        </ul>
+                        <div class="social-links">
+                            <a href="https://linkedin.com/company/teleportz-enterprises"><i
+                                    class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                            <a href="https://twitter.com/teleportz_intl"><i class="fa-brands fa-twitter"></i>
+                                Twitter</a>
+                            <a href="https://instagram.com/teleportz_official"><i class="fa-brands fa-instagram"></i>
+                                Instagram</a>
+                        </div>
                     </div>
                 </div>
-                <div class="text-center mt-5" style="border-top: 1px solid #e2e8f0; padding-top: 2rem;">
-                    <p>&copy; 2026 Teleportz Enterprices PVT Ltd. All rights reserved.</p>
+                <div class="footer-bottom">
+                    <p>© 2026 Teleportz Enterprices PVT Ltd. All rights reserved.</p>
                 </div>
             </div>
         </div>
-
-        <!-- Upward Scroll Button -->
-        <div class="upward-indicator">
-            <!-- Upward arrow -->
-            <i class="fa-solid fa-arrow-up"></i>
-        </div>
     </footer>
+
+    <!-- Upward Scroll Button (fixed, visible) -->
+    <div class="upward-indicator" role="button" aria-label="Scroll up" tabindex="0">
+        <i class="fa-solid fa-plane" aria-hidden="true"></i>
+    </div>
+
+    <!-- Trade Expert AI Chatbot -->
+    <div class="chatbot-wrapper">
+        <div class="chatbot-fab" role="button" aria-label="Open trade expert chat">
+            <i class="fa-solid fa-robot"></i>
+            <div class="notification-badge">1</div>
+        </div>
+
+        <div class="chat-window">
+            <div class="chat-header">
+                <div class="expert-info">
+                    <div class="expert-avatar">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <span class="online-status"></span>
+                    </div>
+                    <div>
+                        <h4>Trade Expert AI</h4>
+                        <p>Global Logistics Specialist</p>
+                    </div>
+                </div>
+                <button class="chat-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message system-message">
+                    Welcome to Teleportz Global Trade Support. How can I assist you with your logistics or sourcing
+                    today?
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="typing-indicator" id="typingIndicator">
+                    <span></span><span></span><span></span> Expert is typing...
+                </div>
+                <form id="chatForm">
+                    <input type="text" id="chatInput" placeholder="Ask about shipping, customs, or products..."
+                        autocomplete="off">
+                    <button type="submit" class="chat-send-btn">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script src="{{ url_for('official.static', filename='js/main.js') }}"></script>
 </body>
