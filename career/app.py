@@ -15,7 +15,7 @@ parent_dir = os.path.abspath(os.path.join(current_dir, '..'))
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'your-secret-key-here'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(parent_dir, "instance", "site.db")}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(parent_dir, "database", "site.db")}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     db.init_app(app)

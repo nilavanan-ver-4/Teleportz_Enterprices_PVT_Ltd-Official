@@ -244,6 +244,6 @@ def download_photo(filename):
 
 @admin_bp.route('/uploads/<filename>')
 def uploaded_file(filename):
-    """Serve uploaded product images from the instance folder."""
+    """Serve uploaded product images from the database folder."""
     upload_path = os.path.join(current_app.instance_path, 'uploads')
     return send_from_directory(upload_path, filename)

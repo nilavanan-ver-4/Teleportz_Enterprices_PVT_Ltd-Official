@@ -7,9 +7,9 @@ app = create_app()
 
 def create_admin(username, password):
     with app.app_context():
-        # Ensure instance folder exists
-        if not os.path.exists('instance'):
-            os.makedirs('instance')
+        # Ensure database folder exists
+        if not os.path.exists('database'):
+            os.makedirs('database')
         
         # Create tables
         db.create_all()
