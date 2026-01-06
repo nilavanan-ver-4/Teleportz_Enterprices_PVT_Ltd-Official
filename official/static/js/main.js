@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Simpler approach: shift background-position or use a child element. 
             // Better: Translate the layer slightly.
             // Since it already has translateZ, we must maintain it.
-            layer.style.transform = `translateZ(-1px) scale(1.5) translate(${x}px, ${y}px)`;
+            layer.style.transform = `translateZ(-1px) scale(1.3) translate(${x}px, ${y}px)`;
         });
     });
 
