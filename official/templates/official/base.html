@@ -19,13 +19,18 @@
 
     <!-- Floating Navigation -->
     <div class="navbar-wrapper">
-        <i class="fa-solid fa-plane" id="navbar-airplane"></i>
+        <!-- <i class="fa-solid fa-plane" id="navbar-airplane"></i> -->
         <i class="fa-solid fa-plane" id="parallax-airplane"></i>
         <nav class="navbar">
             <a href="{{ url_for('official.home') }}" class="brand">
                 <img src="{{ url_for('official.static', filename='img/logo.png') }}" alt="Teleportz Logo"
                     style="height: 64px; border-radius: 6px;">
-                <span>Teleportz Enterprices PVT Ltd.</span>
+                <div class="brand-text-container">
+                    <div class="brand-text-animated">
+                        <span class="letter">T</span><span class="letter">E</span><span class="letter">L</span><span class="letter">E</span><span class="letter">P</span><span class="letter">O</span><span class="letter">R</span><span class="letter">T</span><span class="letter">Z</span>
+                    </div>
+                    <span class="brand-tagline">Global Trade Solutions</span>
+                </div>
             </a>
             <div class="nav-links-desktop">
                 <a href="{{ url_for('official.home') }}" class="nav-link">Home</a>
@@ -35,38 +40,30 @@
                     <a href="{{ url_for('official.services') }}" class="nav-link">Services <i
                             class="fa-solid fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
-                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-ship"></i> Import
-                            Services</a>
-                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-plane-departure"></i> Export
-                            Services</a>
-                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-truck-fast"></i> Logistics &
-                            Supply Chain</a>
-                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-file-signature"></i>
-                            Documentation & Regulatory</a>
-                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-briefcase"></i> Trade
-                            Consulting</a>
-                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-clipboard-check"></i> Quality
-                            & Compliance</a>
-                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-headset"></i> Post-Shipment
-                            Support</a>
-                        <a href="{{ url_for('official.services') }}"><i class="fa-solid fa-sliders"></i> Custom Trade
-                            Solutions</a>
+                        <a href="{{ url_for('official.service_detail', slug='import-services') }}"><i class="fa-solid fa-ship"></i> Import Services</a>
+                        <a href="{{ url_for('official.service_detail', slug='export-services') }}"><i class="fa-solid fa-plane-departure"></i> Export Services</a>
+                        <a href="{{ url_for('official.service_detail', slug='logistics-supply-chain') }}"><i class="fa-solid fa-truck-fast"></i> Logistics & Supply Chain</a>
+                        <a href="{{ url_for('official.service_detail', slug='documentation-regulatory') }}"><i class="fa-solid fa-file-signature"></i> Documentation & Regulatory</a>
+                        <a href="{{ url_for('official.service_detail', slug='trade-consulting') }}"><i class="fa-solid fa-briefcase"></i> Trade Consulting</a>
+                        <a href="{{ url_for('official.service_detail', slug='quality-compliance') }}"><i class="fa-solid fa-clipboard-check"></i> Quality & Compliance</a>
+                        <a href="{{ url_for('official.service_detail', slug='post-shipment-support') }}"><i class="fa-solid fa-headset"></i> Post-Shipment Support</a>
+                        <a href="{{ url_for('official.service_detail', slug='custom-trade-solutions') }}"><i class="fa-solid fa-sliders"></i> Custom Trade Solutions</a>
                     </div>
                 </div>
 
                 <div class="nav-item-dropdown">
-                    <a href="#" class="nav-link">Features <i class="fa-solid fa-chevron-down"></i></a>
+                    <a href="{{ url_for('official.features') }}" class="nav-link">Features <i class="fa-solid fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
-                        <a href="#"><i class="fa-solid fa-brain"></i> Global Trade Intelligence</a>
-                        <a href="#"><i class="fa-solid fa-user-tag"></i> Buyers Intelligence</a>
-                        <a href="#"><i class="fa-solid fa-industry"></i> Suppliers Intelligence</a>
-                        <a href="#"><i class="fa-solid fa-chart-line"></i> Market Intelligence</a>
-                        <a href="#"><i class="fa-solid fa-laptop-code"></i> Trade Platform</a>
-                        <a href="#"><i class="fa-solid fa-bolt"></i> Competitive Intel</a>
-                        <a href="#"><i class="fa-solid fa-box"></i> Product Intel</a>
-                        <a href="#"><i class="fa-solid fa-link"></i> Supply Chain Intel</a>
+                        <a href="{{ url_for('official.feature_detail', slug='trade-intelligence') }}"><i class="fa-solid fa-brain"></i> Global Trade Intelligence</a>
+                        <a href="{{ url_for('official.feature_detail', slug='buyers-intelligence') }}"><i class="fa-solid fa-user-tag"></i> Buyers Intelligence</a>
+                        <a href="{{ url_for('official.feature_detail', slug='suppliers-intelligence') }}"><i class="fa-solid fa-industry"></i> Suppliers Intelligence</a>
+                        <a href="{{ url_for('official.feature_detail', slug='market-intelligence') }}"><i class="fa-solid fa-chart-line"></i> Market Intelligence</a>
+                        <a href="{{ url_for('official.feature_detail', slug='trade-platform') }}"><i class="fa-solid fa-laptop-code"></i> Trade Platform</a>
+                        <a href="{{ url_for('official.feature_detail', slug='competitive-intel') }}"><i class="fa-solid fa-bolt"></i> Competitive Intel</a>
+                        <a href="{{ url_for('official.feature_detail', slug='product-intel') }}"><i class="fa-solid fa-box"></i> Product Intel</a>
+                        <a href="{{ url_for('official.feature_detail', slug='supply-chain-intel') }}"><i class="fa-solid fa-link"></i> Supply Chain Intel</a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="view-all">View All Features <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="{{ url_for('official.features') }}" class="view-all">View All Features <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
 

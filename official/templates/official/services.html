@@ -56,7 +56,7 @@
             </div>
 
             <!-- Import Services -->
-            <div class="bento-card col-span-6 row-span-2">
+            <a href="{{ url_for('official.service_detail', slug='import-services') }}" class="bento-card col-span-8" style="text-decoration: none; color: inherit; cursor: pointer;">
                 <div class="card-icon"><i class="fa-solid fa-ship"></i></div>
                 <h3 class="card-title">Import Services</h3>
                 <p class="card-desc">Seamlessly bring quality global products to your doorstep with our specialized
@@ -67,10 +67,10 @@
                     <li><i class="fa-solid fa-check"></i> Customs coordination support</li>
                     <li><i class="fa-solid fa-check"></i> Import duty optimization</li>
                 </ul>
-            </div>
+            </a>
 
             <!-- Export Services -->
-            <div class="bento-card col-span-6">
+            <a href="{{ url_for('official.service_detail', slug='export-services') }}" class="bento-card col-span-4" style="text-decoration: none; color: inherit; cursor: pointer;">
                 <div class="card-icon"><i class="fa-solid fa-plane-departure"></i></div>
                 <h3 class="card-title">Export Services</h3>
                 <ul class="service-list">
@@ -78,10 +78,10 @@
                     <li><i class="fa-solid fa-check"></i> Documentation assistance</li>
                     <li><i class="fa-solid fa-check"></i> Logistics coordination</li>
                 </ul>
-            </div>
+            </a>
 
             <!-- Logistics & Supply Chain -->
-            <div class="bento-card col-span-6">
+            <a href="{{ url_for('official.service_detail', slug='logistics-supply-chain') }}" class="bento-card col-span-4" style="text-decoration: none; color: inherit; cursor: pointer;">
                 <div class="card-icon"><i class="fa-solid fa-truck-fast"></i></div>
                 <h3 class="card-title">Logistics & Supply Chain</h3>
                 <ul class="service-list">
@@ -89,10 +89,10 @@
                     <li><i class="fa-solid fa-check"></i> Shipment tracking and scheduling</li>
                     <li><i class="fa-solid fa-check"></i> Cost-effective logistics planning</li>
                 </ul>
-            </div>
+            </a>
 
             <!-- Documentation & Regulatory -->
-            <div class="bento-card col-span-4">
+            <a href="{{ url_for('official.service_detail', slug='documentation-regulatory') }}" class="bento-card col-span-4" style="text-decoration: none; color: inherit; cursor: pointer;">
                 <div class="card-icon"><i class="fa-solid fa-file-signature"></i></div>
                 <h3 class="card-title">Documentation & Regulations</h3>
                 <ul class="service-list">
@@ -100,11 +100,10 @@
                     <li><i class="fa-solid fa-check"></i> Customs coordination</li>
                     <li><i class="fa-solid fa-check"></i> HS code & compliance guidance</li>
                 </ul>
-            </div>
-
+            </a>
 
             <!-- Trade Consulting -->
-            <div class="bento-card col-span-4">
+            <a href="{{ url_for('official.service_detail', slug='trade-consulting') }}" class="bento-card col-span-4" style="text-decoration: none; color: inherit; cursor: pointer;">
                 <div class="card-icon"><i class="fa-solid fa-briefcase"></i></div>
                 <h3 class="card-title">Trade Consulting</h3>
                 <ul class="service-list">
@@ -112,10 +111,10 @@
                     <li><i class="fa-solid fa-check"></i> Supplier & buyer connections</li>
                     <li><i class="fa-solid fa-check"></i> Risk mitigation strategies</li>
                 </ul>
-            </div>
+            </a>
 
             <!-- Quality & Compliance -->
-            <div class="bento-card col-span-4">
+            <a href="{{ url_for('official.service_detail', slug='quality-compliance') }}" class="bento-card col-span-4" style="text-decoration: none; color: inherit; cursor: pointer;">
                 <div class="card-icon"><i class="fa-solid fa-clipboard-check"></i></div>
                 <h3 class="card-title">Quality & Compliance</h3>
                 <ul class="service-list">
@@ -123,10 +122,10 @@
                     <li><i class="fa-solid fa-check"></i> International trade standards</li>
                     <li><i class="fa-solid fa-check"></i> Factory audits & inspections</li>
                 </ul>
-            </div>
+            </a>
 
             <!-- Post Shipment Support -->
-            <div class="bento-card col-span-6">
+            <a href="{{ url_for('official.service_detail', slug='post-shipment-support') }}" class="bento-card col-span-8" style="text-decoration: none; color: inherit; cursor: pointer;">
                 <div class="card-icon"><i class="fa-solid fa-headset"></i></div>
                 <h3 class="card-title">Post-Shipment Support</h3>
                 <ul class="service-list">
@@ -134,10 +133,10 @@
                     <li><i class="fa-solid fa-check"></i> Issue resolution & coordination</li>
                     <li><i class="fa-solid fa-check"></i> Long-term client assistance</li>
                 </ul>
-            </div>
+            </a>
 
             <!-- Custom Trade Solutions -->
-            <div class="bento-card col-span-6">
+            <a href="{{ url_for('official.service_detail', slug='custom-trade-solutions') }}" class="bento-card col-span-6" style="text-decoration: none; color: inherit; cursor: pointer;">
                 <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
                 <h3 class="card-title">Custom Trade Solutions</h3>
                 <ul class="service-list">
@@ -145,7 +144,20 @@
                     <li><i class="fa-solid fa-check"></i> Custom order handling</li>
                     <li><i class="fa-solid fa-check"></i> Flexible trade models</li>
                 </ul>
-            </div>
+            </a>
+        </div>
+    </section>
+</div>
+{% endblock %}olutions -->
+            <a href="{{ url_for('official.service_detail', slug='custom-trade-solutions') }}" class="bento-card col-span-6" style="text-decoration: none; color: inherit; cursor: pointer;">
+                <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
+                <h3 class="card-title">Custom Trade Solutions</h3>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Industry-specific sourcing</li>
+                    <li><i class="fa-solid fa-check"></i> Custom order handling</li>
+                    <li><i class="fa-solid fa-check"></i> Flexible trade models</li>
+                </ul>
+            </a>
         </div>
     </section>
 </div>

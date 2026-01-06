@@ -1,0 +1,25 @@
+{% extends 'official/base.html' %}
+
+{% block title %}Our Services{% endblock %}
+
+{% block content %}
+<section class="container" style="padding-top: 120px; padding-bottom: 60px;">
+    <div class="hero-card text-center">
+        <h1 class="display-1">Services</h1>
+        <p class="lead">Comprehensive trade services to support your global operations.</p>
+    </div>
+
+    <div class="bento-grid mt-5">
+        {% for s in services %}
+        <div class="bento-card col-span-6">
+            <div class="card-icon"><i class="fa-solid {{ s.icon }}"></i></div>
+            <h4 class="card-title">{{ s.title }}</h4>
+            <p class="card-desc">{{ s.summary }}</p>
+            <div style="margin-top: auto; display:flex; justify-content:flex-end;">
+                <a href="{{ url_for('official.service_detail', slug=s.slug) }}" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'official/base.html' %}
+
+{% block title %}Quality & Compliance - Teleportz{% endblock %}
+
+{% block content %}
+<div class="parallax-group">
+    <div class="parallax-layer parallax-layer--back" style="background-image: url('{{ url_for('official.static', filename='img/World.png') }}');"></div>
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container text-center" style="padding-top: 150px; padding-bottom: 80px;">
+            <div class="hero-card">
+                <h1 class="display-1">Quality & Compliance</h1>
+                <p class="lead">Ensure product quality and international standards</p>
+                <div style="display: flex; justify-content: center; gap: 16px;">
+                    <a href="{{ url_for('official.services') }}" class="btn btn-primary">Back to Services</a>
+                    <a href="{{ url_for('official.contact') }}" class="btn btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="content-group" style="padding: 5rem 0; background: var(--bg-color);">
+    <section class="container">
+        <div class="bento-grid">
+            <div class="bento-card col-span-12">
+                <div class="card-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                <h3 class="card-title">Quality & Compliance</h3>
+                <p class="card-desc" style="font-size: 1.1rem; line-height: 1.8;">
+                    Maintain the highest quality standards with our comprehensive quality checks and compliance audits. We ensure your products meet international standards and regulatory requirements.
+                </p>
+                <ul class="service-list" style="margin-top: 2rem;">
+                    <li><i class="fa-solid fa-check"></i> Product quality checks</li>
+                    <li><i class="fa-solid fa-check"></i> International trade standards</li>
+                    <li><i class="fa-solid fa-check"></i> Factory audits & inspections</li>
+                    <li><i class="fa-solid fa-check"></i> Certification support</li>
+                    <li><i class="fa-solid fa-check"></i> Testing & verification</li>
+                    <li><i class="fa-solid fa-check"></i> Compliance documentation</li>
+                </ul>
+                <a href="{{ url_for('official.contact') }}" class="btn btn-primary" style="margin-top: 2rem;">Request Service</a>
+            </div>
+
+            <div class="bento-card col-span-6">
+                <h4 style="margin-bottom: 1rem;">Quality Assurance</h4>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Pre-shipment inspection</li>
+                    <li><i class="fa-solid fa-check"></i> Third-party testing</li>
+                    <li><i class="fa-solid fa-check"></i> Defect identification</li>
+                    <li><i class="fa-solid fa-check"></i> Quality reporting</li>
+                </ul>
+            </div>
+
+            <div class="bento-card col-span-6">
+                <h4 style="margin-bottom: 1rem;">Compliance Standards</h4>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> ISO certifications</li>
+                    <li><i class="fa-solid fa-check"></i> Industry-specific standards</li>
+                    <li><i class="fa-solid fa-check"></i> Safety regulations</li>
+                    <li><i class="fa-solid fa-check"></i> Environmental compliance</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

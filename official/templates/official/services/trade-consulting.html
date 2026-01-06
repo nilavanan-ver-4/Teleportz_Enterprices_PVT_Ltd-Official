@@ -1,0 +1,64 @@
+{% extends 'official/base.html' %}
+
+{% block title %}Trade Consulting - Teleportz{% endblock %}
+
+{% block content %}
+<div class="parallax-group">
+    <div class="parallax-layer parallax-layer--back" style="background-image: url('{{ url_for('official.static', filename='img/World.png') }}');"></div>
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container text-center" style="padding-top: 150px; padding-bottom: 80px;">
+            <div class="hero-card">
+                <h1 class="display-1">Trade Consulting</h1>
+                <p class="lead">Strategic guidance for global trade</p>
+                <div style="display: flex; justify-content: center; gap: 16px;">
+                    <a href="{{ url_for('official.services') }}" class="btn btn-primary">Back to Services</a>
+                    <a href="{{ url_for('official.contact') }}" class="btn btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="content-group" style="padding: 5rem 0; background: var(--bg-color);">
+    <section class="container">
+        <div class="bento-grid">
+            <div class="bento-card col-span-12">
+                <div class="card-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <h3 class="card-title">Trade Consulting</h3>
+                <p class="card-desc" style="font-size: 1.1rem; line-height: 1.8;">
+                    Get expert advice on market entry, supplier connections, and risk mitigation strategies. Our consultants provide strategic guidance tailored to your business goals and market conditions.
+                </p>
+                <ul class="service-list" style="margin-top: 2rem;">
+                    <li><i class="fa-solid fa-check"></i> Market entry guidance</li>
+                    <li><i class="fa-solid fa-check"></i> Supplier & buyer connections</li>
+                    <li><i class="fa-solid fa-check"></i> Risk mitigation strategies</li>
+                    <li><i class="fa-solid fa-check"></i> Trade strategy development</li>
+                    <li><i class="fa-solid fa-check"></i> Market research & analysis</li>
+                    <li><i class="fa-solid fa-check"></i> Business opportunity identification</li>
+                </ul>
+                <a href="{{ url_for('official.contact') }}" class="btn btn-primary" style="margin-top: 2rem;">Request Service</a>
+            </div>
+
+            <div class="bento-card col-span-6">
+                <h4 style="margin-bottom: 1rem;">Consulting Services</h4>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Market feasibility studies</li>
+                    <li><i class="fa-solid fa-check"></i> Competitive analysis</li>
+                    <li><i class="fa-solid fa-check"></i> Pricing strategy</li>
+                    <li><i class="fa-solid fa-check"></i> Business planning</li>
+                </ul>
+            </div>
+
+            <div class="bento-card col-span-6">
+                <h4 style="margin-bottom: 1rem;">Strategic Support</h4>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Partner identification</li>
+                    <li><i class="fa-solid fa-check"></i> Negotiation support</li>
+                    <li><i class="fa-solid fa-check"></i> Contract review</li>
+                    <li><i class="fa-solid fa-check"></i> Ongoing advisory</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

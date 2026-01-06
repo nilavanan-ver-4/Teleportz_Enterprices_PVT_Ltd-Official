@@ -1,0 +1,176 @@
+{% extends 'official/base.html' %}
+
+{% block title %}Corporate Policies{% endblock %}
+
+{% block content %}
+<div class="parallax-group">
+    <div class="parallax-layer parallax-layer--back"
+        style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+    </div>
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container text-center" style="padding-top: 150px; padding-bottom: 80px;">
+            <div class="hero-card">
+                <h1 class="display-1">Corporate Policies</h1>
+                <p class="lead" style="margin: 0 auto 20px auto;">
+                    Transparency, Governance & Compliance Framework
+                </p>
+                <div style="display: flex; justify-content: center; gap: 16px;">
+                    <a href="{{ url_for('official.home') }}" class="btn btn-secondary">Back Home</a>
+                    <a href="{{ url_for('official.contact') }}" class="btn btn-primary">Contact Us</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="parallax-group content-group" style="min-height: auto; padding: 5rem 0; background: #ffffff;">
+    <div class="parallax-layer parallax-layer--base">
+        <section class="container">
+            <div style="display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: start;">
+                <!-- Left Sidebar -->
+                <div class="sidebar" style="position: sticky; top: 100px;">
+                    <!-- Download Brochure -->
+                    <div class="bento-card" style="padding: 24px; background: #1f2937; color: white; margin-bottom: 24px;">
+                        <div style="text-align: center;">
+                            <div class="card-icon" style="background: rgba(255, 255, 255, 0.1); color: white; margin: 0 auto 16px auto;">
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                            <h4 style="margin-bottom: 12px; color: white;">Company Brochure</h4>
+                            <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 20px;">Download our complete company profile and capabilities</p>
+                            <a href="#" class="btn btn-primary" style="width: 100%; background: #3b82f6; border-color: #3b82f6;">
+                                <i class="fa-solid fa-file-pdf" style="margin-right: 8px;"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Customer Support -->
+                    <div class="bento-card" style="padding: 24px; background: #1f2937; color: white;">
+                        <div style="text-align: center;">
+                            <div class="card-icon" style="background: rgba(34, 197, 94, 0.2); color: #22c55e; margin: 0 auto 16px auto;">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <h4 style="margin-bottom: 8px; color: white;">Need Help?</h4>
+                            <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 16px;">Our support team is here to assist you</p>
+                            <div style="padding: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; margin-bottom: 16px;">
+                                <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
+                                    <i class="fa-solid fa-phone" style="color: #22c55e;"></i>
+                                    <span style="font-weight: 600;">+1 234 567 890</span>
+                                </div>
+                            </div>
+                            <a href="{{ url_for('official.contact') }}" class="btn btn-secondary" style="width: 100%; background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); color: white;">
+                                Contact Support
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="main-content">
+                    <div style="margin-bottom: 40px;">
+                        <h2 style="font-size: 2.5rem; margin-bottom: 16px; color: #1f2937;">Corporate Governance</h2>
+                        <p style="font-size: 1.1rem; color: #6b7280; line-height: 1.6; max-width: 800px;">
+                            At Teleportz Enterprises, we are committed to maintaining the highest standards of corporate governance, 
+                            transparency, and ethical business practices. Our comprehensive policy framework ensures compliance 
+                            with regulatory requirements and industry best practices.
+                        </p>
+                    </div>
+
+                    <!-- Policy Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                        <!-- Materiality Policy -->
+                        <div class="policy-card" style="padding: 24px; background: white; border: 2px dashed #e5e7eb; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#f97316'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <div style="margin-bottom: 16px;">
+                                <i class="fa-solid fa-file-pdf" style="font-size: 3rem; color: #dc2626; margin-bottom: 12px;"></i>
+                            </div>
+                            <h4 style="color: #f97316; margin-bottom: 8px; font-size: 1.1rem;">Materiality Policy</h4>
+                            <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 16px;">Framework for identifying and managing material information</p>
+                            <a href="#" class="btn btn-sm" style="background: #fef3c7; color: #f59e0b; border: none; padding: 6px 16px; font-size: 0.85rem;">
+                                <i class="fa-solid fa-download" style="margin-right: 6px;"></i>Download
+                            </a>
+                        </div>
+
+                        <!-- Code of Conduct -->
+                        <div class="policy-card" style="padding: 24px; background: white; border: 2px dashed #e5e7eb; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#f97316'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <div style="margin-bottom: 16px;">
+                                <i class="fa-solid fa-file-pdf" style="font-size: 3rem; color: #dc2626; margin-bottom: 12px;"></i>
+                            </div>
+                            <h4 style="color: #f97316; margin-bottom: 8px; font-size: 1.1rem;">Code of Conduct</h4>
+                            <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 16px;">Ethical guidelines and behavioral standards for all stakeholders</p>
+                            <a href="#" class="btn btn-sm" style="background: #fef3c7; color: #f59e0b; border: none; padding: 6px 16px; font-size: 0.85rem;">
+                                <i class="fa-solid fa-download" style="margin-right: 6px;"></i>Download
+                            </a>
+                        </div>
+
+                        <!-- Board Diversity Policy -->
+                        <div class="policy-card" style="padding: 24px; background: white; border: 2px dashed #e5e7eb; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#f97316'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <div style="margin-bottom: 16px;">
+                                <i class="fa-solid fa-file-pdf" style="font-size: 3rem; color: #dc2626; margin-bottom: 12px;"></i>
+                            </div>
+                            <h4 style="color: #f97316; margin-bottom: 8px; font-size: 1.1rem;">Board Diversity Policy</h4>
+                            <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 16px;">Commitment to diversity and inclusion in board composition</p>
+                            <a href="#" class="btn btn-sm" style="background: #fef3c7; color: #f59e0b; border: none; padding: 6px 16px; font-size: 0.85rem;">
+                                <i class="fa-solid fa-download" style="margin-right: 6px;"></i>Download
+                            </a>
+                        </div>
+
+                        <!-- Nomination and Remuneration Policy -->
+                        <div class="policy-card" style="padding: 24px; background: white; border: 2px dashed #e5e7eb; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#f97316'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <div style="margin-bottom: 16px;">
+                                <i class="fa-solid fa-file-pdf" style="font-size: 3rem; color: #dc2626; margin-bottom: 12px;"></i>
+                            </div>
+                            <h4 style="color: #f97316; margin-bottom: 8px; font-size: 1.1rem;">Nomination & Remuneration Policy</h4>
+                            <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 16px;">Guidelines for board appointments and compensation structure</p>
+                            <a href="#" class="btn btn-sm" style="background: #fef3c7; color: #f59e0b; border: none; padding: 6px 16px; font-size: 0.85rem;">
+                                <i class="fa-solid fa-download" style="margin-right: 6px;"></i>Download
+                            </a>
+                        </div>
+
+                        <!-- Insider Trading Code -->
+                        <div class="policy-card" style="padding: 24px; background: white; border: 2px dashed #e5e7eb; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#f97316'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <div style="margin-bottom: 16px;">
+                                <i class="fa-solid fa-file-pdf" style="font-size: 3rem; color: #dc2626; margin-bottom: 12px;"></i>
+                            </div>
+                            <h4 style="color: #f97316; margin-bottom: 8px; font-size: 1.1rem;">Insider Trading Code</h4>
+                            <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 16px;">Prevention of insider trading and fair disclosure practices</p>
+                            <a href="#" class="btn btn-sm" style="background: #fef3c7; color: #f59e0b; border: none; padding: 6px 16px; font-size: 0.85rem;">
+                                <i class="fa-solid fa-download" style="margin-right: 6px;"></i>Download
+                            </a>
+                        </div>
+
+                        <!-- Content Archiving Policy -->
+                        <div class="policy-card" style="padding: 24px; background: white; border: 2px dashed #e5e7eb; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#f97316'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <div style="margin-bottom: 16px;">
+                                <i class="fa-solid fa-file-pdf" style="font-size: 3rem; color: #dc2626; margin-bottom: 12px;"></i>
+                            </div>
+                            <h4 style="color: #f97316; margin-bottom: 8px; font-size: 1.1rem;">Content Archiving Policy</h4>
+                            <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 16px;">Document retention and information management guidelines</p>
+                            <a href="#" class="btn btn-sm" style="background: #fef3c7; color: #f59e0b; border: none; padding: 6px 16px; font-size: 0.85rem;">
+                                <i class="fa-solid fa-download" style="margin-right: 6px;"></i>Download
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div style="margin-top: 60px; padding: 32px; background: #f8fafc; border-radius: 16px; border-left: 4px solid #3b82f6;">
+                        <h3 style="color: #1f2937; margin-bottom: 16px;">Commitment to Excellence</h3>
+                        <p style="color: #6b7280; line-height: 1.6; margin-bottom: 20px;">
+                            These policies reflect our unwavering commitment to ethical business practices, regulatory compliance, 
+                            and stakeholder value creation. We regularly review and update our policies to ensure they remain 
+                            current with evolving regulatory requirements and industry best practices.
+                        </p>
+                        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="{{ url_for('official.contact') }}" class="btn btn-primary">
+                                <i class="fa-solid fa-envelope" style="margin-right: 8px;"></i>Contact Compliance Team
+                            </a>
+                            <a href="{{ url_for('official.about') }}" class="btn btn-secondary">
+                                <i class="fa-solid fa-info-circle" style="margin-right: 8px;"></i>Learn More About Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

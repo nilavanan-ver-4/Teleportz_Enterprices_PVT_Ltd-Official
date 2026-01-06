@@ -14,92 +14,181 @@
                 <p class="lead" style="margin: 0 auto 20px auto;">
                     Quality sourcing across key industries.
                 </p>
-                <div style="display: flex; justify-content: center; gap: 16px;">
-                    <a href="{{ url_for('official.home') }}" class="btn btn-primary">Back Home</a>
-                    <a href="{{ url_for('official.contact') }}" class="btn btn-secondary">Inquire Now</a>
-                </div>
             </div>
         </section>
     </div>
 </div>
 
-<div class="parallax-group content-group" style="min-height: auto; padding-bottom: 5rem;">
-    <div class="parallax-layer parallax-layer--base">
-        <section class="container" style="padding-top: 2rem;">
-
-            <!-- Category Chips -->
-            <div class="mb-5 text-center">
-                <h3 style="margin-bottom: 1.5rem;">Product Categories</h3>
-                <div class="category-chips-container">
-                    <span class="category-chip chip-agri"><i class="fa-solid fa-wheat-awn"></i> Agricultural &
-                        Food</span>
-                    <span class="category-chip chip-industrial"><i class="fa-solid fa-industry"></i> Industrial
-                        Materials</span>
-                    <span class="category-chip chip-consumer"><i class="fa-solid fa-couch"></i> Consumer Goods</span>
-                    <span class="category-chip chip-custom"><i class="fa-solid fa-sliders"></i> Custom Orders</span>
+<div class="content-group" style="padding: 3rem 0; background: var(--bg-color);">
+    <section class="container">
+        <div class="products-layout">
+            <!-- Left Sidebar - Categories (25%) -->
+            <div class="categories-sidebar">
+                <h3>Product Categories</h3>
+                <div class="category-list">
+                    <a href="{{ url_for('official.contact', subject='Agricultural Products Inquiry') }}" class="category-card">
+                        <div class="category-content">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-wheat-awn"></i>
+                            </div>
+                            <div class="category-info">
+                                <h4>Agricultural & Food</h4>
+                                <p>Premium grains & spices</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right category-arrow"></i>
+                    </a>
+                    
+                    <a href="{{ url_for('official.contact', subject='Industrial Materials Inquiry') }}" class="category-card">
+                        <div class="category-content">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-industry"></i>
+                            </div>
+                            <div class="category-info">
+                                <h4>Industrial Materials</h4>
+                                <p>Raw materials & components</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right category-arrow"></i>
+                    </a>
+                    
+                    <a href="{{ url_for('official.contact', subject='Consumer Goods Inquiry') }}" class="category-card">
+                        <div class="category-content">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-couch"></i>
+                            </div>
+                            <div class="category-info">
+                                <h4>Consumer Goods</h4>
+                                <p>Home & lifestyle products</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right category-arrow"></i>
+                    </a>
+                    
+                    <a href="{{ url_for('official.contact', subject='Textiles Inquiry') }}" class="category-card">
+                        <div class="category-content">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-shirt"></i>
+                            </div>
+                            <div class="category-info">
+                                <h4>Textiles & Apparel</h4>
+                                <p>Quality fabrics & garments</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right category-arrow"></i>
+                    </a>
+                    
+                    <a href="{{ url_for('official.contact', subject='Electronics Inquiry') }}" class="category-card">
+                        <div class="category-content">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <div class="category-info">
+                                <h4>Electronics</h4>
+                                <p>Components & tech products</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right category-arrow"></i>
+                    </a>
+                    
+                    <a href="{{ url_for('official.contact', subject='Custom Orders Inquiry') }}" class="category-card">
+                        <div class="category-content">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-sliders"></i>
+                            </div>
+                            <div class="category-info">
+                                <h4>Custom Orders</h4>
+                                <p>Tailored sourcing solutions</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right category-arrow"></i>
+                    </a>
+                </div>
+                
+                <!-- Download Brochure -->
+                <div class="download-section">
+                    <a href="{{ url_for('official.static', filename='Amty global catalogue sp .pdf') }}" class="download-btn" target="_blank">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Download Brochure</span>
+                    </a>
+                </div>
+                
+                <!-- Customer Support -->
+                <div class="support-panel">
+                    <h4>Customer Support</h4>
+                    <div class="support-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <strong>Call Us</strong>
+                            <p>+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="support-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <p>info@teleportz.com</p>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('official.contact') }}" class="btn btn-primary" style="width: 100%; margin-top: 1rem; font-size: 0.9rem;">
+                        Contact Us
+                    </a>
                 </div>
             </div>
-
-            <!-- Search Bar -->
-            <div style="max-width: 500px; margin: 0 auto 60px auto;margin-top: 20px;">
-                <form id="product-search-form" action="{{ url_for('official.products') }}" method="GET"
-                    style="position: relative;">
-                    <input id="product-search" type="text" name="search" placeholder="Search products..."
-                        value="{{ search }}"
-                        style="width: 100%; background: white; border: 1px solid #cbd5e1; padding: 16px 24px; border-radius: 99px; color: var(--text-primary); font-size: 1rem; outline: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
-                    <button id="product-search-submit" type="submit"
-                        style="position: absolute; right: 8px; top: 8px; background: var(--accent-color); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                    <div id="product-search-status" aria-live="polite"
-                        style="position: absolute; left: 12px; top: 10px; font-size: 0.85rem; color: rgba(0,0,0,0.6); display: none;">
-                    </div>
-                </form>
-            </div>
-
-            <!-- Product Grid -->
-            <div id="products-grid" class="bento-grid"
-                style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
-                {% for product in products %}
-                <div class="bento-card product-item" data-name="{{ product.name }}"
-                    data-category="{{ product.category }}" data-description="{{ product.description }}"
-                    data-image="{{ url_for('official.uploaded_file', filename=product.image_filename) if product.image_filename else '' }}"
-                    data-contact-url="{{ url_for('official.contact', subject='Inquiry: ' + product.name) }}"
-                    style="padding: 0; min-height: 420px; border-radius: 24px; cursor: pointer;">
-                    <!-- Background Image Layer -->
-                    {% if product.image_filename %}
-                    <img src="{{ url_for('official.uploaded_file', filename=product.image_filename) }}"
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-                    {% else %}
-                    <div
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); z-index: 1;">
-                    </div>
-                    {% endif %}
-
-                    <!-- Content Overlay -->
-                    <div class="product-overlay">
-                        <span class="product-category">{{ product.category }}</span>
-
-                        <div class="product-meta">
-                            <h3 class="product-name">{{ product.name }}</h3>
-                            <!-- Description removed from card for cleaner look -->
-                        </div>
-
-                        <div class="product-footer">
-                            <button class="btn-product-view">View Details</button>
-                            <button class="btn btn-primary product-inquire">Inquire</button>
-                        </div>
-                    </div>
+            
+            <!-- Right Content - Products (75%) -->
+            <div class="products-content">
+                <!-- Search Bar -->
+                <div class="search-section">
+                    <form id="product-search-form" action="{{ url_for('official.products') }}" method="GET">
+                        <input id="product-search" type="text" name="search" placeholder="Search products..." value="{{ search }}">
+                        <button id="product-search-submit" type="submit">
+                            <i class="fa-solid fa-search"></i>
+                        </button>
+                    </form>
                 </div>
-                {% endfor %}
-            </div>
+                
+                <!-- Product Grid -->
+                <div id="products-grid" class="bento-grid">
+                    {% for product in products %}
+                    <div class="bento-card product-item col-span-4" data-name="{{ product.name }}"
+                        data-category="{{ product.category }}" data-description="{{ product.description }}"
+                        data-image="{{ url_for('official.uploaded_file', filename=product.image_filename) if product.image_filename else '' }}"
+                        data-contact-url="{{ url_for('official.contact', subject='Inquiry: ' + product.name) }}"
+                        style="padding: 0; height: 380px; border-radius: 20px; cursor: pointer; overflow: hidden;">
+                        <!-- Background Image Layer -->
+                        {% if product.image_filename %}
+                        <img src="{{ url_for('official.uploaded_file', filename=product.image_filename) }}"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                        {% else %}
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); z-index: 1;">
+                        </div>
+                        {% endif %}
 
-            <div class="text-center mt-5">
-                <p style="color: var(--text-secondary);">Detailed specifications available upon request.</p>
-            </div>
+                        <!-- Content Overlay -->
+                        <div class="product-overlay">
+                            <span class="product-category">{{ product.category }}</span>
 
-        </section>
-    </div>
+                            <div class="product-meta">
+                                <h3 class="product-name">{{ product.name }}</h3>
+                            </div>
+
+                            <div class="product-footer">
+                                <button class="btn-product-view">View Details</button>
+                                <button class="btn btn-primary product-inquire">Inquire</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="text-center mt-4">
+                    <p style="color: var(--text-secondary);">Detailed specifications available upon request.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <!-- Product Details Modal -->
@@ -138,4 +227,285 @@
         </div>
     </div>
 </div>
+
+<style>
+.products-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.categories-sidebar {
+    flex: 0 0 25%;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 120px;
+}
+
+.categories-sidebar h3 {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.products-content {
+    flex: 1;
+}
+
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.category-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.category-card:hover {
+    background: white;
+    border-color: var(--accent-color);
+    transform: translateX(4px);
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.category-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.category-icon {
+    width: 35px;
+    height: 35px;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.category-info h4 {
+    margin: 0 0 0.2rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.category-info p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+}
+
+.category-arrow {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-arrow {
+    color: var(--accent-color);
+    transform: translateX(2px);
+}
+
+.download-section {
+    margin-bottom: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.download-btn:hover {
+    background: #4a5d23;
+    color: white;
+    text-decoration: none;
+}
+
+.support-panel {
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.support-panel h4 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.support-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.support-item i {
+    width: 30px;
+    height: 30px;
+    background: #f8fafc;
+    color: var(--accent-color);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.support-item strong {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: var(--text-primary);
+    font-size: 0.8rem;
+}
+
+.support-item p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+}
+
+.search-section {
+    margin-bottom: 2rem;
+}
+
+.search-section form {
+    position: relative;
+    max-width: 400px;
+}
+
+.search-section input {
+    width: 100%;
+    background: white;
+    border: 1px solid #cbd5e1;
+    padding: 12px 50px 12px 16px;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.search-section button {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .products-layout {
+        flex-direction: column;
+    }
+    
+    .categories-sidebar {
+        flex: none;
+        position: static;
+    }
+}
+</style>
+
+<script>
+// Product modal functionality
+function openProductModal(productData) {
+    const modal = document.getElementById('productModal');
+    const modalImage = document.getElementById('modalProductImage');
+    const modalCategory = document.getElementById('modalProductCategory');
+    const modalName = document.getElementById('modalProductName');
+    const modalDescription = document.getElementById('modalProductDescription');
+    const modalContactLink = document.getElementById('modalContactLink');
+    const modalMailLink = document.getElementById('modalMailLink');
+    
+    modalImage.src = productData.image || '';
+    modalCategory.textContent = productData.category;
+    modalName.textContent = productData.name;
+    modalDescription.textContent = productData.description || 'Product details available upon request.';
+    modalContactLink.href = productData.contactUrl;
+    modalMailLink.href = `mailto:info@teleportz.com?subject=Inquiry: ${productData.name}`;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProductModal() {
+    const modal = document.getElementById('productModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Add event listeners to product cards
+document.addEventListener('DOMContentLoaded', function() {
+    const productItems = document.querySelectorAll('.product-item');
+    
+    productItems.forEach(item => {
+        const viewBtn = item.querySelector('.btn-product-view');
+        const inquireBtn = item.querySelector('.product-inquire');
+        
+        if (viewBtn) {
+            viewBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const productData = {
+                    name: item.dataset.name,
+                    category: item.dataset.category,
+                    description: item.dataset.description,
+                    image: item.dataset.image,
+                    contactUrl: item.dataset.contactUrl
+                };
+                openProductModal(productData);
+            });
+        }
+        
+        if (inquireBtn) {
+            inquireBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                window.location.href = item.dataset.contactUrl;
+            });
+        }
+    });
+    
+    // Close modal on overlay click
+    document.getElementById('productModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeProductModal();
+        }
+    });
+});
+</script>
 {% endblock %}

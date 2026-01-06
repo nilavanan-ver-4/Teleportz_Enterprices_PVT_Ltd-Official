@@ -1,0 +1,24 @@
+{% extends 'official/base.html' %}
+
+{% block title %}{{ service.title }}{% endblock %}
+
+{% block content %}
+<section class="container" style="padding-top: 120px; padding-bottom: 60px;">
+    <div class="hero-card text-center">
+        <h1 class="display-1">{{ service.title }}</h1>
+        <p class="lead">{{ service.summary }}</p>
+    </div>
+
+    <div class="container mt-5">
+        <div class="bento-card">
+            <div class="card-icon"><i class="fa-solid {{ service.icon }}"></i></div>
+            <h3 class="card-title">Overview</h3>
+            <p class="card-desc">{{ service.description }}</p>
+            <div style="margin-top: 1.5rem;">
+                <a href="{{ url_for('official.contact', subject='Inquiry: ' + service.title) }}" class="btn btn-primary">Get in Touch</a>
+                <a href="{{ url_for('official.services') }}" class="btn btn-secondary" style="margin-left: 8px;">Back to Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

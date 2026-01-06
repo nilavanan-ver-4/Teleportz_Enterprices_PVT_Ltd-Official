@@ -19,6 +19,78 @@ def about():
 def services():
     return render_template('official/services.html')
 
+@official_bp.route('/services/<slug>')
+def service_detail(slug):
+    services_data = {
+        'import-services': {
+            'name': 'Import Services',
+            'desc': 'Seamlessly bring quality global products to your doorstep',
+            'icon': 'fa-ship',
+            'full_desc': 'Our comprehensive import services help you source quality products from around the world with complete compliance and documentation support.',
+            'features': ['Global sourcing of quality products', 'Vendor verification and compliance', 'Customs coordination support', 'Import duty optimization']
+        },
+        'export-services': {
+            'name': 'Export Services',
+            'desc': 'Expand your business globally with our export solutions',
+            'icon': 'fa-plane-departure',
+            'full_desc': 'We handle all aspects of international product distribution, from documentation to logistics coordination.',
+            'features': ['International product distribution', 'Documentation assistance', 'Logistics coordination', 'Market entry support']
+        },
+        'logistics-supply-chain': {
+            'name': 'Logistics & Supply Chain',
+            'desc': 'Efficient freight and supply chain management',
+            'icon': 'fa-truck-fast',
+            'full_desc': 'Optimize your supply chain with our freight coordination and logistics planning services.',
+            'features': ['Freight coordination (air, sea, land)', 'Shipment tracking and scheduling', 'Cost-effective logistics planning', 'Real-time visibility']
+        },
+        'documentation-regulatory': {
+            'name': 'Documentation & Regulatory',
+            'desc': 'Complete compliance and regulatory support',
+            'icon': 'fa-file-signature',
+            'full_desc': 'Navigate complex international trade regulations with our expert documentation and compliance guidance.',
+            'features': ['Export-import documentation', 'Customs coordination', 'HS code & compliance guidance', 'Regulatory compliance']
+        },
+        'trade-consulting': {
+            'name': 'Trade Consulting',
+            'desc': 'Strategic guidance for global trade',
+            'icon': 'fa-briefcase',
+            'full_desc': 'Get expert advice on market entry, supplier connections, and risk mitigation strategies.',
+            'features': ['Market entry guidance', 'Supplier & buyer connections', 'Risk mitigation strategies', 'Trade strategy development']
+        },
+        'quality-compliance': {
+            'name': 'Quality & Compliance',
+            'desc': 'Ensure product quality and international standards',
+            'icon': 'fa-clipboard-check',
+            'full_desc': 'Maintain the highest quality standards with our comprehensive quality checks and compliance audits.',
+            'features': ['Product quality checks', 'International trade standards', 'Factory audits & inspections', 'Certification support']
+        },
+        'post-shipment-support': {
+            'name': 'Post-Shipment Support',
+            'desc': 'Continuous support after delivery',
+            'icon': 'fa-headset',
+            'full_desc': 'We provide ongoing support to ensure smooth delivery and resolution of any post-shipment issues.',
+            'features': ['Shipment follow-ups', 'Issue resolution & coordination', 'Long-term client assistance', 'Customer support']
+        },
+        'custom-trade-solutions': {
+            'name': 'Custom Trade Solutions',
+            'desc': 'Tailored solutions for your unique needs',
+            'icon': 'fa-sliders',
+            'full_desc': 'We create customized trade solutions designed specifically for your industry and business requirements.',
+            'features': ['Industry-specific sourcing', 'Custom order handling', 'Flexible trade models', 'Bespoke solutions']
+        }
+    }
+    
+    service = services_data.get(slug)
+    if not service:
+        return redirect(url_for('official.services'))
+    
+    return render_template('official/services_detail.html',
+                         service_name=service['name'],
+                         service_desc=service['desc'],
+                         service_icon=service['icon'],
+                         service_full_desc=service['full_desc'],
+                         service_features=service['features'])
+
 @official_bp.route('/products')
 def products():
     # If DB has no products yet, seed it with the provided PRODUCTS_DATA
@@ -106,3 +178,93 @@ def privacy():
 @official_bp.route('/terms')
 def terms():
     return render_template('official/terms.html')
+
+@official_bp.route('/policy')
+def policy():
+    return render_template('official/policy.html')
+
+@official_bp.route('/features')
+def features():
+    features_data = [
+        {'slug': 'trade-intelligence', 'title': 'Global Trade Intelligence', 'summary': 'Real-time insights into global trade patterns', 'icon': 'fa-brain'},
+        {'slug': 'buyers-intelligence', 'title': 'Buyers Intelligence', 'summary': 'Identify and connect with qualified buyers', 'icon': 'fa-user-tag'},
+        {'slug': 'suppliers-intelligence', 'title': 'Suppliers Intelligence', 'summary': 'Discover reliable suppliers worldwide', 'icon': 'fa-industry'},
+        {'slug': 'market-intelligence', 'title': 'Market Intelligence', 'summary': 'Deep insights into market dynamics', 'icon': 'fa-chart-line'},
+        {'slug': 'trade-platform', 'title': 'Trade Platform', 'summary': 'All-in-one platform for trade management', 'icon': 'fa-laptop-code'},
+        {'slug': 'competitive-intel', 'title': 'Competitive Intel', 'summary': 'Stay ahead of competition', 'icon': 'fa-bolt'},
+        {'slug': 'product-intel', 'title': 'Product Intel', 'summary': 'Detailed product market analysis', 'icon': 'fa-box'},
+        {'slug': 'supply-chain-intel', 'title': 'Supply Chain Intel', 'summary': 'Optimize your supply chain network', 'icon': 'fa-link'}
+    ]
+    return render_template('official/features/index.html', features=features_data)
+
+@official_bp.route('/features/<slug>')
+def feature_detail(slug):
+    features_data = {
+        'trade-intelligence': {
+            'name': 'Global Trade Intelligence',
+            'desc': 'Real-time insights into global trade patterns',
+            'icon': 'fa-brain',
+            'full_desc': 'Access comprehensive trade data and market intelligence to make informed business decisions.',
+            'benefits': ['Real-time trade data', 'Market trend analysis', 'Competitor insights', 'Trade opportunity identification']
+        },
+        'buyers-intelligence': {
+            'name': 'Buyers Intelligence',
+            'desc': 'Identify and connect with qualified buyers',
+            'icon': 'fa-user-tag',
+            'full_desc': 'Find and analyze potential buyers in your target markets with detailed buyer profiles.',
+            'benefits': ['Buyer database access', 'Buyer profiling', 'Contact information', 'Purchase history analysis']
+        },
+        'suppliers-intelligence': {
+            'name': 'Suppliers Intelligence',
+            'desc': 'Discover reliable suppliers worldwide',
+            'icon': 'fa-industry',
+            'full_desc': 'Access verified supplier information and ratings to find the best partners for your business.',
+            'benefits': ['Supplier verification', 'Quality ratings', 'Pricing comparison', 'Supplier reliability scores']
+        },
+        'market-intelligence': {
+            'name': 'Market Intelligence',
+            'desc': 'Deep insights into market dynamics',
+            'icon': 'fa-chart-line',
+            'full_desc': 'Understand market trends, demand patterns, and competitive landscape in your industry.',
+            'benefits': ['Market size analysis', 'Growth trends', 'Demand forecasting', 'Competitive analysis']
+        },
+        'trade-platform': {
+            'name': 'Trade Platform',
+            'desc': 'All-in-one platform for trade management',
+            'icon': 'fa-laptop-code',
+            'full_desc': 'Manage all your trade operations from a single integrated platform.',
+            'benefits': ['Order management', 'Document handling', 'Payment processing', 'Shipment tracking']
+        },
+        'competitive-intel': {
+            'name': 'Competitive Intel',
+            'desc': 'Stay ahead of competition',
+            'icon': 'fa-bolt',
+            'full_desc': 'Monitor competitor activities and market positioning to maintain competitive advantage.',
+            'benefits': ['Competitor monitoring', 'Price tracking', 'Strategy analysis', 'Market positioning']
+        },
+        'product-intel': {
+            'name': 'Product Intel',
+            'desc': 'Detailed product market analysis',
+            'icon': 'fa-box',
+            'full_desc': 'Get comprehensive insights on product performance, demand, and market opportunities.',
+            'benefits': ['Product demand analysis', 'Price trends', 'Quality benchmarking', 'Market opportunities']
+        },
+        'supply-chain-intel': {
+            'name': 'Supply Chain Intel',
+            'desc': 'Optimize your supply chain network',
+            'icon': 'fa-link',
+            'full_desc': 'Analyze and optimize your supply chain for efficiency and cost reduction.',
+            'benefits': ['Supply chain mapping', 'Cost optimization', 'Risk assessment', 'Efficiency improvement']
+        }
+    }
+    
+    feature = features_data.get(slug)
+    if not feature:
+        return redirect(url_for('official.products'))
+    
+    return render_template('official/features_detail.html',
+                         feature_name=feature['name'],
+                         feature_desc=feature['desc'],
+                         feature_icon=feature['icon'],
+                         feature_full_desc=feature['full_desc'],
+                         feature_benefits=feature['benefits'])
