@@ -1,6 +1,7 @@
 {% extends 'official/base.html' %}
 
 {% block title %}Products{% endblock %}
+{% block meta_description %}Explore high-quality products sourced and distributed by our international import–export company — reliable sourcing, quality control, and export solutions.{% endblock %}
 
 {% block content %}
 <div class="parallax-group">
@@ -24,7 +25,7 @@
         <div class="products-layout">
             <!-- Left Sidebar - Categories (25%) -->
             <div class="categories-sidebar">
-                <h3>Product Categories</h3>
+                <h2>Product Categories</h2>
                 <div class="category-list">
                     <a href="{{ url_for('official.contact', subject='Agricultural Products Inquiry') }}" class="category-card">
                         <div class="category-content">

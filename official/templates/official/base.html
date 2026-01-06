@@ -4,7 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Teleportz Enterprises{% endblock %} - Global Trade Solutions</title>
+
+    <!-- Page title (override in child templates) -->
+    <title>{% block title %}Teleportz Enterprises Pvt Ltd | International Import Export Company{% endblock %} - Global
+        Trade Solutions</title>
+
+    <!-- Primary SEO meta tags (override using blocks in child templates) -->
+    <meta name="description"
+        content="{% block meta_description %}Teleportz Enterprises Private Limited is a global import–export company providing reliable trade solutions, quality sourcing, logistics coordination, and international market expertise.{% endblock %}">
+    <meta name="keywords"
+        content="{% block meta_keywords %}import export, international trade, logistics, sourcing, trade consulting, global suppliers{% endblock %}">
+    <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
+    <link rel="canonical" href="{% block canonical %}https://www.teleportz.com/{% endblock %}" />
+    <meta name="theme-color" content="#556b2f">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title"
+        content="{% block og_title %}Teleportz Enterprises Pvt Ltd | International Import Export Company{% endblock %}">
+    <meta property="og:description"
+        content="{% block og_description %}Teleportz Enterprises Private Limited is a global import–export company providing reliable trade solutions and international market expertise.{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{% block og_url %}https://www.teleportz.com/{% endblock %}">
+    <meta property="og:image"
+        content="{% block og_image %}{{ url_for('official.static', filename='img/og-image.png', _external=True) }}{% endblock %}">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@teleportz_intl">
+    <meta name="twitter:title"
+        content="{% block twitter_title %}Teleportz Enterprises Pvt Ltd | International Import Export Company{% endblock %}">
+    <meta name="twitter:description"
+        content="{% block twitter_description %}Teleportz Enterprises Private Limited provides reliable trade solutions, quality sourcing, and logistics coordination for global businesses.{% endblock %}">
+    <meta name="twitter:image"
+        content="{% block twitter_image %}{{ url_for('official.static', filename='img/og-image.png', _external=True) }}{% endblock %}">
+
+    <!-- JSON-LD Organization structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Teleportz Enterprises PVT Ltd",
+      "url": "https://www.teleportz.com/",
+      "logo": "{{ url_for('official.static', filename='img/logo.png', _external=True) }}",
+      "sameAs": [
+        "https://linkedin.com/company/teleportz-enterprises",
+        "https://twitter.com/teleportz_intl",
+        "https://instagram.com/teleportz_official"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      },
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "telephone": "+1-234-567-890",
+        "contactType": "customer service",
+        "email": "info@teleportz.com",
+        "areaServed": "Worldwide"
+      }],
+      "description": "Teleportz Enterprises Private Limited is an international import–export company specializing in global trade solutions, including product sourcing, export distribution, logistics coordination, and regulatory compliance. The company serves international markets with a focus on quality assurance, transparency, and long-term business partnerships."
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -60,7 +122,9 @@
                     style="height: 64px; border-radius: 6px;">
                 <div class="brand-text-container">
                     <div class="brand-text-animated">
-                        <span class="letter">T</span><span class="letter">E</span><span class="letter">L</span><span class="letter">E</span><span class="letter">P</span><span class="letter">O</span><span class="letter">R</span><span class="letter">T</span><span class="letter">Z</span>
+                        <span class="letter">T</span><span class="letter">E</span><span class="letter">L</span><span
+                            class="letter">E</span><span class="letter">P</span><span class="letter">O</span><span
+                            class="letter">R</span><span class="letter">T</span><span class="letter">Z</span>
                     </div>
                     <span class="brand-tagline">Global Trade Solutions</span>
                 </div>
@@ -73,30 +137,48 @@
                     <a href="{{ url_for('official.services') }}" class="nav-link">Services <i
                             class="fa-solid fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
-                        <a href="{{ url_for('official.service_detail', slug='import-services') }}"><i class="fa-solid fa-ship"></i> Import Services</a>
-                        <a href="{{ url_for('official.service_detail', slug='export-services') }}"><i class="fa-solid fa-plane-departure"></i> Export Services</a>
-                        <a href="{{ url_for('official.service_detail', slug='logistics-supply-chain') }}"><i class="fa-solid fa-truck-fast"></i> Logistics & Supply Chain</a>
-                        <a href="{{ url_for('official.service_detail', slug='documentation-regulatory') }}"><i class="fa-solid fa-file-signature"></i> Documentation & Regulatory</a>
-                        <a href="{{ url_for('official.service_detail', slug='trade-consulting') }}"><i class="fa-solid fa-briefcase"></i> Trade Consulting</a>
-                        <a href="{{ url_for('official.service_detail', slug='quality-compliance') }}"><i class="fa-solid fa-clipboard-check"></i> Quality & Compliance</a>
-                        <a href="{{ url_for('official.service_detail', slug='post-shipment-support') }}"><i class="fa-solid fa-headset"></i> Post-Shipment Support</a>
-                        <a href="{{ url_for('official.service_detail', slug='custom-trade-solutions') }}"><i class="fa-solid fa-sliders"></i> Custom Trade Solutions</a>
+                        <a href="{{ url_for('official.service_detail', slug='import-services') }}"><i
+                                class="fa-solid fa-ship"></i> Import Services</a>
+                        <a href="{{ url_for('official.service_detail', slug='export-services') }}"><i
+                                class="fa-solid fa-plane-departure"></i> Export Services</a>
+                        <a href="{{ url_for('official.service_detail', slug='logistics-supply-chain') }}"><i
+                                class="fa-solid fa-truck-fast"></i> Logistics & Supply Chain</a>
+                        <a href="{{ url_for('official.service_detail', slug='documentation-regulatory') }}"><i
+                                class="fa-solid fa-file-signature"></i> Documentation & Regulatory</a>
+                        <a href="{{ url_for('official.service_detail', slug='trade-consulting') }}"><i
+                                class="fa-solid fa-briefcase"></i> Trade Consulting</a>
+                        <a href="{{ url_for('official.service_detail', slug='quality-compliance') }}"><i
+                                class="fa-solid fa-clipboard-check"></i> Quality & Compliance</a>
+                        <a href="{{ url_for('official.service_detail', slug='post-shipment-support') }}"><i
+                                class="fa-solid fa-headset"></i> Post-Shipment Support</a>
+                        <a href="{{ url_for('official.service_detail', slug='custom-trade-solutions') }}"><i
+                                class="fa-solid fa-sliders"></i> Custom Trade Solutions</a>
                     </div>
                 </div>
 
                 <div class="nav-item-dropdown">
-                    <a href="{{ url_for('official.features') }}" class="nav-link">Features <i class="fa-solid fa-chevron-down"></i></a>
+                    <a href="{{ url_for('official.features') }}" class="nav-link">Features <i
+                            class="fa-solid fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
-                        <a href="{{ url_for('official.feature_detail', slug='trade-intelligence') }}"><i class="fa-solid fa-brain"></i> Global Trade Intelligence</a>
-                        <a href="{{ url_for('official.feature_detail', slug='buyers-intelligence') }}"><i class="fa-solid fa-user-tag"></i> Buyers Intelligence</a>
-                        <a href="{{ url_for('official.feature_detail', slug='suppliers-intelligence') }}"><i class="fa-solid fa-industry"></i> Suppliers Intelligence</a>
-                        <a href="{{ url_for('official.feature_detail', slug='market-intelligence') }}"><i class="fa-solid fa-chart-line"></i> Market Intelligence</a>
-                        <a href="{{ url_for('official.feature_detail', slug='trade-platform') }}"><i class="fa-solid fa-laptop-code"></i> Trade Platform</a>
-                        <a href="{{ url_for('official.feature_detail', slug='competitive-intel') }}"><i class="fa-solid fa-bolt"></i> Competitive Intel</a>
-                        <a href="{{ url_for('official.feature_detail', slug='product-intel') }}"><i class="fa-solid fa-box"></i> Product Intel</a>
-                        <a href="{{ url_for('official.feature_detail', slug='supply-chain-intel') }}"><i class="fa-solid fa-link"></i> Supply Chain Intel</a>
+                        <a href="{{ url_for('official.feature_detail', slug='trade-intelligence') }}"><i
+                                class="fa-solid fa-brain"></i> Global Trade Intelligence</a>
+                        <a href="{{ url_for('official.feature_detail', slug='buyers-intelligence') }}"><i
+                                class="fa-solid fa-user-tag"></i> Buyers Intelligence</a>
+                        <a href="{{ url_for('official.feature_detail', slug='suppliers-intelligence') }}"><i
+                                class="fa-solid fa-industry"></i> Suppliers Intelligence</a>
+                        <a href="{{ url_for('official.feature_detail', slug='market-intelligence') }}"><i
+                                class="fa-solid fa-chart-line"></i> Market Intelligence</a>
+                        <a href="{{ url_for('official.feature_detail', slug='trade-platform') }}"><i
+                                class="fa-solid fa-laptop-code"></i> Trade Platform</a>
+                        <a href="{{ url_for('official.feature_detail', slug='competitive-intel') }}"><i
+                                class="fa-solid fa-bolt"></i> Competitive Intel</a>
+                        <a href="{{ url_for('official.feature_detail', slug='product-intel') }}"><i
+                                class="fa-solid fa-box"></i> Product Intel</a>
+                        <a href="{{ url_for('official.feature_detail', slug='supply-chain-intel') }}"><i
+                                class="fa-solid fa-link"></i> Supply Chain Intel</a>
                         <div class="dropdown-divider"></div>
-                        <a href="{{ url_for('official.features') }}" class="view-all">View All Features <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="{{ url_for('official.features') }}" class="view-all">View All Features <i
+                                class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
 
@@ -187,15 +269,7 @@
                 <div class="footer-grid">
                     <div>
                         <h3>Teleportz Enterprices PVT Ltd.</h3>
-                        <p style="font-size: 0.9rem;">Bridging D:\Teleportz_Enterprices_PVT_Ltd-Official\official>python app.py
-[2026-01-06 19:48:15,278] INFO in app: Application startup
-Traceback (most recent call last):
-  File "D:\Teleportz_Enterprices_PVT_Ltd-Official\official\app.py", line 18, in <module>
-    app = create_app(register_blueprints=False)
-  File "D:\Teleportz_Enterprices_PVT_Ltd-Official\app.py", line 114, in create_app
-    upload_path = os.path.join(app.instance_path, 'uploads')
-                               ^^^^^^^^^^^^^^^^^
-AttributeError: 'Flask' object has no attribute 'database_path's through seamless global trade solutions.</p>
+                        <p style="font-size: 0.9rem;">Teleportz Enterprises Private Limited is an international import–export company specializing in global trade solutions, including product sourcing, export distribution, logistics coordination, and regulatory compliance. The company serves international markets with a focus on quality assurance, transparency, and long-term business partnerships.</p>
                     </div>
                     <div>
                         <h3>Company</h3>

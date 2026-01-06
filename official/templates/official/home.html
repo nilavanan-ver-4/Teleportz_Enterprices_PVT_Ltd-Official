@@ -1,13 +1,14 @@
 {% extends 'official/base.html' %}
 
 {% block title %}Home{% endblock %}
+{% block meta_description %}Teleportz Enterprises Private Limited is an international import–export company offering global trade solutions, logistics coordination, and product sourcing to businesses worldwide.{% endblock %}
 
 {% block content %}
 <!-- Hero Group with Parallax -->
 <div class="parallax-group">
     <!-- Parallax Background Layer -->
     <div class="parallax-layer parallax-layer--back"
-        style="background-image: url('{{ url_for('official.static', filename='img/about-2.png') }}'); filter: brightness(0.6) contrast(1.1); background-size: cover; background-position: right bottom; ">
+        style="background-image: url('{{ url_for('official.static', filename='img/about-2.png') }}');  ">
     </div>
 
     <!-- Middle Parallax Layer for Floating Elements -->
@@ -86,13 +87,7 @@
                 <i class="fa-solid fa-globe"></i>
                 <span>Global Trade Excellence</span>
             </div>
-            <p class="intro-text">
-                Teleportz Enterprises Private Limited is a <strong>global import–export company</strong>
-                specializing in sourcing and
-                distributing quality products across international markets. We focus on <em>reliability</em>,
-                <em>transparency</em>,
-                and <em>long-term partnerships</em> to support businesses worldwide.
-            </p>
+            <p class="intro-text">Teleportz Enterprises Private Limited is an international import–export company specializing in global trade solutions, including product sourcing, export distribution, logistics coordination, and regulatory compliance. The company serves international markets with a focus on quality assurance, transparency, and long-term business partnerships.</p>
             <div class="intro-stats">
                 <div class="stat-item">
                     <div class="stat-number">50+</div>
@@ -118,7 +113,7 @@
                     <i class="fa-solid fa-network-wired"></i>
                     <span>Global Presence</span>
                 </div>
-                <h3 class="card-title" style="font-size: 2rem; margin-bottom: 20px;">Our Network</h3>
+                <h2 class="card-title" style="font-size: 2rem; margin-bottom: 20px;">Our Network</h2>
                 <p class="intro-text" style="max-width: 800px; margin: 0 auto;">
                     Our network is spread all over the world including India. We have established strong trade relationships across multiple continents, ensuring reliable supply chains and market access for our partners.
                 </p>
@@ -166,7 +161,7 @@
 
         <!-- Featured Products Spotlight (Essential Content) -->
         <div style="margin: 40px 0 60px 0;">
-            <h3 class="card-title text-center mb-5" style="font-size: 2rem;">Featured Trading Commodities</h3>
+            <h2 class="card-title text-center mb-5" style="font-size: 2rem;">Featured Trading Commodities</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
                 {% if products %}
                 {% for product in products %}
@@ -219,7 +214,7 @@
             <div class="bento-card col-span-8 row-span-2">
                 <div style="max-width: 60%;">
                     <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
-                    <h3 class="card-title">Global Trade Expertise</h3>
+                    <h2 class="card-title">Global Trade Expertise</h2>
                     <p class="card-desc">
                         Navigating complex international markets with proven strategies and regulatory compliance.
                     </p>
@@ -264,7 +259,7 @@
 
             <!-- Categories Preview -->
             <div class="bento-group-card col-span-12" style="background: #ffffff;">
-                <h3 class="card-title text-center mb-4">Our Key Industries</h3>
+                <h2 class="card-title text-center mb-4">Our Key Industries</h2>
                 <div class="category-chips-container">
                     <div class="category-chip chip-agri">
                         <i class="fa-solid fa-wheat-awn"></i> Agricultural Products
@@ -287,5 +282,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- {% include 'official/_faq.html' %} -->
+
 </section>
 {% endblock %}
