@@ -1,0 +1,64 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Job Applications</h2>
+    <div>
+        <span class="badge bg-warning me-2">{{ applications|selectattr('status', 'equalto', 'pending')|list|length }} Pending</span>
+        <span class="badge bg-success me-2">{{ applications|selectattr('status', 'equalto', 'shortlisted')|list|length }} Shortlisted</span>
+        <span class="badge bg-secondary">{{ applications|selectattr('status', 'equalto', 'rejected')|list|length }} Rejected</span>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Applicant</th>
+                    <th>Job Title</th>
+                    <th>Experience</th>
+                    <th>Applied Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application in applications %}
+                <tr>
+                    <td>
+                        <div>
+                            <strong>{{ application.name }}</strong><br>
+                            <small class="text-muted">{{ application.email }}</small>
+                        </div>
+                    </td>
+                    <td>{{ application.job.title }}</td>
+                    <td>{{ application.experience_years }} years</td>
+                    <td>{{ application.applied_at.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        <span class="badge bg-{% if application.status == 'pending' %}warning{% elif application.status == 'shortlisted' %}success{% elif application.status == 'reviewed' %}info{% else %}secondary{% endif %}">
+                            {{ application.status.title() }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('admin.view_application', id=application.id) }}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa-solid fa-eye me-1"></i>View
+                        </a>
+                        {% if application.resume_filename %}
+                        <a href="{{ url_for('admin.download_resume', filename=application.resume_filename) }}" 
+                           class="btn btn-sm btn-outline-success" target="_blank">
+                            <i class="fa-solid fa-download me-1"></i>Resume
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center py-4">No applications found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -13,6 +13,7 @@ class Config:
     basedir = os.path.abspath(os.path.dirname(__file__))
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'instance', 'site.db')
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # --- Extensions ---
@@ -54,6 +55,34 @@ class Inquiry(db.Model):
     is_read = db.Column(db.Boolean, default=False)
     received_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+class Job(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    department = db.Column(db.String(50), nullable=False)
+    location = db.Column(db.String(100), nullable=False)
+    type = db.Column(db.String(20), nullable=False)  # Full-time, Part-time, Contract
+    experience = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    requirements = db.Column(db.Text, nullable=False)
+    benefits = db.Column(db.Text, nullable=True)
+    salary_range = db.Column(db.String(50), nullable=True)
+    is_active = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    applications = db.relationship('JobApplication', backref='job', lazy=True, cascade='all, delete-orphan')
+
+class JobApplication(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    job_id = db.Column(db.Integer, db.ForeignKey('job.id'), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    phone = db.Column(db.String(20), nullable=False)
+    experience_years = db.Column(db.Integer, nullable=False)
+    cover_letter = db.Column(db.Text, nullable=True)
+    resume_filename = db.Column(db.String(100), nullable=True)
+    photo_filename = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(20), default='pending')  # pending, reviewed, shortlisted, rejected
+    applied_at = db.Column(db.DateTime, default=datetime.utcnow)
+
 # --- Application Factory ---
 def create_app(config_class=Config, register_blueprints=True):
     app = Flask(__name__)
@@ -80,9 +109,13 @@ def create_app(config_class=Config, register_blueprints=True):
         app.register_blueprint(admin_bp, url_prefix='/admin')
         app.register_blueprint(official_bp)
 
-    # Ensure upload folder exists
+    # Ensure upload folders exist
     with app.app_context():
         upload_path = os.path.join(app.instance_path, 'uploads')
+        resumes_path = os.path.join(app.instance_path, 'uploads', 'resumes')
+        photos_path = os.path.join(app.instance_path, 'uploads', 'photos')
         os.makedirs(upload_path, exist_ok=True)
+        os.makedirs(resumes_path, exist_ok=True)
+        os.makedirs(photos_path, exist_ok=True)
 
     return app

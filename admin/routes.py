@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app
+from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app, send_from_directory
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash
-from app import User, Product, Inquiry, db
+from app import User, Product, Inquiry, Job, JobApplication, db
 
 import os
 from werkzeug.utils import secure_filename
@@ -47,11 +47,24 @@ def dashboard():
     inquiry_count = Inquiry.query.count()
     unread_inquiries = Inquiry.query.filter_by(is_read=False).count()
     recent_inquiries = Inquiry.query.order_by(Inquiry.received_at.desc()).limit(5).all()
+    
+    # Career stats
+    job_count = Job.query.count()
+    active_jobs = Job.query.filter_by(is_active=True).count()
+    application_count = JobApplication.query.count()
+    pending_applications = JobApplication.query.filter_by(status='pending').count()
+    recent_applications = JobApplication.query.order_by(JobApplication.applied_at.desc()).limit(5).all()
+    
     return render_template('admin/dashboard.html', 
                            product_count=product_count, 
                            inquiry_count=inquiry_count, 
                            unread_inquiries=unread_inquiries,
-                           recent_inquiries=recent_inquiries)
+                           recent_inquiries=recent_inquiries,
+                           job_count=job_count,
+                           active_jobs=active_jobs,
+                           application_count=application_count,
+                           pending_applications=pending_applications,
+                           recent_applications=recent_applications)
 
 # Product Management
 @admin_bp.route('/products')
@@ -133,3 +146,104 @@ def view_inquiry(id):
         inquiry.is_read = True
         db.session.commit()
     return render_template('admin/inquiry_detail.html', inquiry=inquiry)
+
+# Career Management
+@admin_bp.route('/jobs')
+@login_required
+def jobs():
+    jobs = Job.query.order_by(Job.created_at.desc()).all()
+    return render_template('admin/jobs.html', jobs=jobs)
+
+@admin_bp.route('/jobs/new', methods=['GET', 'POST'])
+@login_required
+def new_job():
+    if request.method == 'POST':
+        job = Job(
+            title=request.form.get('title'),
+            department=request.form.get('department'),
+            location=request.form.get('location'),
+            type=request.form.get('type'),
+            experience=request.form.get('experience'),
+            salary_range=request.form.get('salary_range'),
+            description=request.form.get('description'),
+            requirements=request.form.get('requirements'),
+            benefits=request.form.get('benefits'),
+            is_active=bool(request.form.get('is_active'))
+        )
+        db.session.add(job)
+        db.session.commit()
+        flash('Job posted successfully!', 'success')
+        return redirect(url_for('admin.jobs'))
+    return render_template('admin/job_form.html', action='New')
+
+@admin_bp.route('/jobs/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_job(id):
+    job = Job.query.get_or_404(id)
+    if request.method == 'POST':
+        job.title = request.form.get('title')
+        job.department = request.form.get('department')
+        job.location = request.form.get('location')
+        job.type = request.form.get('type')
+        job.experience = request.form.get('experience')
+        job.salary_range = request.form.get('salary_range')
+        job.description = request.form.get('description')
+        job.requirements = request.form.get('requirements')
+        job.benefits = request.form.get('benefits')
+        job.is_active = bool(request.form.get('is_active'))
+        db.session.commit()
+        flash('Job updated successfully!', 'success')
+        return redirect(url_for('admin.jobs'))
+    return render_template('admin/job_form.html', job=job, action='Edit')
+
+@admin_bp.route('/jobs/delete/<int:id>', methods=['POST'])
+@login_required
+def delete_job(id):
+    job = Job.query.get_or_404(id)
+    db.session.delete(job)
+    db.session.commit()
+    flash('Job deleted.', 'info')
+    return redirect(url_for('admin.jobs'))
+
+@admin_bp.route('/applications')
+@login_required
+def applications():
+    applications = JobApplication.query.order_by(JobApplication.applied_at.desc()).all()
+    return render_template('admin/applications.html', applications=applications)
+
+@admin_bp.route('/applications/<int:id>')
+@login_required
+def view_application(id):
+    application = JobApplication.query.get_or_404(id)
+    return render_template('admin/application_detail.html', application=application)
+
+@admin_bp.route('/applications/<int:id>/status', methods=['POST'])
+@login_required
+def update_application_status(id):
+    application = JobApplication.query.get_or_404(id)
+    application.status = request.form.get('status')
+    db.session.commit()
+    flash('Application status updated!', 'success')
+    return redirect(url_for('admin.view_application', id=id))
+
+@admin_bp.route('/download/resume/<filename>')
+@login_required
+def download_resume(filename):
+    return send_from_directory(
+        os.path.join(current_app.instance_path, 'uploads', 'resumes'),
+        filename
+    )
+
+@admin_bp.route('/download/photo/<filename>')
+@login_required
+def download_photo(filename):
+    return send_from_directory(
+        os.path.join(current_app.instance_path, 'uploads', 'photos'),
+        filename
+    )
+
+@admin_bp.route('/uploads/<filename>')
+def uploaded_file(filename):
+    """Serve uploaded product images from the instance folder."""
+    upload_path = os.path.join(current_app.instance_path, 'uploads')
+    return send_from_directory(upload_path, filename)

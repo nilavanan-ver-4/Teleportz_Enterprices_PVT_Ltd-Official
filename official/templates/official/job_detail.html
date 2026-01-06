@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}{{ job.title }} - Careers{% endblock %}
+
+{% block head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  "title": "{{ job.title }}",
+  "description": "{{ job.description | replace('\n', ' ') | replace('"', '\"') }}",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "Teleportz Enterprises"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": "{{ job.location }}"
+  },
+  "employmentType": "{{ job.type }}",
+  "datePosted": "{{ job.created_at.strftime('%Y-%m-%d') }}"
+  {% if job.salary_range %},"baseSalary": {
+    "@type": "MonetaryAmount",
+    "value": "{{ job.salary_range }}"
+  }{% endif %}
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="job-hero" style="background: linear-gradient(135deg, #556b2f 0%, #8fbc8f 100%); padding: 120px 0 80px;">
+    <div class="container">
+        <div class="job-hero-content">
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <a href="{{ url_for('official.careers') }}" style="color: rgba(255,255,255,0.8); text-decoration: none; margin-right: 15px;">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Careers
+                </a>
+            </div>
+            
+            <h1 style="color: white; font-size: 3rem; margin-bottom: 20px;">{{ job.title }}</h1>
+            
+            <div class="job-meta-hero" style="display: flex; gap: 30px; flex-wrap: wrap; margin-bottom: 30px;">
+                <div style="color: rgba(255,255,255,0.9);">
+                    <i class="fa-solid fa-building" style="margin-right: 8px;"></i>{{ job.department }}
+                </div>
+                <div style="color: rgba(255,255,255,0.9);">
+                    <i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i>{{ job.location }}
+                </div>
+                <div style="color: rgba(255,255,255,0.9);">
+                    <i class="fa-solid fa-clock" style="margin-right: 8px;"></i>{{ job.type }}
+                </div>
+                <div style="color: rgba(255,255,255,0.9);">
+                    <i class="fa-solid fa-briefcase" style="margin-right: 8px;"></i>{{ job.experience }}
+                </div>
+            </div>
+            
+            {% if job.salary_range %}
+            <div class="salary-info" style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 25px; display: inline-block; margin-bottom: 30px;">
+                <span style="color: white; font-weight: 600; font-size: 1.1rem;">{{ job.salary_range }}</span>
+            </div>
+            {% endif %}
+            
+            <div>
+                <a href="{{ url_for('official.apply_job', job_id=job.id) }}" 
+                   class="btn-apply" 
+                   style="background: white; color: #556b2f; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 1.1rem; display: inline-block; transition: all 0.3s ease;">
+                    Apply Now <i class="fa-solid fa-paper-plane" style="margin-left: 8px;"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="job-details" style="padding: 80px 0;">
+    <div class="container">
+        <div class="job-content" style="max-width: 800px; margin: 0 auto;">
+            
+            <div class="job-section" style="margin-bottom: 50px;">
+                <h2 style="color: #2c3e50; font-size: 2rem; margin-bottom: 20px; border-bottom: 3px solid #556b2f; padding-bottom: 10px;">Job Description</h2>
+                <div style="color: #666; line-height: 1.8; font-size: 1.1rem;">
+                    {{ job.description | replace('\n', '<br>') | safe }}
+                </div>
+            </div>
+
+            <div class="job-section" style="margin-bottom: 50px;">
+                <h2 style="color: #2c3e50; font-size: 2rem; margin-bottom: 20px; border-bottom: 3px solid #556b2f; padding-bottom: 10px;">Requirements</h2>
+                <div style="color: #666; line-height: 1.8; font-size: 1.1rem;">
+                    {{ job.requirements | replace('\n', '<br>') | safe }}
+                </div>
+            </div>
+
+            {% if job.benefits %}
+            <div class="job-section" style="margin-bottom: 50px;">
+                <h2 style="color: #2c3e50; font-size: 2rem; margin-bottom: 20px; border-bottom: 3px solid #556b2f; padding-bottom: 10px;">Benefits</h2>
+                <div style="color: #666; line-height: 1.8; font-size: 1.1rem;">
+                    {{ job.benefits | replace('\n', '<br>') | safe }}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="job-posted" style="background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 40px;">
+                <p style="color: #888; margin: 0;">
+                    <i class="fa-solid fa-calendar" style="margin-right: 8px;"></i>
+                    Posted on {{ job.created_at.strftime('%B %d, %Y') }}
+                </p>
+            </div>
+
+            <div class="share-section" style="text-align: center; margin-bottom: 30px;">
+                <h4 style="color: #2c3e50; margin-bottom: 15px;">Share this Job</h4>
+                <div class="share-buttons" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" 
+                       target="_blank" 
+                       style="background: #0077b5; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none;">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={{ request.url }}&text=Check out this job opportunity: {{ job.title }}" 
+                       target="_blank" 
+                       style="background: #1da1f2; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none;">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="mailto:?subject=Job Opportunity: {{ job.title }}&body=I found this job that might interest you: {{ request.url }}" 
+                       style="background: #34495e; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none;">
+                        <i class="fa-solid fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+
+            <div class="apply-section" style="text-align: center; background: linear-gradient(135deg, #556b2f 0%, #8fbc8f 100%); padding: 40px; border-radius: 15px;">
+                <h3 style="color: white; font-size: 1.8rem; margin-bottom: 15px;">Ready to Join Our Team?</h3>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px; font-size: 1.1rem;">
+                    Take the next step in your career with Teleportz Enterprises.
+                </p>
+                <a href="{{ url_for('official.apply_job', job_id=job.id) }}" 
+                   class="btn-apply-large" 
+                   style="background: white; color: #556b2f; padding: 18px 40px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 1.2rem; display: inline-block; transition: all 0.3s ease;">
+                    Apply for this Position <i class="fa-solid fa-arrow-right" style="margin-left: 10px;"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.btn-apply:hover, .btn-apply-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(85, 107, 47, 0.3);
+}
+
+.share-buttons a:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .job-hero h1 {
+        font-size: 2.2rem !important;
+    }
+    
+    .job-meta-hero {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    .job-content {
+        padding: 0 20px;
+    }
+    
+    .apply-section {
+        padding: 30px 20px !important;
+    }
+    
+    .share-buttons {
+        flex-direction: column !important;
+        align-items: center;
+    }
+    
+    .share-buttons a {
+        width: 200px;
+        text-align: center;
+    }
+}
+</style>
+{% endblock %}

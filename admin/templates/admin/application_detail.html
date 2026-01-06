@@ -1,0 +1,117 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Application Details</h2>
+    <a href="{{ url_for('admin.applications') }}" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left me-2"></i>Back to Applications
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Applicant Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Name:</strong> {{ application.name }}</p>
+                        <p><strong>Email:</strong> {{ application.email }}</p>
+                        <p><strong>Phone:</strong> {{ application.phone }}</p>
+                        <p><strong>Experience:</strong> {{ application.experience_years }} years</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Applied For:</strong> {{ application.job.title }}</p>
+                        <p><strong>Department:</strong> {{ application.job.department }}</p>
+                        <p><strong>Applied Date:</strong> {{ application.applied_at.strftime('%B %d, %Y') }}</p>
+                        <p><strong>Current Status:</strong> 
+                            <span class="badge bg-{% if application.status == 'pending' %}warning{% elif application.status == 'shortlisted' %}success{% elif application.status == 'reviewed' %}info{% else %}secondary{% endif %}">
+                                {{ application.status.title() }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if application.cover_letter %}
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Cover Letter</h5>
+            </div>
+            <div class="card-body">
+                <p style="white-space: pre-wrap;">{{ application.cover_letter }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Job Details</h5>
+            </div>
+            <div class="card-body">
+                <h6>{{ application.job.title }}</h6>
+                <p><strong>Department:</strong> {{ application.job.department }}</p>
+                <p><strong>Location:</strong> {{ application.job.location }}</p>
+                <p><strong>Type:</strong> {{ application.job.type }}</p>
+                <p><strong>Experience Required:</strong> {{ application.job.experience }}</p>
+                {% if application.job.salary_range %}
+                <p><strong>Salary Range:</strong> {{ application.job.salary_range }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Update Status</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('admin.update_application_status', id=application.id) }}">
+                    <div class="mb-3">
+                        <select class="form-select" name="status" required>
+                            <option value="pending" {% if application.status == 'pending' %}selected{% endif %}>Pending</option>
+                            <option value="reviewed" {% if application.status == 'reviewed' %}selected{% endif %}>Reviewed</option>
+                            <option value="shortlisted" {% if application.status == 'shortlisted' %}selected{% endif %}>Shortlisted</option>
+                            <option value="rejected" {% if application.status == 'rejected' %}selected{% endif %}>Rejected</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Update Status</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Documents</h5>
+            </div>
+            <div class="card-body">
+                {% if application.resume_filename %}
+                <div class="mb-3">
+                    <a href="{{ url_for('admin.download_resume', filename=application.resume_filename) }}" 
+                       class="btn btn-outline-success w-100" target="_blank">
+                        <i class="fa-solid fa-file-pdf me-2"></i>Download Resume
+                    </a>
+                </div>
+                {% endif %}
+                
+                {% if application.photo_filename %}
+                <div class="mb-3">
+                    <a href="{{ url_for('admin.download_photo', filename=application.photo_filename) }}" 
+                       class="btn btn-outline-info w-100" target="_blank">
+                        <i class="fa-solid fa-image me-2"></i>View Photo
+                    </a>
+                </div>
+                {% endif %}
+                
+                {% if not application.resume_filename and not application.photo_filename %}
+                <p class="text-muted">No documents uploaded.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

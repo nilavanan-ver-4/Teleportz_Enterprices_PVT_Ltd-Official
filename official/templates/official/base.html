@@ -11,11 +11,44 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('official.static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('official.static', filename='css/contact-sidebar.css') }}">
     <link rel="stylesheet" href="{{ url_for('official.static', filename='css/chatbot.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
+
+    <!-- Contact Details Sidebar -->
+    <div class="contact-sidebar" id="contactSidebar">
+        <div class="contact-item">
+            <i class="fa-solid fa-building"></i>
+            <div>
+                <p class="contact-label">Company</p>
+                <p class="contact-value">Teleportz Enterprices</p>
+            </div>
+        </div>
+        <div class="contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+                <p class="contact-label">Call</p>
+                <p class="contact-value"><a href="tel:+1234567890">+1 (234) 567-890</a></p>
+            </div>
+        </div>
+        <div class="contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+                <p class="contact-label">Email</p>
+                <p class="contact-value"><a href="mailto:info@teleportz.com">info@teleportz.com</a></p>
+            </div>
+        </div>
+        <div class="contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+                <p class="contact-label">Location</p>
+                <p class="contact-value">Global Headquarters</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Floating Navigation -->
     <div class="navbar-wrapper">
@@ -166,6 +199,8 @@
                                     Services</a></li>
                             <li><a href="{{ url_for('official.products') }}"><i class="fa-solid fa-box"></i>
                                     Products</a></li>
+                            <li><a href="{{ url_for('official.careers') }}"><i class="fa-solid fa-briefcase"></i>
+                                    Careers</a></li>
                         </ul>
                     </div>
                     <div>
@@ -248,6 +283,19 @@
     </div>
 
     <script src="{{ url_for('official.static', filename='js/main.js') }}"></script>
+    <script>
+        // Contact Sidebar Scroll Detection
+        const contactSidebar = document.getElementById('contactSidebar');
+        const parallaxContainer = document.querySelector('.parallax');
+
+        parallaxContainer.addEventListener('scroll', () => {
+            if (parallaxContainer.scrollTop > 300) {
+                contactSidebar.classList.add('visible');
+            } else {
+                contactSidebar.classList.remove('visible');
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,100 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>{{ action }} Job</h2>
+    <a href="{{ url_for('admin.jobs') }}" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left me-2"></i>Back to Jobs
+    </a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <form method="POST">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Job Title *</label>
+                        <input type="text" class="form-control" id="title" name="title" 
+                               value="{{ job.title if job else '' }}" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="department" class="form-label">Department *</label>
+                        <input type="text" class="form-control" id="department" name="department" 
+                               value="{{ job.department if job else '' }}" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location *</label>
+                        <input type="text" class="form-control" id="location" name="location" 
+                               value="{{ job.location if job else '' }}" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Job Type *</label>
+                        <select class="form-select" id="type" name="type" required>
+                            <option value="">Select Type</option>
+                            <option value="Full-time" {% if job and job.type == 'Full-time' %}selected{% endif %}>Full-time</option>
+                            <option value="Part-time" {% if job and job.type == 'Part-time' %}selected{% endif %}>Part-time</option>
+                            <option value="Contract" {% if job and job.type == 'Contract' %}selected{% endif %}>Contract</option>
+                            <option value="Internship" {% if job and job.type == 'Internship' %}selected{% endif %}>Internship</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="experience" class="form-label">Experience Required *</label>
+                        <input type="text" class="form-control" id="experience" name="experience" 
+                               value="{{ job.experience if job else '' }}" placeholder="e.g., 2-5 years" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="salary_range" class="form-label">Salary Range</label>
+                <input type="text" class="form-control" id="salary_range" name="salary_range" 
+                       value="{{ job.salary_range if job else '' }}" placeholder="e.g., $50,000 - $70,000">
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Job Description *</label>
+                <textarea class="form-control" id="description" name="description" rows="5" required>{{ job.description if job else '' }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="requirements" class="form-label">Requirements *</label>
+                <textarea class="form-control" id="requirements" name="requirements" rows="4" required>{{ job.requirements if job else '' }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="benefits" class="form-label">Benefits</label>
+                <textarea class="form-control" id="benefits" name="benefits" rows="3">{{ job.benefits if job else '' }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="is_active" name="is_active" 
+                           {% if not job or job.is_active %}checked{% endif %}>
+                    <label class="form-check-label" for="is_active">
+                        Active (visible to job seekers)
+                    </label>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-save me-2"></i>{{ action }} Job
+                </button>
+                <a href="{{ url_for('admin.jobs') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

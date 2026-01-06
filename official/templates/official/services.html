@@ -5,7 +5,7 @@
 {% block content %}
 <div class="parallax-group">
     <div class="parallax-layer parallax-layer--back"
-        style="background-image: url('{{ url_for('official.static', filename='img/World.png') }}');">
+        style="background-image: url('{{ url_for('official.static', filename='img/World.png') }}'); filter: brightness(0.6) contrast(1.1);">
     </div>
     <div class="parallax-layer parallax-layer--base">
         <section class="container text-center" style="padding-top: 150px; padding-bottom: 80px;">
@@ -38,7 +38,7 @@
                         <p class="card-desc" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 24px;">
                             We manage the complete trade lifecycle—from sourcing and compliance to logistics and
                             delivery—ensuring smooth, transparent, and efficient international transactions tailored
-                            to each client’s requirements.
+                            to each client's requirements.
                         </p>
                         <a href="{{ url_for('official.contact') }}" class="btn btn-primary">Get Started</a>
                     </div>
@@ -136,19 +136,6 @@
             </a>
 
             <!-- Custom Trade Solutions -->
-            <a href="{{ url_for('official.service_detail', slug='custom-trade-solutions') }}" class="bento-card col-span-6" style="text-decoration: none; color: inherit; cursor: pointer;">
-                <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
-                <h3 class="card-title">Custom Trade Solutions</h3>
-                <ul class="service-list">
-                    <li><i class="fa-solid fa-check"></i> Industry-specific sourcing</li>
-                    <li><i class="fa-solid fa-check"></i> Custom order handling</li>
-                    <li><i class="fa-solid fa-check"></i> Flexible trade models</li>
-                </ul>
-            </a>
-        </div>
-    </section>
-</div>
-{% endblock %}olutions -->
             <a href="{{ url_for('official.service_detail', slug='custom-trade-solutions') }}" class="bento-card col-span-6" style="text-decoration: none; color: inherit; cursor: pointer;">
                 <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
                 <h3 class="card-title">Custom Trade Solutions</h3>

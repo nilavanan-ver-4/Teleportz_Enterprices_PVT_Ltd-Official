@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, send_from_directory, current_app
-from app import Product, Inquiry, db
+from app import Product, Inquiry, Job, JobApplication, db
 from sqlalchemy import or_
+from werkzeug.utils import secure_filename
 import os
+import uuid
 
 official_bp = Blueprint('official', __name__, template_folder='templates', static_folder='static', static_url_path='/official/static')
 
@@ -196,6 +198,91 @@ def features():
         {'slug': 'supply-chain-intel', 'title': 'Supply Chain Intel', 'summary': 'Optimize your supply chain network', 'icon': 'fa-link'}
     ]
     return render_template('official/features/index.html', features=features_data)
+
+@official_bp.route('/careers')
+def careers():
+    jobs = Job.query.filter_by(is_active=True).order_by(Job.created_at.desc()).all()
+    return render_template('official/careers.html', jobs=jobs)
+
+@official_bp.route('/careers/<int:job_id>')
+def job_detail(job_id):
+    job = Job.query.get_or_404(job_id)
+    if not job.is_active:
+        flash('This job posting is no longer available.', 'info')
+        return redirect(url_for('official.careers'))
+    return render_template('official/job_detail.html', job=job)
+
+@official_bp.route('/careers/<int:job_id>/apply', methods=['GET', 'POST'])
+def apply_job(job_id):
+    job = Job.query.get_or_404(job_id)
+    if not job.is_active:
+        flash('This job posting is no longer available.', 'info')
+        return redirect(url_for('official.careers'))
+    
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        experience_years = request.form.get('experience_years')
+        cover_letter = request.form.get('cover_letter')
+        
+        if not all([name, email, phone, experience_years]):
+            flash('Please fill in all required fields.', 'danger')
+            return render_template('official/apply_job.html', job=job)
+        
+        # Handle file uploads
+        resume_filename = None
+        photo_filename = None
+        
+        if 'resume' in request.files:
+            resume_file = request.files['resume']
+            if resume_file and resume_file.filename:
+                filename = secure_filename(resume_file.filename)
+                unique_filename = f"{uuid.uuid4()}_{filename}"
+                resume_path = os.path.join(current_app.instance_path, 'uploads', 'resumes', unique_filename)
+                resume_file.save(resume_path)
+                resume_filename = unique_filename
+        
+        if 'photo' in request.files:
+            photo_file = request.files['photo']
+            if photo_file and photo_file.filename:
+                filename = secure_filename(photo_file.filename)
+                unique_filename = f"{uuid.uuid4()}_{filename}"
+                photo_path = os.path.join(current_app.instance_path, 'uploads', 'photos', unique_filename)
+                photo_file.save(photo_path)
+                photo_filename = unique_filename
+        
+        # Create job application
+        application = JobApplication(
+            job_id=job_id,
+            name=name,
+            email=email,
+            phone=phone,
+            experience_years=int(experience_years),
+            cover_letter=cover_letter,
+            resume_filename=resume_filename,
+            photo_filename=photo_filename
+        )
+        
+        db.session.add(application)
+        db.session.commit()
+        
+        flash('Your application has been submitted successfully! We will contact you soon.', 'success')
+        return redirect(url_for('official.job_detail', job_id=job_id))
+    
+    return render_template('official/apply_job.html', job=job)
+
+@official_bp.route('/uploads/resumes/<filename>')
+def resume_file(filename):
+    """Serve resume files from the resumes folder."""
+    resumes_path = os.path.join(current_app.instance_path, 'uploads', 'resumes')
+    return send_from_directory(resumes_path, filename)
+
+@official_bp.route('/uploads/photos/<filename>')
+def photo_file(filename):
+    """Serve photo files from the photos folder."""
+    photos_path = os.path.join(current_app.instance_path, 'uploads', 'photos')
+    return send_from_directory(photos_path, filename)
 
 @official_bp.route('/features/<slug>')
 def feature_detail(slug):

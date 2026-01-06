@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Apply for {{ job.title }} - Careers{% endblock %}
+
+{% block content %}
+<section class="apply-hero">
+    <div class="container container-main">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="job-title">Apply for {{ job.title }}</h1>
+                <p>{{ job.department }} • {{ job.location }} • {{ job.type }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="application-form">
+    <div class="container container-main">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="form-card">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Full Name *</label>
+                                <input type="text" class="form-control form-control-custom" id="name" name="name" required> 
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control form-control-custom" id="email" name="email" required> 
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-control form-control-custom" id="phone" name="phone" required> 
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="experience_years" class="form-label">Years of Experience *</label>
+                                <select class="form-control form-control-custom" id="experience_years" name="experience_years" required> 
+                                    <option value="">Select experience</option>
+                                    <option value="0">Fresh Graduate</option>
+                                    <option value="1">1 Year</option>
+                                    <option value="2">2 Years</option>
+                                    <option value="3">3 Years</option>
+                                    <option value="4">4 Years</option>
+                                    <option value="5">5+ Years</option>
+                                    <option value="10">10+ Years</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="resume" class="form-label">Resume/CV</label>
+                            <input type="file" class="form-control form-control-custom" id="resume" name="resume" accept=".pdf,.doc,.docx">
+                            <small class="form-text text-muted-small">Accepted formats: PDF, DOC, DOCX (Max 5MB)</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Profile Photo (Optional)</label>
+                            <input type="file" class="form-control form-control-custom" id="photo" name="photo" accept="image/*">
+                            <small class="form-text text-muted-small">Accepted formats: JPG, PNG, GIF (Max 2MB)</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="cover_letter" class="form-label">Cover Letter</label>
+                            <textarea class="form-control form-control-custom" id="cover_letter" name="cover_letter" rows="6" 
+                                      placeholder="Tell us why you're interested in this position and what makes you a great fit..."></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn-cta">
+                                <i class="fa-solid fa-paper-plane me-2"></i>Submit Application
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.form-control:focus {
+    border-color: #556b2f;
+    box-shadow: 0 0 0 0.2rem rgba(85, 107, 47, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(85, 107, 47, 0.3);
+}
+
+@media (max-width: 768px) {
+    .form-card {
+        padding: 25px !important;
+        margin: 0 15px;
+    }
+    
+    .apply-hero h1 {
+        font-size: 2rem !important;
+    }
+}
+</style>
+{% endblock %}

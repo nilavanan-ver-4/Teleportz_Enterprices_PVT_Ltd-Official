@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}{{ job.title }} - Careers{% endblock %}
+
+{% block content %}
+<section class="job-detail-hero">
+    <div class="container container-main">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="job-hero-content">
+                    <div class="job-meta-badges">
+                        <span class="badge"><i class="fa-solid fa-building"></i> {{ job.department }}</span>
+                        <span class="badge"><i class="fa-solid fa-location-dot"></i> {{ job.location }}</span>
+                        <span class="badge"><i class="fa-solid fa-clock"></i> {{ job.type }}</span>
+                    </div>
+                    <h1 class="job-title">{{ job.title }}</h1>
+                    <p class="hero-subtitle mb-3">{{ job.description[:200] }}...</p>
+                    <div class="job-quick-info">
+                        <div class="quick-item"><strong>Experience:</strong> {{ job.experience }}</div>
+                        {% if job.salary_range %}
+                        <div class="quick-item"><strong>Salary:</strong> {{ job.salary_range }}</div>
+                        {% endif %}
+                        <div class="quick-item"><strong>Posted:</strong> {{ job.created_at.strftime('%B %d, %Y') }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center">
+                <a href="{{ url_for('career.apply_job', job_id=job.id) }}" class="btn-cta btn-apply-hero">Apply Now <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="job-details-content">
+    <div class="container container-main">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="job-content-card">
+                    <h2>Job Description</h2>
+                    <div class="content-body">
+                        {{ job.description }} 
+                    </div>
+                </div>
+
+                <div class="job-content-card">
+                    <h2>Requirements</h2>
+                    <div class="content-body">
+                        {{ job.requirements }}
+                    </div>
+                </div>
+
+                {% if job.benefits %}
+                <div class="job-content-card">
+                    <h2>Benefits & Perks</h2>
+                    <div class="content-body">
+                        {{ job.benefits }}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-lg-4">
+                <div class="job-sidebar">
+                    <div class="apply-card">
+                        <h3>Ready to Apply?</h3>
+                        <p>Join our team and be part of something amazing!</p>
+                        <a href="{{ url_for('career.apply_job', job_id=job.id) }}" class="btn-cta btn-apply-sidebar">Apply Now <i class="fa-solid fa-paper-plane"></i></a>
+                    </div> 
+
+                    <div class="job-info-card">
+                        <h4>Job Information</h4>
+                        <div class="info-item">
+                            <span>Department:</span>
+                            <strong>{{ job.department }}</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Location:</span>
+                            <strong>{{ job.location }}</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Job Type:</span>
+                            <strong>{{ job.type }}</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Experience:</span>
+                            <strong>{{ job.experience }}</strong>
+                        </div>
+                        {% if job.salary_range %}
+                        <div class="info-item">
+                            <span>Salary Range:</span>
+                            <strong>{{ job.salary_range }}</strong>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.btn-apply-hero:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+    background: #f8f9fa;
+}
+
+.btn-apply-sidebar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(85, 107, 47, 0.3);
+}
+
+@media (max-width: 768px) {
+    .job-hero-content h1 {
+        font-size: 2.2rem !important;
+    }
+    
+    .job-quick-info {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    .job-sidebar {
+        position: static !important;
+        margin-top: 40px;
+    }
+}
+</style>
+{% endblock %}
