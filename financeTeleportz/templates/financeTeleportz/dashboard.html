@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Command | Teleportz</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #05080a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --accent-blue: #00d2ff;
+            --accent-gold: #d4af37;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .dashboard-container {
+            max-width: 1700px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk';
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--accent-blue);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 25px;
+            border-radius: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-blue);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 10px 0;
+            font-family: 'Space Grotesk';
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 8px 18px;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .filter-btn.active {
+            background: var(--accent-blue);
+            color: #000;
+            font-weight: 700;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk';
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: var(--accent-blue);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 15px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .data-table td {
+            padding: 15px;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.85rem;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .badge-success {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+        }
+
+        .badge-danger {
+            background: rgba(255, 77, 77, 0.1);
+            color: #ff4d4d;
+        }
+
+        .btn-action {
+            background: var(--accent-blue);
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.8rem;
+        }
+
+        .btn-action:hover {
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #0a0e14;
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 30px;
+            width: 500px;
+        }
+
+        .reminder-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--accent-blue);
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header>
+            <div class="logo">FINANCE<span style="color: #fff;">COMMAND</span></div>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div style="text-align: right;">
+                    <div style="font-weight: 700;">{{ current_user.username }}</div>
+                    <div style="font-size: 0.7rem; color: var(--accent-blue);">AUTHORIZED: {{ current_user.role }}</div>
+                </div>
+                <a href="{{ url_for('finance.logout') }}" style="color: #ff4d4d; font-size: 1.2rem;"><i
+                        class="fa-solid fa-power-off"></i></a>
+            </div>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div
+            style="padding: 15px; background: rgba(0,210,255,0.1); border: 1px solid var(--accent-blue); border-radius: 10px; margin-bottom: 20px; color: var(--accent-blue); font-size: 0.9rem;">
+            <i class="fa-solid fa-circle-check"></i> {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <div class="filter-bar">
+            <a href="{{ url_for('finance.dashboard', period='all') }}"
+                class="filter-btn {{ 'active' if current_period == 'all' }}">Lifetime</a>
+            <a href="{{ url_for('finance.dashboard', period='today') }}"
+                class="filter-btn {{ 'active' if current_period == 'today' }}">Today</a>
+            <a href="{{ url_for('finance.dashboard', period='week') }}"
+                class="filter-btn {{ 'active' if current_period == 'week' }}">This Week</a>
+            <a href="{{ url_for('finance.dashboard', period='month') }}"
+                class="filter-btn {{ 'active' if current_period == 'month' }}">This Month</a>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Liquidity Pool</div>
+                <div class="stat-value">${{ "{:,.2f}".format(total_balance) }}</div>
+                <div style="font-size: 0.75rem; color: #00ff88;"><i class="fa-solid fa-shield-check"></i> Multi-Currency
+                    Synced</div>
+            </div>
+            <div class="stat-card" style="--accent-blue: var(--accent-gold);">
+                <div class="stat-label">Trade Receivables</div>
+                <div class="stat-value">${{ "{:,.2f}".format(ar_total) }}</div>
+                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.3);">Pipeline Revenue</div>
+            </div>
+            <div class="stat-card" style="--accent-blue: #ff00ff;">
+                <div class="stat-label">Reminders</div>
+                <div class="stat-value">{{ reminders|length }} ACTIVE</div>
+                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.3);">Calendar alerts</div>
+            </div>
+            <div class="stat-card" style="--accent-blue: #00ff88;">
+                <div class="stat-label">Audit Status</div>
+                <div class="stat-value">CLEAN</div>
+                <div style="font-size: 0.75rem; color: #00ff88;"><i class="fa-solid fa-user-shield"></i> {{
+                    current_user.username }} Active</div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="left-col">
+                <div class="card">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-list-check"></i> Ledger (Audit Trail)</span>
+                        <button class="btn-action" onclick="openModal('txModal')">+ Post Transaction</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Executor</th>
+                                <th>ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tx in transactions %}
+                            <tr>
+                                <td style="color: rgba(255,255,255,0.4);">{{ tx.timestamp.strftime('%d %b %H:%M') }}
+                                </td>
+                                <td><b>{{ tx.category }}</b></td>
+                                <td
+                                    style="color: {{ '#00ff88' if tx.transaction_type == 'Credit' else '#ff4d4d' }}; font-weight: 700;">
+                                    {{ '+' if tx.transaction_type == 'Credit' else '-' }}${{ "{:,.2f}".format(tx.amount)
+                                    }}
+                                </td>
+                                <td><span style="font-size: 0.75rem; opacity: 0.6;"><i class="fa-solid fa-user-tag"></i>
+                                        {{ tx.author.username if tx.author else 'System' }}</span></td>
+                                <td style="font-family: monospace; opacity: 0.3;">{{ tx.id }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-calendar-days"></i> Global Reminders</span>
+                        <button class="btn-action" style="padding: 5px 12px;" onclick="openModal('remModal')">Add
+                            Alert</button>
+                    </div>
+                    {% for rem in reminders %}
+                    <div class="reminder-item"
+                        style="border-left-color: {{ '#ff4d4d' if rem.priority == 'High' else '#00d2ff' }};">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700;">{{ rem.title }}</div>
+                            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">Due: {{
+                                rem.due_date.strftime('%Y-%m-%d %H:%M') }}</div>
+                        </div>
+                        <span class="badge {{ 'badge-danger' if rem.priority == 'High' else 'badge-success' }}">{{
+                            rem.priority }}</span>
+                    </div>
+                    {% endfor %}
+                    {% if not reminders %}
+                    <div style="text-align: center; color: rgba(255,255,255,0.1); padding: 20px;">No pending alerts.
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="right-col">
+                <div class="card">
+                    <div class="card-title">
+                        <span><i class="fa-solid fa-vault"></i> Account Balances</span>
+                    </div>
+                    {% for acc in accounts %}
+                    <div
+                        style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 15px; margin-bottom: 12px; border: 1px solid var(--glass-border);">
+                        <div style="font-size: 0.75rem; opacity: 0.5; margin-bottom: 5px;">{{ acc.account_name }}</div>
+                        <div style="font-size: 1.4rem; font-weight: 800; color: var(--accent-blue);">${{
+                            "{:,.2f}".format(acc.balance) }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Fiscal Summary</div>
+                    <div style="font-size: 0.85rem; space-y: 10px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span>Active Payroll:</span>
+                            <span style="color: #ff4d4d;">-${{ "{:,.2f}".format(total_payroll) }}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <span>Net Runway:</span>
+                            <span style="color: #00ff88;">+{{ (total_balance / (total_payroll + 1))|round(1) }}
+                                Mo</span>
+                        </div>
+                        <div style="height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px;">
+                            <div style="width: 70%; height: 100%; background: var(--accent-blue);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="txModal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 25px; font-family: 'Space Grotesk';">Authorize Ledger Entry</h2>
+            <form action="{{ url_for('finance.add_transaction') }}" method="POST">
+                <div class="input-group">
+                    <label>Funding Account</label>
+                    <select name="account_id">
+                        {% for acc in accounts %}<option value="{{ acc.id }}">{{ acc.account_name }}</option>{% endfor
+                        %}
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Movement Type</label>
+                    <select name="type">
+                        <option value="Credit">Credit (Income)</option>
+                        <option value="Debit">Debit (Expense)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Amount (USD)</label>
+                    <input type="number" step="0.01" name="amount" required>
+                </div>
+                <div class="input-group">
+                    <label>Sector / Category</label>
+                    <input type="text" name="category" placeholder="e.g. Customs, Shipping, Refund">
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 30px;">
+                    <button type="submit" class="btn-action" style="flex: 2;">AUTHORIZE</button>
+                    <button type="button" class="btn-action" style="background: #222; color: #fff; flex: 1;"
+                        onclick="closeModal('txModal')">CANCEL</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="remModal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 25px; font-family: 'Space Grotesk';">Initialize Alert</h2>
+            <form action="{{ url_for('finance.add_reminder') }}" method="POST">
+                <div class="input-group">
+                    <label>Alert Title</label>
+                    <input type="text" name="title" required placeholder="e.g. Audit Deadline">
+                </div>
+                <div class="input-group">
+                    <label>Timestamp (UTC)</label>
+                    <input type="datetime-local" name="due_date" required>
+                </div>
+                <div class="input-group">
+                    <label>Priority Protocol</label>
+                    <select name="priority">
+                        <option value="High">High (Immediate)</option>
+                        <option value="Medium">Medium (Scheduled)</option>
+                        <option value="Low">Low (Informational)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-action" style="width: 100%; margin-top: 30px;">SYNC CALENDAR</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    </script>
+</body>
+
+</html>

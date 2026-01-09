@@ -28,29 +28,29 @@ def service_detail(slug):
             'name': 'Import Services',
             'desc': 'Seamlessly bring quality global products to your doorstep',
             'icon': 'fa-ship',
-            'full_desc': 'Our comprehensive import services help you source quality products from around the world with complete compliance and documentation support.',
-            'features': ['Global sourcing of quality products', 'Vendor verification and compliance', 'Customs coordination support', 'Import duty optimization']
+            'full_desc': 'Our comprehensive import services help you source quality products from around the world. We manage vendor selection, factory audits, and end-to-end compliance with Indian and international import laws (IEC, GST, Customs Act).',
+            'features': ['Global sourcing with verified supplier network', 'AEO (Authorized Economic Operator) coordination', 'Customs clearance and duty optimization', 'Import licensing and regulatory support']
         },
         'export-services': {
             'name': 'Export Services',
             'desc': 'Expand your business globally with our export solutions',
             'icon': 'fa-plane-departure',
-            'full_desc': 'We handle all aspects of international product distribution, from documentation to logistics coordination.',
-            'features': ['International product distribution', 'Documentation assistance', 'Logistics coordination', 'Market entry support']
+            'full_desc': 'Expand your global footprint with our robust export solutions. We manage pre-shipment inspections, international marketing, and distribution across 50+ global ports.',
+            'features': ['Port-to-port and door-to-door distribution', 'Pre-shipment inspection (SGS/Intertek)', 'Certificate of Origin (COO) and B/L support', 'Export incentive (RoDTEP/DBK) consultation']
         },
         'logistics-supply-chain': {
             'name': 'Logistics & Supply Chain',
             'desc': 'Efficient freight and supply chain management',
             'icon': 'fa-truck-fast',
-            'full_desc': 'Optimize your supply chain with our freight coordination and logistics planning services.',
-            'features': ['Freight coordination (air, sea, land)', 'Shipment tracking and scheduling', 'Cost-effective logistics planning', 'Real-time visibility']
+            'full_desc': 'Optimize your supply chain with multi-modal freight solutions. We handle Air (Express/Cargo), Sea (FCL/LCL), and Land transport with real-time tracking.',
+            'features': ['FCL (Full Container Load) & LCL (Less than Container Load)', 'Air Freight Cargo & Express Courier', 'Real-time GPS shipment tracking', 'Warehouse & Cold Chain facilities']
         },
         'documentation-regulatory': {
             'name': 'Documentation & Regulatory',
             'desc': 'Complete compliance and regulatory support',
             'icon': 'fa-file-signature',
-            'full_desc': 'Navigate complex international trade regulations with our expert documentation and compliance guidance.',
-            'features': ['Export-import documentation', 'Customs coordination', 'HS code & compliance guidance', 'Regulatory compliance']
+            'full_desc': 'Navigate the maze of international trade compliance. We provide expert guidance on HS Code classification, Anti-dumping duties, and Trade Agreements (FTA/CEPA).',
+            'features': ['HS Code classification & Tariff analysis', 'B/L, Commercial Invoice, Packing List preparation', 'Phytosanitary & Fumigation certificates', 'Legalization & Embassy Attestation']
         },
         'trade-consulting': {
             'name': 'Trade Consulting',
@@ -73,12 +73,19 @@ def service_detail(slug):
             'full_desc': 'We provide ongoing support to ensure smooth delivery and resolution of any post-shipment issues.',
             'features': ['Shipment follow-ups', 'Issue resolution & coordination', 'Long-term client assistance', 'Customer support']
         },
+        'trade-finance-lc': {
+            'name': 'Trade Finance & LC Support',
+            'desc': 'Secure your transactions with expert LC and payment management',
+            'icon': 'fa-file-invoice-dollar',
+            'full_desc': 'We facilitate international trade finance by managing Letter of Credit (LC) documentation, bank coordination, and multiple payment methods (T/T, D/P, D/A) to ensure secure transactions for both buyers and sellers.',
+            'features': ['Letter of Credit (LC) documentation support', 'Bank coordination across 50+ countries', 'Secure payment terms management', 'Currency risk consultation']
+        },
         'custom-trade-solutions': {
             'name': 'Custom Trade Solutions',
             'desc': 'Tailored solutions for your unique needs',
             'icon': 'fa-sliders',
-            'full_desc': 'We create customized trade solutions designed specifically for your industry and business requirements.',
-            'features': ['Industry-specific sourcing', 'Custom order handling', 'Flexible trade models', 'Bespoke solutions']
+            'full_desc': 'We create customized trade solutions designed specifically for your industry. We offer flexible MOQs (starting from LCL to FCL) and tailored lead times (15-45 days depending on region).',
+            'features': ['Industry-specific sourcing', 'Flexible MOQs (LCL/FCL options)', 'Lead time optimization (15-45 days)', 'Bespoke trade models']
         }
     }
     

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | BotConnections</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #0a0e14;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-glow: #8fc353;
+            --whatsapp-color: #25d366;
+            --instagram-color: #e4405f;
+            --telegram-color: #0088cc;
+            --twitter-color: #1da1f2;
+            --gmail-color: #ea4335;
+            --n8n-color: #ff6d5a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(143, 195, 83, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: moveGlow 20s infinite alternate;
+        }
+
+        @keyframes moveGlow {
+            0% {
+                top: -100px;
+                left: -100px;
+            }
+
+            100% {
+                bottom: -100px;
+                right: -100px;
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px 30px;
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #8fc353, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout-btn {
+            color: #ff4d4d;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .connection-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            transition: 0.4s;
+        }
+
+        .connection-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-glow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .icon-box {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-action:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .log-section {
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .log-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .log-table th {
+            text-align: left;
+            padding: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .log-table td {
+            padding: 12px;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.9rem;
+        }
+
+        .status-tag {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .status-success {
+            background: rgba(143, 195, 83, 0.2);
+            color: #8fc353;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+    <div class="container">
+        <header>
+            <div class="logo">BOTCONNECTIONS</div>
+            <div class="user-profile">
+                <div style="text-align: right;">
+                    <div style="font-weight: 700;">{{ current_user.username }}</div>
+                    <div style="font-size: 0.75rem; color: var(--accent-glow);">Marketing Lead</div>
+                </div>
+                <div class="icon-box" style="width: 45px; height: 45px; background: var(--accent-glow); color: #000;">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <a href="{{ url_for('bot.logout') }}" class="logout-btn"><i class="fa-solid fa-power-off"></i></a>
+            </div>
+        </header>
+
+        <section>
+            <div class="social-grid">
+                {% for conn in connections %}
+                <div class="connection-card" id="card-{{ conn.platform|lower }}">
+                    <div class="card-header">
+                        <div class="icon-box" style="color: var(--{{ conn.platform|lower }}-color);">
+                            {% if conn.platform == 'WhatsApp' %}<i class="fa-brands fa-whatsapp"></i>
+                            {% elif conn.platform == 'Instagram' %}<i class="fa-brands fa-instagram"></i>
+                            {% elif conn.platform == 'Telegram' %}<i class="fa-brands fa-telegram"></i>
+                            {% elif conn.platform == 'Twitter' %}<i class="fa-brands fa-twitter"></i>
+                            {% elif conn.platform == 'Gmail' %}<i class="fa-solid fa-envelope"></i>
+                            {% endif %}
+                        </div>
+                        <div style="font-size: 1.2rem; font-weight: 700;">{{ conn.platform }}</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">
+                        {% if conn.platform == 'WhatsApp' %}Multi-device automation via Baileys engine.{% endif %}
+                        {% if conn.platform == 'Gmail' %}Automated cold outreach and lead follow-ups.{% endif %}
+                        {% if conn.platform == 'Instagram' %}Graph API integration for business scheduling.{% endif %}
+                        {% if conn.platform == 'Telegram' %}BotFather API broadcast controller.{% endif %}
+                        {% if conn.platform == 'Twitter' %}Twitter (X) thread and engagement bot.{% endif %}
+                    </p>
+
+                    <div style="margin-top: 15px; display: flex; align-items: center; justify-content: space-between;">
+                        <span class="status-tag {{ 'status-success' if conn.status == 'linked' else '' }}"
+                            id="status-{{ conn.platform|lower }}">
+                            {{ conn.status|upper }}
+                        </span>
+                        {% if conn.account_name %}
+                        <span style="font-size: 0.7rem; opacity: 0.5;">{{ conn.account_name }}</span>
+                        {% endif %}
+                    </div>
+
+                    {% if conn.platform == 'Gmail' %}
+                    <a href="{{ url_for('bot.gmail_automation') }}" style="text-decoration: none;">
+                        <button class="btn-action">Configure</button>
+                    </a>
+                    {% elif conn.platform == 'Twitter' %}
+                    <a href="{{ url_for('bot.twitter_automation') }}" style="text-decoration: none;">
+                        <button class="btn-action">Manage Hub</button>
+                    </a>
+                    {% else %}
+                    <button class="btn-action" onclick="connectPlatform('{{ conn.platform }}', this)">
+                        {{ 'Reconnect' if conn.status == 'linked' else 'Link Account' }}
+                    </button>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- n8n Workflow Quick Launch -->
+            <div
+                style="background: linear-gradient(90deg, rgba(255,109,90,0.1), transparent); border: 1px solid rgba(255,109,90,0.2); padding: 30px; border-radius: 24px; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <h3 style="font-family: 'Space Grotesk';">n8n Workflow Engine</h3>
+                    <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Trigger cross-platform postings with
+                        zero code.</p>
+                </div>
+                <button class="btn-action" id="n8nBtn"
+                    style="width: auto; padding: 12px 30px; background: var(--n8n-color);" onclick="launchN8N()">Launch
+                    Workflows</button>
+            </div>
+
+            <div class="log-section">
+                <h3 style="font-family: 'Space Grotesk';">System Activity Logs</h3>
+                <table class="log-table">
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Action</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="log-body">
+                        {% for log in logs %}
+                        <tr>
+                            <td><b>{{ log.platform }}</b></td>
+                            <td>{{ log.action }}</td>
+                            <td><span class="status-tag status-success">{{ log.status }}</span></td>
+                            <td style="color: rgba(255,255,255,0.4);">{{ log.timestamp.strftime('%H:%M:%S') }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% if not logs %}
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.2);">No
+                                recent activity detected.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        async function connectPlatform(platform, btn) {
+            const originalText = btn.innerText;
+            btn.innerText = "Connecting...";
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(`/marketing/platform/connect/${platform}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    const statusTag = document.getElementById(`status-${platform.toLowerCase()}`);
+                    statusTag.innerText = "LINKED";
+                    statusTag.classList.add('status-success');
+                    btn.innerText = "Linked";
+                    setTimeout(() => location.reload(), 1000);
+                } else {
+                    alert("Connection failed. Check API logs.");
+                    btn.innerText = originalText;
+                }
+            } catch (err) {
+                console.error(err);
+                btn.innerText = originalText;
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function launchN8N() {
+            const btn = document.getElementById('n8nBtn');
+            btn.innerText = "Initializing Tunnel...";
+
+            try {
+                const response = await fetch('/marketing/n8n-launch');
+                const data = await response.json();
+                if (data.status === 'success') {
+                    alert("n8n Engine Started. Redirecting to internal workflow...");
+                    window.open(data.url, '_blank');
+                    location.reload();
+                }
+            } catch (e) { }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Automation | BotConnections</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #0a0e14;
+            --accent-glow: #ea4335;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: var(--primary-bg);
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+            transform: translateX(-5px);
+        }
+
+        .header {
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-family: 'Space Grotesk';
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            padding: 35px;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .input-item {
+            margin-bottom: 25px;
+        }
+
+        .input-item label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .input-item input,
+        .input-item textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: #fff;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-item input:focus {
+            border-color: var(--accent-glow);
+        }
+
+        .toggle-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .btn-save {
+            width: 100%;
+            padding: 18px;
+            background: var(--accent-glow);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-save:hover {
+            box-shadow: 0 0 20px rgba(234, 67, 53, 0.4);
+        }
+
+        .preview {
+            margin-top: 40px;
+            border-top: 1px dashed var(--glass-border);
+            padding-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="{{ url_for('bot.dashboard') }}" class="back-link"><i class="fa-solid fa-arrow-left"></i> Return to
+            Command Center</a>
+
+        <div class="header">
+            <h1>Gmail & Email <b style="color: var(--accent-glow);">Automation</b></h1>
+            <p>Configure automated cold mailing, lead nurturing, and SMTP relay triggers.</p>
+        </div>
+
+        <div class="config-grid">
+            <!-- Left: Settings -->
+            <div class="card">
+                <h3 style="margin-bottom: 25px; font-family: 'Space Grotesk';">Auth Configuration</h3>
+                <div class="input-item">
+                    <label>Gmail User / Service Account</label>
+                    <input type="email" placeholder="marketing@teleportz.com">
+                </div>
+                <div class="input-item">
+                    <label>App Password / API Secret</label>
+                    <input type="password" placeholder="••••••••••••••••">
+                </div>
+
+                <h3
+                    style="margin: 35px 0 20px; font-family: 'Space Grotesk'; border-top: 1px solid var(--glass-border); padding-top: 25px;">
+                    Automation Triggers</h3>
+                <div class="toggle-box">
+                    <span>Auto-reply to Inquiries</span>
+                    <input type="checkbox" checked>
+                </div>
+                <div class="toggle-box">
+                    <span>Daily Lead Digest</span>
+                    <input type="checkbox" checked>
+                </div>
+                <div class="toggle-box">
+                    <span>SMTP Relay (High Volume)</span>
+                    <input type="checkbox">
+                </div>
+
+                <button class="btn-save">INITIALIZE AUTOMATION ENGINE</button>
+            </div>
+
+            <!-- Right: Content Builder -->
+            <div class="card">
+                <h3 style="margin-bottom: 25px; font-family: 'Space Grotesk';">Outreach Template</h3>
+                <div class="input-item">
+                    <label>Subject Line</label>
+                    <input type="text" placeholder="Global Trade Solutions: {{ company_name }}">
+                </div>
+                <div class="input-item">
+                    <label>Email Body (Markdown/HTML)</label>
+                    <textarea rows="10"
+                        placeholder="Dear {{ name }},\n\nWe noticed your interest in our logistics services..."></textarea>
+                </div>
+                <div
+                    style="background: rgba(143, 195, 83, 0.05); padding: 15px; border-radius: 12px; border: 1px solid rgba(143, 195, 83, 0.2); font-size: 0.8rem; color: #8fc353;">
+                    <i class="fa-solid fa-circle-info"></i> Pro Tip: Use double braces for dynamic variable injection
+                    from your CRM.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Automation | BotConnections</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #0a0e14;
+            --accent-glow: #1da1f2;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: var(--primary-bg);
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+            transform: translateX(-5px);
+        }
+
+        .header {
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-family: 'Space Grotesk';
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .status-banner {
+            background: rgba(29, 161, 242, 0.1);
+            border: 1px solid rgba(29, 161, 242, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            padding: 35px;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .input-item {
+            margin-bottom: 25px;
+        }
+
+        .input-item label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .input-item input,
+        .input-item textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: #fff;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-item input:focus {
+            border-color: var(--accent-glow);
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 18px;
+            background: var(--accent-glow);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-action:hover {
+            box-shadow: 0 0 20px rgba(29, 161, 242, 0.4);
+        }
+
+        .platform-tag {
+            background: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="{{ url_for('bot.dashboard') }}" class="back-link"><i class="fa-solid fa-arrow-left"></i> Return to
+            Command Center</a>
+
+        <div class="header">
+            <h1>Twitter (X) <b style="color: var(--accent-glow);">Automation</b></h1>
+            <p>Handle automated threads, news sharing, and engagement bots.</p>
+        </div>
+
+        <div class="status-banner">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <i class="fa-brands fa-twitter" style="font-size: 1.5rem; color: var(--accent-glow);"></i>
+                <div>
+                    <div style="font-size: 0.9rem; opacity: 0.6;">Connection Status</div>
+                    <div style="font-weight: 700;">{{ connection.status|upper if connection else 'NOT INITIALIZED' }}
+                    </div>
+                </div>
+            </div>
+            {% if connection and connection.status == 'linked' %}
+            <span class="platform-tag" style="color: #8fc353; border-color: #8fc353;">ACTIVE</span>
+            {% else %}
+            <button class="platform-tag" style="cursor: pointer;">LINK NOW</button>
+            {% endif %}
+        </div>
+
+        <div class="config-grid">
+            <div class="card">
+                <h3 style="margin-bottom: 25px; font-family: 'Space Grotesk';">API API Credentials</h3>
+                <div class="input-item">
+                    <label>Consumer Key (API Key)</label>
+                    <input type="text" placeholder="xA9...jK2">
+                </div>
+                <div class="input-item">
+                    <label>Consumer Secret</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+                <div class="input-item">
+                    <label>Access Token</label>
+                    <input type="text" placeholder="158...-yH9">
+                </div>
+                <button class="btn-action">VALIDATE CREDENTIALS</button>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 25px; font-family: 'Space Grotesk';">Auto-Posting Rules</h3>
+                <div class="input-item">
+                    <label>Trigger Keywords</label>
+                    <input type="text" placeholder="Logistics, Trade, AI, Robotics">
+                </div>
+                <div class="input-item">
+                    <label>Default Thread Intro</label>
+                    <textarea rows="5" placeholder="Breaking News in Tech & Trade... 🧵"></textarea>
+                </div>
+
+                <div style="padding: 15px; background: rgba(255,255,255,0.02); border-radius: 12px; margin-top: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem;">
+                        <span>Auto-Retweet Industry News</span>
+                        <input type="checkbox" checked>
+                    </div>
+                </div>
+                <button class="btn-action"
+                    style="background: transparent; border: 1px solid var(--accent-glow); color: var(--accent-glow);">SAVE
+                    RULES</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

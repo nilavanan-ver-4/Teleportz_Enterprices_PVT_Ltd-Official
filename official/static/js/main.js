@@ -149,6 +149,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Brand Logo Mouse Parallax
+    const brand = document.querySelector('.brand');
+    const brandContainer = document.querySelector('.brand-text-container');
+    if (brand && brandContainer) {
+        brand.addEventListener('mousemove', (e) => {
+            const rect = brand.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Calculate offset from center (-1 to 1)
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const moveX = (x - centerX) / 10; // Max 10px shift
+            const moveY = (y - centerY) / 5;  // Max 5px shift
+
+            brandContainer.style.setProperty('--brand-tx', `${moveX}px`);
+            brandContainer.style.setProperty('--brand-ty', `${moveY}px`);
+        });
+
+        brand.addEventListener('mouseleave', () => {
+            brandContainer.style.setProperty('--brand-tx', '0px');
+            brandContainer.style.setProperty('--brand-ty', '0px');
+        });
+    }
+
     // Mouse Parallax for Background (Interactive Depth)
     document.addEventListener('mousemove', (e) => {
         const x = (window.innerWidth - e.pageX * 2) / 100;
@@ -247,136 +272,79 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })();
 
-    // Downward Indicator Click - Smooth Scroll Down
+    // Downward Indicator Click - Robust Smooth Scroll Down
     const downwardIndicator = document.querySelector('.downward-indicator');
     if (downwardIndicator) {
-        // Ensure the element is accessible/focusable without changing template
+        // Ensure accessibility
         if (!downwardIndicator.hasAttribute('role')) downwardIndicator.setAttribute('role', 'button');
         if (!downwardIndicator.hasAttribute('tabindex')) downwardIndicator.setAttribute('tabindex', '0');
         if (!downwardIndicator.hasAttribute('aria-label')) downwardIndicator.setAttribute('aria-label', 'Scroll down');
 
-        // Insert tiny delay to check Font Awesome rendering; if icon is not visible, add an SVG fallback
-        const iconI = downwardIndicator.querySelector('i');
-        const addFallbackIfNeeded = () => {
-            try {
-                if (iconI && iconI.getBoundingClientRect().width < 6) {
-                    // hide the FA <i> visually but keep for semantics
-                    iconI.style.display = 'none';
-                    if (!downwardIndicator.querySelector('svg.fallback-icon')) {
-                        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                        svg.setAttribute('class', 'fallback-icon');
-                        svg.setAttribute('viewBox', '0 0 24 24');
-                        svg.setAttribute('aria-hidden', 'true');
-                        svg.innerHTML = '<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
-                        downwardIndicator.insertBefore(svg, downwardIndicator.firstChild);
-                    }
-                }
-            } catch (e) {
-                // ignore
+        const HEADER_OFFSET = 80;
+
+        const getNextScrollTarget = () => {
+            // 1) Priority: data-target
+            const targetSel = downwardIndicator.dataset.target;
+            if (targetSel) {
+                const el = document.querySelector(targetSel);
+                if (el) return el;
             }
+
+            // 2) Automatic: Find next section below current view
+            const currentScroll = getScrollTop();
+            const sections = Array.from(document.querySelectorAll('section, .parallax-group, .content-group, .container'));
+
+            // Filter out empty or hidden containers, and sort by position
+            const validSections = sections
+                .filter(s => {
+                    const rect = s.getBoundingClientRect();
+                    // In parallax scroller, rect.top is relative to viewport. 
+                    // We want sections where the top is significantly below the current header
+                    return rect.top > HEADER_OFFSET + 20 && s.offsetHeight > 50;
+                })
+                .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+
+            return validSections[0] || null;
         };
 
-        setTimeout(addFallbackIfNeeded, 300);
-
-        const scrollDownToTarget = () => {
-            // 1) explicit target selector (data-target)
-            const targetSelector = downwardIndicator.dataset.target;
-            if (targetSelector) {
-                const targetEl = document.querySelector(targetSelector);
-                if (targetEl) {
-                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    return;
-                }
+        const executeScroll = () => {
+            const target = getNextScrollTarget();
+            if (target) {
+                const targetTop = target.getBoundingClientRect().top;
+                const absoluteTop = getScrollTop() + targetTop - HEADER_OFFSET;
+                scrollToY(absoluteTop);
+            } else {
+                // Last ditch fallback: scroll one viewport
+                const targetY = Math.min(getScrollTop() + getInnerHeight() * 0.8, getScrollHeight() - getInnerHeight());
+                scrollToY(targetY);
             }
-
-            // 2) data-next selector: sequentially advance through elements matching this selector on each click
-            const nextSel = downwardIndicator.dataset.next || downwardIndicator.dataset.nextSelector;
-            if (nextSel) {
-                const matches = Array.from(document.querySelectorAll(nextSel));
-                if (matches.length) {
-                    // initialize pointer if not present or selector changed
-                    if (typeof downwardIndicator._nextIndex === 'undefined' || downwardIndicator._nextSelector !== nextSel) {
-                        downwardIndicator._nextIndex = 0;
-                        downwardIndicator._nextSelector = nextSel;
-                    }
-
-                    // Ensure pointer is within bounds
-                    let idx = downwardIndicator._nextIndex % matches.length;
-                    if (idx < 0) idx = 0;
-
-                    const targetEl = matches[idx];
-                    if (targetEl) {
-                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        // advance pointer for the next click
-                        downwardIndicator._nextIndex = (idx + 1) % matches.length;
-                        return;
-                    }
-                }
-            }
-
-            // 2.5) If the indicator is inside a block, try to move to its next sibling block (reliable for parallax groups)
-            const currentBlock = downwardIndicator.closest('section, .parallax-group, .content-group, .container');
-            if (currentBlock) {
-                let nextBlock = currentBlock.nextElementSibling;
-                while (nextBlock && !nextBlock.matches('section, .parallax-group, .content-group, .container')) {
-                    nextBlock = nextBlock.nextElementSibling;
-                }
-                if (nextBlock) {
-                    nextBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    return;
-                }
-            }
-
-            // 3) fallback: next major block inside <main>
-            const main = document.querySelector('main');
-            if (main) {
-                const candidates = Array.from(main.querySelectorAll('section, .container, .content-group, .parallax-group'));
-                const found = candidates.find(el => {
-                    const rect = el.getBoundingClientRect();
-                    return rect.top > 64;
-                });
-                if (found) {
-                    found.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    return;
-                }
-            }
-
-            // 4) fallback: scroll by configurable number of viewports (data-step, default 2)
-            const maxScroll = getScrollHeight() - getInnerHeight();
-            const multiplier = Math.max(0.1, parseFloat(downwardIndicator.dataset.step) || 2);
-            const step = Math.round(getInnerHeight() * multiplier);
-            const targetY = Math.min(getScrollTop() + step, maxScroll);
-            scrollToY(targetY);
         };
 
         downwardIndicator.addEventListener('click', (e) => {
             e.preventDefault();
-            scrollDownToTarget();
+            executeScroll();
         });
 
         downwardIndicator.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                scrollDownToTarget();
+                executeScroll();
             }
         });
 
-        // Show indicator on short pages; hide when user scrolls down on taller pages
+        // Show indicator on long pages at the top; hide otherwise
         const handleDownScroll = () => {
             const scrollPosition = getScrollTop();
-            const longPage = getScrollHeight() > getInnerHeight() + 40;
-            if (!longPage) {
-                downwardIndicator.style.opacity = '0.95';
-                downwardIndicator.style.pointerEvents = 'auto';
-                return;
-            }
+            const longPage = getScrollHeight() > getInnerHeight() + 100;
 
-            if (scrollPosition > getInnerHeight() * 0.3) {
+            if (!longPage || scrollPosition > 100) {
                 downwardIndicator.style.opacity = '0';
                 downwardIndicator.style.pointerEvents = 'none';
+                downwardIndicator.style.transform = 'translate(-50%, 20px)';
             } else {
                 downwardIndicator.style.opacity = '0.95';
                 downwardIndicator.style.pointerEvents = 'auto';
+                downwardIndicator.style.transform = 'translate(-50%, 0)';
             }
         };
 

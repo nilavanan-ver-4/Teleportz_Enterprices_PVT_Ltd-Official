@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Login | Careers{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="container d-flex justify-content-center">
+        <div class="auth-card">
+            <div class="auth-header text-center">
+                <div class="auth-icon">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <h2>Login or Sign Up</h2>
+                <p>Enter your mobile number to receive a one-time password (OTP)</p>
+            </div>
+
+            <form method="POST" class="auth-form">
+                <div class="form-group mb-4">
+                    <label for="phone" class="form-label">Mobile Number</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-auth w-100">
+                    Send OTP <i class="fa-solid fa-paper-plane ms-2"></i>
+                </button>
+            </form>
+
+            <div class="auth-footer text-center mt-4">
+                <p class="small text-muted">By continuing, you agree to our <a href="#">Terms of Service</a> and <a
+                        href="#">Privacy Policy</a>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .auth-section {
+        padding: 120px 0;
+        background: radial-gradient(circle at 10% 20%, rgba(85, 107, 47, 0.05) 0%, transparent 40%),
+            radial-gradient(circle at 90% 80%, rgba(143, 195, 83, 0.05) 0%, transparent 40%);
+        min-height: 80vh;
+    }
+
+    .auth-card {
+        background: white;
+        padding: 50px;
+        border-radius: 32px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        max-width: 450px;
+        width: 100%;
+        border: 1px solid rgba(85, 107, 47, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .auth-icon {
+        width: 80px;
+        height: 80px;
+        background: rgba(85, 107, 47, 0.1);
+        color: #556b2f;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        margin: 0 auto 25px;
+    }
+
+    .auth-header h2 {
+        font-weight: 800;
+        color: #2c3e50;
+        margin-bottom: 15px;
+    }
+
+    .auth-header p {
+        color: #666;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #4a5568;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-wrapper i {
+        position: absolute;
+        left: 20px;
+        color: #556b2f;
+    }
+
+    .input-wrapper input {
+        width: 100%;
+        padding: 15px 15px 15px 50px;
+        border-radius: 16px;
+        border: 2px solid #edf2f7;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        outline: none;
+    }
+
+    .input-wrapper input:focus {
+        border-color: #556b2f;
+        box-shadow: 0 0 15px rgba(85, 107, 47, 0.15);
+    }
+
+    .btn-auth {
+        background: linear-gradient(135deg, #556b2f, #6b8e3a);
+        color: white;
+        padding: 16px;
+        border-radius: 16px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(85, 107, 47, 0.2);
+    }
+
+    .btn-auth:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(85, 107, 47, 0.3);
+        color: white;
+    }
+</style>
+{% endblock %}

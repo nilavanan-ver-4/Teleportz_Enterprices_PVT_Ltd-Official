@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotConnections | Marketing Command Center</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #0a0e14;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-glow: #8fc353;
+            --whatsapp-color: #25d366;
+            --instagram-color: #e4405f;
+            --telegram-color: #0088cc;
+            --twitter-color: #1da1f2;
+            --n8n-color: #ff6d5a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(143, 195, 83, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: moveGlow 20s infinite alternate;
+        }
+
+        @keyframes moveGlow {
+            0% {
+                top: -100px;
+                left: -100px;
+            }
+
+            100% {
+                bottom: -100px;
+                right: -100px;
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            padding: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+
+        .logo {
+            font-family: 'Space+Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #8fc353, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-status {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            background: var(--accent-glow);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Social Grid */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .connection-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .connection-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-glow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .platform-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .stats {
+            margin: 20px 0;
+            display: flex;
+            gap: 40px;
+        }
+
+        .stat-item span {
+            display: block;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+        }
+
+        .stat-item b {
+            font-size: 1.2rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .btn-connect {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-connect:hover {
+            background: #ffffff;
+            color: var(--primary-bg);
+        }
+
+        /* n8n Section */
+        .automation-center {
+            margin-top: 60px;
+            background: linear-gradient(135deg, rgba(255, 109, 90, 0.1) 0%, rgba(10, 14, 20, 0.8) 100%);
+            border: 1px solid rgba(255, 109, 90, 0.2);
+            border-radius: 30px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .n8n-tag {
+            background: var(--n8n-color);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .workflow-visual {
+            flex: 1;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .workflow-node {
+            width: 40px;
+            height: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            margin: 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .node-line {
+            width: 30px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Pulse for Linked Device */
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                box-shadow: 0 0 0 0px rgba(143, 195, 83, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 0 0 20px rgba(143, 195, 83, 0);
+            }
+        }
+
+        /* Modal placeholder */
+        .qr-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .qr-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            color: #333;
+        }
+
+        .qr-placeholder {
+            width: 250px;
+            height: 250px;
+            background: #eee;
+            margin: 20px auto;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">BOTCONNECTIONS</div>
+            <div class="nav-status">
+                <div><span class="status-dot"></span> System Online</div>
+                <div><span class="status-dot"></span> 4 Active Channels</div>
+                <div style="color: var(--accent-glow);"><i class="fa-solid fa-user-gear"></i> Marketing Admin</div>
+            </div>
+        </header>
+
+        <section>
+            <h2 style="margin-bottom: 30px; font-weight: 300;">Omnichannel <b style="font-weight: 800;">Command
+                    Center</b></h2>
+
+            <div class="social-grid">
+                <!-- WhatsApp -->
+                <div class="connection-card">
+                    <div class="card-header">
+                        <div class="icon-box" style="color: var(--whatsapp-color);">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div class="platform-name">WhatsApp</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Multi-device sync active. Handling
+                        automated customer triggers.</p>
+                    <div class="stats">
+                        <div class="stat-item"><span>Status</span><b style="color: var(--whatsapp-color);">Linked</b>
+                        </div>
+                        <div class="stat-item"><span>Messages</span><b>1.2K+</b></div>
+                    </div>
+                    <button class="btn-connect" onclick="showQR('WhatsApp')">
+                        <i class="fa-solid fa-link"></i> Manage Devices
+                    </button>
+                </div>
+
+                <!-- Instagram -->
+                <div class="connection-card">
+                    <div class="card-header">
+                        <div class="icon-box" style="color: var(--instagram-color);">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <div class="platform-name">Instagram</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Automated carousel postings and story
+                        scheduling.</p>
+                    <div class="stats">
+                        <div class="stat-item"><span>Last Post</span><b>2h ago</b></div>
+                        <div class="stat-item"><span>Auth</span><b>Session.v12</b></div>
+                    </div>
+                    <button class="btn-connect">
+                        <i class="fa-solid fa-calendar-check"></i> Postings Schedule
+                    </button>
+                </div>
+
+                <!-- Telegram -->
+                <div class="connection-card">
+                    <div class="card-header">
+                        <div class="icon-box" style="color: var(--telegram-color);">
+                            <i class="fa-brands fa-telegram"></i>
+                        </div>
+                        <div class="platform-name">Telegram</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Broadcasting to global trade channels
+                        via API Bot.</p>
+                    <div class="stats">
+                        <div class="stat-item"><span>Bot Token</span><b>********</b></div>
+                        <div class="stat-item"><span>Audience</span><b>5.4K</b></div>
+                    </div>
+                    <button class="btn-connect">
+                        <i class="fa-solid fa-bolt"></i> Push Update
+                    </button>
+                </div>
+
+                <!-- Twitter -->
+                <div class="connection-card">
+                    <div class="card-header">
+                        <div class="icon-box" style="color: var(--twitter-color);">
+                            <i class="fa-brands fa-twitter"></i>
+                        </div>
+                        <div class="platform-name">Twitter (X)</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Twitter API v2 connected. Auto-sharing
+                        trade news.</p>
+                    <div class="stats">
+                        <div class="stat-item"><span>Status</span><b style="color: #ffcc00;">Pending</b></div>
+                        <div class="stat-item"><span>Thread Count</span><b>24</b></div>
+                    </div>
+                    <button class="btn-connect">
+                        <i class="fa-solid fa-key"></i> Authenticate
+                    </button>
+                </div>
+            </div>
+
+            <!-- n8n Automation -->
+            <div class="automation-center">
+                <div style="flex: 1;">
+                    <span class="n8n-tag">POWERED BY N8N</span>
+                    <h2 style="font-size: 2.2rem; margin-top: 10px;">End-to-End <br><b>Automation</b></h2>
+                    <p style="color: rgba(255,255,255,0.6); margin-top: 20px; line-height: 1.8;">
+                        Connect your marketing stack with open-source workflows. Trigger social posts from Google
+                        Sheets, CRM updates, or trade indicators.
+                    </p>
+                    <button class="btn-connect"
+                        style="margin-top: 30px; width: 220px; background: rgba(255, 109, 90, 0.2); border-color: rgba(255, 109, 90, 0.4);">
+                        Launch n8n Workflows <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </button>
+                </div>
+                <div class="workflow-visual">
+                    <div class="workflow-node"><i class="fa-brands fa-google-drive"></i></div>
+                    <div class="node-line"></div>
+                    <div class="workflow-node"><i class="fa-solid fa-gears pulse"
+                            style="color: var(--accent-glow);"></i></div>
+                    <div class="node-line"></div>
+                    <div class="workflow-node"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="node-line"></div>
+                    <div class="workflow-node"><i class="fa-brands fa-twitter"></i></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- QR Modal -->
+    <div class="qr-overlay" id="qrOverlay">
+        <div class="qr-card">
+            <h2 id="platformTitle">Link Device</h2>
+            <p>Scan the code from your mobile device</p>
+            <div class="qr-placeholder">
+                <i class="fa-solid fa-qrcode" style="font-size: 8rem; color: #ccc;"></i>
+            </div>
+            <button onclick="hideQR()"
+                style="padding: 10px 30px; border-radius: 10px; border: none; background: #333; color: white; cursor: pointer;">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        function showQR(platform) {
+            document.getElementById('platformTitle').innerText = 'Link ' + platform;
+            document.getElementById('qrOverlay').style.display = 'flex';
+        }
+
+        function hideQR() {
+            document.getElementById('qrOverlay').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

@@ -8,101 +8,53 @@ with app.app_context():
     
     products = [
         Product(
-            name="Moon Walker Massage Chair",
-            category="body massager",
-            description="""The Moon Walker Massage Chair combines futuristic design with advanced functionality.
-It features individual leg movement, 7D full-body massage, ergonomic zero gravity positioning,
-hand squeezing massage, SL track, AI body scan, and capsule design.""",
-            image_filename="moon_walker.jpg"
+            name="Organic Basmati Rice",
+            category="Agricultural Products",
+            description="Premium long-grain aged Basmati rice sourced from the foothills of the Himalayas. GMO-free, high aroma, and superior taste. Available in 10kg, 20kg bulk packing.",
+            image_filename="basmati_rice.jpg"
         ),
-
         Product(
-            name="RX-7 Massage Chair",
-            category="body massager",
-            description="""RX-7 offers a 7D massage with SL track system, zero gravity positioning,
-Bluetooth speaker, heating therapy, airbag massage, AI body scan, and voice control.""",
-            image_filename="rx7.jpg"
+            name="Industrial Grade Steel Valves",
+            category="Industrial Materials",
+            description="High-pressure stainless steel ball valves for oil and gas applications. Certified ISO 9001. Corrosion resistant and durable under extreme temperatures.",
+            image_filename="steel_valves.jpg"
         ),
-
         Product(
-            name="RX-5 Elite Massage Chair",
-            category="body massager",
-            description="""RX-5 Elite includes automatic leg stretching, tri-motion calf rubbing,
-feet scraping, full-body stretching, 7D massage, SL track, and zero gravity positioning.""",
-            image_filename="rx5_elite.jpg"
+            name="Premium Combed Cotton Yarn",
+            category="Textiles",
+            description="100% organic combed cotton yarn for high-end apparel manufacturing. Soft texture, high tensile strength, and eco-friendly dyeing process.",
+            image_filename="cotton_yarn.jpg"
         ),
-
         Product(
-            name="Coin Operated Massage Chair",
-            category="body massager",
-            description="""Commercial heavy-duty massage chair with coin and QR-UPI operation,
-7D massage, SL track, zero gravity positioning, minimalist kiosk design.""",
-            image_filename="coin_operated.jpg"
+            name="Smart LED Driver Modules",
+            category="Electronics",
+            description="Advanced constant current LED drivers with surge protection and dimming capabilities. Ideal for commercial and industrial lighting solutions.",
+            image_filename="led_driver.jpg"
         ),
-
         Product(
-            name="RX-3 Massage Chair",
-            category="body massager",
-            description="""RX-3 features dual SL track system, tri-motion calf rubbing,
-7D full-body massage, zero gravity, AI body scan, and airbag massage.""",
-            image_filename="rx3.jpg"
+            name="Cold Pressed Virgin Coconut Oil",
+            category="Agricultural Products",
+            description="Pure, unrefined, and cold-pressed virgin coconut oil for culinary and cosmetic use. Sourced from certified organic coastal plantations.",
+            image_filename="coconut_oil.jpg"
         ),
-
         Product(
-            name="Q7 2.0 Massage Chair",
-            category="body massager",
-            description="""Q7 2.0 offers Android touchscreen, calves rubbing, TikTok/Reels controller,
-7D massage, SL track, zero gravity, heating, and airbag massage.""",
-            image_filename="q7_2.jpg"
+            name="Precision CNC Machined Parts",
+            category="Industrial Materials",
+            description="Custom-engineered metal components using advanced CNC technology. High tolerance levels (up to +/- 0.005mm) for aerospace and automotive industries.",
+            image_filename="cnc_parts.jpg"
         ),
-
         Product(
-            name="Q5 Massage Chair",
-            category="body massager",
-            description="""Q5 provides 7D massage, SL track design, zero gravity positioning,
-Bluetooth speaker, therapeutic heating, airbag massage, and AI body scan.""",
-            image_filename="q5.jpg"
+            name="Silk Jacquard Fabric",
+            category="Textiles",
+            description="Luxury silk jacquard fabric with intricate patterns. Perfect for high-fashion garments and premium upholstery. Hand-woven by master artisans.",
+            image_filename="silk_fabric.jpg"
         ),
-
         Product(
-            name="R10 Massage Chair",
-            category="body massager",
-            description="""R10 includes 7D massage, AI body scan, SL track system,
-zero gravity positioning, Bluetooth speaker, heating, and voice control.""",
-            image_filename="r10.jpg"
-        ),
-
-        Product(
-            name="R9 Massage Chair",
-            category="body massager",
-            description="""R9 delivers 7D full-body massage, SL track, zero gravity,
-Bluetooth speaker, heating therapy, airbag massage, and AI body scan.""",
-            image_filename="r9.jpg"
-        ),
-
-        Product(
-            name="R8 Pro Massage Chair",
-            category="body massager",
-            description="""R8 Pro features upgraded faux leather, thigh massage straps,
-4D full-body massage, fixed roller system, zero gravity, and Bluetooth speaker.""",
-            image_filename="r8_pro.jpg"
-        ),
-
-        Product(
-            name="R7 Neo Massage Chair",
-            category="body massager",
-            description="""R7 Neo offers 4D full-body massage, strong metal frame,
-zero gravity positioning, Bluetooth speakers, heating, and airbag massage.""",
-            image_filename="r7_neo.jpg"
-        ),
-
-        Product(
-            name="R6 Massage Chair",
-            category="body massager",
-            description="""R6 includes solid wooden frame, 4D massage system,
-therapeutic heating, targeted thigh massage, and full-body relaxation.""",
-            image_filename="r6.jpg"
-        ),
+            name="Industrial IoT Gateway",
+            category="Electronics",
+            description="Ruggedized IoT gateway for smart factory automation. Supports multiple protocols including MQTT, Modbus, and OPC-UA. Wide operating temperature range.",
+            image_filename="iot_gateway.jpg"
+        )
     ]
 
     db.session.bulk_save_objects(products)

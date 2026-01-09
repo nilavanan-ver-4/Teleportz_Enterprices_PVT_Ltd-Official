@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Page title (override in child templates) -->
-    <title>{% block title %}Teleportz Enterprises Pvt Ltd | International Import Export Company{% endblock %} - Global
-        Trade Solutions</title>
+    <title>{% block title %}Teleportz Enterprises Pvt Ltd{% endblock %} - International Trade & Global Logistics
+        Solutions</title>
 
     <!-- Primary SEO meta tags (override using blocks in child templates) -->
     <meta name="description"
@@ -86,14 +86,14 @@
             <i class="fa-solid fa-building"></i>
             <div>
                 <p class="contact-label">Company</p>
-                <p class="contact-value">Teleportz Enterprices</p>
+                <p class="contact-value">Teleportz Enterprises</p>
             </div>
         </div>
         <div class="contact-item">
             <i class="fa-solid fa-phone"></i>
             <div>
                 <p class="contact-label">Call</p>
-                <p class="contact-value"><a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                <p class="contact-value"><a href="tel:+919876543210">+91 98765 43210</a></p>
             </div>
         </div>
         <div class="contact-item">
@@ -106,8 +106,8 @@
         <div class="contact-item">
             <i class="fa-solid fa-location-dot"></i>
             <div>
-                <p class="contact-label">Location</p>
-                <p class="contact-value">Global Headquarters</p>
+                <p class="contact-label">Headquarters</p>
+                <p class="contact-value">No. 12, Global Trade Tower, Chennai, TN, India</p>
             </div>
         </div>
     </div>
@@ -118,15 +118,19 @@
         <i class="fa-solid fa-plane" id="parallax-airplane"></i>
         <nav class="navbar">
             <a href="{{ url_for('official.home') }}" class="brand">
-                <img src="{{ url_for('official.static', filename='img/logo.png') }}" alt="Teleportz Logo"
-                    style="height: 64px; border-radius: 6px;">
+                <img src="{{ url_for('official.static', filename='img/Olive-Green-Hitech-logo-1.png') }}"
+                    alt="Teleportz Logo" class="logo-img">
                 <div class="brand-text-container">
                     <div class="brand-text-animated">
                         <span class="letter">T</span><span class="letter">E</span><span class="letter">L</span><span
                             class="letter">E</span><span class="letter">P</span><span class="letter">O</span><span
                             class="letter">R</span><span class="letter">T</span><span class="letter">Z</span>
                     </div>
-                    <span class="brand-tagline">Global Trade Solutions</span>
+                    <div class="brand-tagline">
+                        <span class="tagline-word">Global</span>
+                        <span class="tagline-word">Trade</span>
+                        <span class="tagline-word">Solutions</span>
+                    </div>
                 </div>
             </a>
             <div class="nav-links-desktop">
@@ -200,7 +204,8 @@
     <div class="mobile-sidebar">
         <div class="sidebar-header">
             <a href="{{ url_for('official.home') }}" class="brand">
-                <img src="{{ url_for('official.static', filename='img/logo.png') }}" alt="Logo" style="height: 48px;">
+                <img src="{{ url_for('official.static', filename='img/logo_hitech.png') }}" alt="Logo"
+                    class="logo-img-mobile">
                 <span>Teleportz</span>
             </a>
             <button class="sidebar-close"><i class="fa-solid fa-xmark"></i></button>
@@ -244,10 +249,6 @@
             {% block content %}{% endblock %}
         </main>
 
-        <!-- Downward Indicator -->
-        <div class="downward-indicator">
-            <i class="fa-solid fa-arrow-down"></i>
-        </div>
 
         <!-- Spacer for Footer Reveal -->
         <div class="footer-spacer"></div>
@@ -268,8 +269,12 @@
             <div style="width: 100%;">
                 <div class="footer-grid">
                     <div>
-                        <h3>Teleportz Enterprices PVT Ltd.</h3>
-                        <p style="font-size: 0.9rem;">Teleportz Enterprises Private Limited is an international import–export company specializing in global trade solutions, including product sourcing, export distribution, logistics coordination, and regulatory compliance. The company serves international markets with a focus on quality assurance, transparency, and long-term business partnerships.</p>
+                        <h3>Teleportz Enterprises Pvt Ltd.</h3>
+                        <p style="font-size: 0.9rem;">Teleportz Enterprises specializes in end-to-end global trade
+                            management. We bridge the gap between international suppliers and buyers with comprehensive
+                            documentation support (B/L, Commercial Invoice), customs clearance (IEC, GST compliance),
+                            and multi-modal logistics solutions across Agriculture, Industrial, and Consumer sectors.
+                        </p>
                     </div>
                     <div>
                         <h3>Company</h3>
@@ -309,11 +314,16 @@
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>© 2026 Teleportz Enterprices PVT Ltd. All rights reserved.</p>
+                    <p>© 2026 Teleportz Enterprises Pvt Ltd. | Reg. No: U51909TN2020PTC123456 | GST: 33AAAAA0000A1Z5</p>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Dynamic Scroll Indicators -->
+    <div class="downward-indicator" role="button" aria-label="Scroll down" tabindex="0">
+        <i class="fa-solid fa-arrow-down"></i>
+    </div>
 
     <!-- Upward Scroll Button (fixed, visible) -->
     <div class="upward-indicator" role="button" aria-label="Scroll up" tabindex="0">

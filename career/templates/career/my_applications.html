@@ -1,0 +1,400 @@
+{% extends "base.html" %}
+
+{% block title %}My Applications | Careers{% endblock %}
+
+{% block content %}
+<section class="profile-section">
+    <div class="container container-main">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-md-4">
+                <div class="profile-sidebar">
+                    <div class="user-info-brief">
+                        <div class="user-avatar">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <h3>{{ current_user.full_name or "Portal User" }}</h3>
+                        <p>{{ current_user.phone }}</p>
+                    </div>
+
+                    <div class="sidebar-nav-menu">
+                        <a href="{{ url_for('career.profile') }}" class="nav-item">
+                            <i class="fa-solid fa-id-card"></i> Personal Information
+                        </a>
+                        <a href="{{ url_for('career.my_applications') }}" class="nav-item active">
+                            <i class="fa-solid fa-list-check"></i> My Applications
+                        </a>
+                        <a href="{{ url_for('career.logout') }}" class="nav-item text-danger">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="col-md-8">
+                <div class="profile-main-card">
+                    <div class="card-header-hitech">
+                        <h2>Application Tracking</h2>
+                        <p>Real-time status of your active job applications</p>
+                    </div>
+
+                    <div class="applications-container">
+                        {% if applications %}
+                        {% for app in applications %}
+                        <div class="app-tracking-card mb-4">
+                            <div class="app-card-header">
+                                <div class="job-info">
+                                    <h4>{{ app.job.title }}</h4>
+                                    <span class="dept-badge">{{ app.job.department }}</span>
+                                </div>
+                                <div class="app-status-badge status-{{ app.status|lower }}">
+                                    {{ app.status|title }}
+                                </div>
+                            </div>
+
+                            <div class="hitech-progress-container mt-4 mb-5 px-3">
+                                <div class="progress-track">
+                                    {% set status_lower = app.status|lower %}
+                                    {% set progress_val = 0 %}
+                                    {% if status_lower in ['applied', 'pending'] %}{% set progress_val = 0 %}
+                                    {% elif status_lower in ['reviewing', 'reviewed', 'assessment'] %}{% set
+                                    progress_val = 33.33 %}
+                                    {% elif status_lower in ['shortlisted', 'shortlist'] %}{% set progress_val = 66.66
+                                    %}
+                                    {% elif status_lower in ['selected', 'hired', 'rejected'] %}{% set progress_val =
+                                    100 %}
+                                    {% endif %}
+                                    <div class="progress-fill" style="width: {{ progress_val }}%;"></div>
+                                </div>
+                                <div class="progress-steps">
+                                    <!-- Step 1: Applied -->
+                                    <div class="step-node completed">
+                                        <div class="node-icon"><i class="fa-solid fa-paper-plane"></i></div>
+                                        <span class="node-label">Applied</span>
+                                    </div>
+
+                                    <!-- Step 2: Reviewing -->
+                                    <div
+                                        class="step-node {% if status_lower in ['reviewing', 'reviewed', 'assessment', 'shortlisted', 'shortlist', 'selected', 'hired', 'rejected'] %}completed{% endif %}">
+                                        <div class="node-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                        <span class="node-label">Reviewing</span>
+                                    </div>
+
+                                    <!-- Step 3: Shortlisted -->
+                                    <div
+                                        class="step-node {% if status_lower in ['shortlisted', 'shortlist', 'selected', 'hired'] %}completed{% endif %}">
+                                        <div class="node-icon"><i class="fa-solid fa-star"></i></div>
+                                        <span class="node-label">Shortlisted</span>
+                                    </div>
+
+                                    <!-- Step 4: Selected -->
+                                    <div
+                                        class="step-node {% if status_lower in ['selected', 'hired'] %}completed{% elif status_lower == 'rejected' %}rejected{% endif %}">
+                                        <div class="node-icon">
+                                            {% if status_lower == 'rejected' %}
+                                            <i class="fa-solid fa-xmark"></i>
+                                            {% else %}
+                                            <i class="fa-solid fa-check"></i>
+                                            {% endif %}
+                                        </div>
+                                        <span class="node-label">{% if status_lower == 'rejected' %}Rejected{% else
+                                            %}Selected{% endif %}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="activity-logs-card mb-4">
+                                <div class="logs-inner">
+                                    <h5 class="logs-header-text">Activity Logs</h5>
+                                    <div class="tracking-timeline-simple">
+                                        {% for record in app.tracking_records %}
+                                        <div class="log-item">
+                                            <div class="log-title">{{ record.status }} {{
+                                                record.update_time.strftime('%b %d, %H:%M') }}</div>
+                                            <div class="log-desc">{{ record.notes }}</div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="app-card-footer mt-3">
+                                <span class="applied-date">Applied on {{ app.applied_at.strftime('%B %d, %Y') }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="empty-state text-center py-5">
+                            <i class="fa-solid fa-folder-open mb-3" style="font-size: 3rem; color: #e2e8f0;"></i>
+                            <h3>No Applications Yet</h3>
+                            <p>You haven't applied to any positions yet. Start exploring jobs!</p>
+                            <a href="{{ url_for('career.careers') }}" class="btn btn-primary mt-3">Browse Jobs</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .profile-section {
+        padding: 80px 0;
+        background: #f8fafc;
+        min-height: 80vh;
+    }
+
+    .profile-sidebar {
+        background: white;
+        border-radius: 24px;
+        padding: 40px 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(85, 107, 47, 0.1);
+    }
+
+    .user-info-brief {
+        text-align: center;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #f1f5f9;
+        margin-bottom: 30px;
+    }
+
+    .user-avatar {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #556b2f, #8fc353);
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+    }
+
+    .sidebar-nav-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 20px;
+        border-radius: 12px;
+        color: #64748b;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+        background: rgba(85, 107, 47, 0.08);
+        color: #556b2f;
+    }
+
+    .profile-main-card {
+        background: white;
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(85, 107, 47, 0.1);
+    }
+
+    .card-header-hitech h2 {
+        font-weight: 800;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    .app-tracking-card {
+        border: 1px solid #edf2f7;
+        border-radius: 20px;
+        padding: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .app-tracking-card:hover {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+        border-color: rgba(85, 107, 47, 0.2);
+    }
+
+    .app-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .job-info h4 {
+        margin: 0 0 5px 0;
+        font-weight: 700;
+        color: #2d3748;
+    }
+
+    .dept-badge {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #556b2f;
+        background: rgba(85, 107, 47, 0.1);
+        padding: 3px 10px;
+        border-radius: 12px;
+    }
+
+    .app-status-badge {
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
+
+    .status-pending {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .status-reviewing {
+        background: #d1ecf1;
+        color: #0c5460;
+    }
+
+    .status-shortlisted {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .status-applied {
+        background: #e2e3e5;
+        color: #383d41;
+    }
+
+    /* High-Tech Progress Tracker Styles */
+    .hitech-progress-container {
+        position: relative;
+        padding-top: 20px;
+    }
+
+    .progress-track {
+        position: absolute;
+        top: 44px;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: #edf2f7;
+        border-radius: 10px;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: #556b2f;
+        border-radius: 10px;
+        transition: width 1s cubic-bezier(0.65, 0, 0.35, 1);
+        box-shadow: 0 0 10px rgba(85, 107, 47, 0.2);
+    }
+
+    .progress-steps {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 2;
+    }
+
+    .step-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 90px;
+    }
+
+    .node-icon {
+        width: 52px;
+        height: 52px;
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        color: #94a3b8;
+        transition: all 0.5s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .step-node.completed .node-icon {
+        background: #556b2f;
+        border-color: #556b2f;
+        color: white;
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(85, 107, 47, 0.2);
+    }
+
+    .step-node.rejected .node-icon {
+        background: #e53e3e;
+        border-color: #e53e3e;
+        color: white;
+    }
+
+    .node-label {
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: #a0aec0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+    }
+
+    .step-node.completed .node-label {
+        color: #556b2f;
+    }
+
+    /* Activity Logs Card Style */
+    .activity-logs-card {
+        background: #fbfcfd;
+        border: 1px dashed #cbd5e0;
+        border-radius: 20px;
+        margin-top: 30px;
+        padding: 30px;
+    }
+
+    .logs-header-text {
+        font-size: 0.9rem;
+        font-weight: 800;
+        color: #2d3748;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 25px;
+    }
+
+    .tracking-timeline-simple {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .log-item {
+        border-left: 2px solid #edf2f7;
+        padding-left: 20px;
+        position: relative;
+    }
+
+    .log-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 4px;
+    }
+
+    .log-desc {
+        font-size: 0.9rem;
+        color: #718096;
+    }
+</style>
+{% endblock %}
